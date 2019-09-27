@@ -1,0 +1,13 @@
+package com.bw.movie.view.base;
+
+/**
+ * date:2019/9/27
+ * author:贺少伟(盗)
+ * function: 抽取base类的接口回调
+ */
+public interface IBaseVIew {
+//    成功
+    void onLogCurress(Object obj);
+//    失败
+    void onLogExurr(String str);
+}
