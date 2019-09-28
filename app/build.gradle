@@ -57,7 +57,6 @@ dependencies {
     //让retrofit支持Rxjava2
     implementation 'com.squareup.retrofit2:adapter-rxjava2:+'
 
-
     //ok日志拦截器 需要使用日志拦截器的时候使用
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 

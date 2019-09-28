@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@mipmap/bitmap"
+    tools:context=".view.activity.LoginActivity">
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/edit_name"
+        android:hint="请输入昵称"
+        android:textColorHint="#fff"
+        android:textColor="#fff"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edit_email"
+        android:hint="请输入邮箱账号"
+        android:textColorHint="#fff"
+        android:textColor="#fff"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edit_pas"
+        android:hint="请设置密码"
+        android:textColorHint="#fff"
+        android:textColor="#fff"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/edit_yzm"
+            android:hint="请输入验证码"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/but_yzm"
+            android:background="#fff"
+            android:text="获取验证码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/text_dl"
+        android:gravity="right"
+        android:textColor="#fff"
+        android:layout_marginRight="20dp"
+        android:text="已有账号  立即登录"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/but_log"
+        android:textSize="20dp"
+        android:layout_margin="20dp"
+        android:background="#CC299C"
+        android:text="注册"
+        android:textColor="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
