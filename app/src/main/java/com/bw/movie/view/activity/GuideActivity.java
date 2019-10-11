@@ -65,7 +65,7 @@ public class GuideActivity extends BaseActivity implements IViewContract.doView 
         textZhuce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(GuideActivity.this,LoginActivity.class);
+                Intent intent=new Intent("com.bawei.lo");
                 startActivity(intent);
             }
         });
@@ -82,6 +82,7 @@ public class GuideActivity extends BaseActivity implements IViewContract.doView 
                 persenter.doGuild(map);
             }
         });
+
     }
 
     @Override
@@ -89,7 +90,7 @@ public class GuideActivity extends BaseActivity implements IViewContract.doView 
         GuideBean guideBean= (GuideBean) obj;
         if ("0000".equals(guideBean.status)){
             Toast.makeText(this, guideBean.message, Toast.LENGTH_SHORT).show();
-            Intent intent=new Intent(GuideActivity.this,ShowActivity.class);
+            Intent intent=new Intent("com.bawei.sh");
             startActivity(intent);
         }else{
             Toast.makeText(this, guideBean.message, Toast.LENGTH_SHORT).show();

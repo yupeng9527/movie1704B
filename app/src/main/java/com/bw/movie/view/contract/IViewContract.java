@@ -24,7 +24,10 @@ public interface IViewContract {
     public abstract void doCode(Map<String,String> map);
 //    登录
     public abstract void doGuild(Map<String,String> map);
-
+//    热映数据
+    public abstract void doMovieList(int page);
+//      即将上映
+    public abstract void SoonMovieList(int page);
 }
 
 }

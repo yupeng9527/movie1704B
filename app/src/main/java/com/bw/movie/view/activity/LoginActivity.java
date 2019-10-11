@@ -85,10 +85,12 @@ public class LoginActivity extends BaseActivity implements IViewContract.doView 
                 map.put("email", emil);
                 map.put("code", yzm);
                 persenter.doRegister(map);
+                finish();
                 break;
             case R.id.text_dl:
                 Intent intent=new Intent(LoginActivity.this,GuideActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

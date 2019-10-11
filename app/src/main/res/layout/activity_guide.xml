@@ -17,7 +17,7 @@
 
     <EditText
         android:id="@+id/edit_emil"
-        android:hint="请输入邮箱背景"
+        android:hint="请输入邮箱格式"
         android:textColorHint="#fff"
         android:textColor="#fff"
         android:layout_margin="20dp"

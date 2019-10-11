@@ -46,5 +46,6 @@ public class MainActivity extends BaseActivity {
             }
         };
         timer.schedule(task, 3000);
+
     }
 }
