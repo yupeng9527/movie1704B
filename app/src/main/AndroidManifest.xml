@@ -19,7 +19,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.GuiaActivity"></activity>
+        <activity android:name=".view.activity.PrincipalActivity">
+            <intent-filter>
+                <action android:name="com.bawei.Prin" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.GuiaActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".view.activity.ShowActivity">
             <intent-filter>
                 <action android:name="com.bawei.sh" />
@@ -36,11 +49,7 @@
         </activity>
         <activity android:name=".view.activity.GuideActivity" />
         <activity android:name=".view.activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data

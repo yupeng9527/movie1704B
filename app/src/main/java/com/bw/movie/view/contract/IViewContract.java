@@ -28,6 +28,12 @@ public interface IViewContract {
     public abstract void doMovieList(int page);
 //      即将上映
     public abstract void SoonMovieList(int page);
+//      热门
+    public abstract void HotMovieList(int page);
+//    推荐影院信息
+    public abstract void DoBanner();
+//    Banner轮播图
+    public abstract void Recommend();
 }
 
 }

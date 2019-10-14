@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#141931"
+    android:layout_margin="@dimen/m20"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imag_view"
+        android:layout_margin="10dp"
+        android:layout_width="@dimen/m316"
+        android:layout_height="@dimen/m120" />
+
+    <LinearLayout
+        android:layout_alignBottom="@id/imag_view"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+
+            android:layout_marginLeft="@dimen/m20"
+            android:id="@+id/text_name"
+            android:textSize="14sp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:text="拍摄能力差"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/m20" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/m15"
+            android:id="@+id/text_score"
+            android:textColor="#fff"
+            android:text="评分:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+                android:layout_marginRight="@dimen/m10"
+                android:contextClickable="true"
+                android:id="@+id/bit_gaopiao"
+                android:text="购票"
+                android:textSize="12dp"
+                android:textColor="#fff"
+                android:background="#E62C67"
+                android:layout_width="40dp"
+                android:layout_height="17dp" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

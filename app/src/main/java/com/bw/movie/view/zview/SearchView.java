@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -12,7 +12,6 @@ import com.bw.movie.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * date:2019/9/28
@@ -22,12 +21,12 @@ import butterknife.OnClick;
 public class SearchView extends RelativeLayout {
 
 
-    @BindView(R.id.text_finis)
-    TextView textFinis;
-    @BindView(R.id.edit_ss)
-    EditText editSs;
-    @BindView(R.id.text_ann)
-    TextView textAnn;
+    @BindView(R.id.imag_mapa)
+    ImageView imagMapa;
+    @BindView(R.id.text_mapa_name)
+    TextView textMapaName;
+    @BindView(R.id.imag_search)
+    ImageView imagSearch;
 
     public SearchView(Context context) {
         super(context, null);
@@ -41,34 +40,15 @@ public class SearchView extends RelativeLayout {
 
     }
 
-    @OnClick({R.id.text_finis, R.id.edit_ss, R.id.text_ann})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.text_finis:
-                if (onIntersen!=null) {
-                    onIntersen.onFinis("");
-                }
-                break;
-            case R.id.edit_ss:
-                if (onIntersen!=null) {
-                    String s = editSs.getText().toString();
-                    onIntersen.onSs(s);
-                }
-                break;
-            case R.id.text_ann:
-                editSs.setVisibility(VISIBLE);
-                textAnn.setVisibility(GONE);
-                break;
-        }
-    }
-
     public void setOnIntersen(OnIntersen onIntersen) {
         this.onIntersen = onIntersen;
     }
 
     private OnIntersen onIntersen;
-    public interface OnIntersen{
+
+    public interface OnIntersen {
         void onFinis(String str);
+
         void onSs(String str);
     }
 }

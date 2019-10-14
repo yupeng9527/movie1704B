@@ -1,5 +1,6 @@
 package com.bw.movie.view.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,8 +17,6 @@ import android.view.ViewGroup;
 public abstract class BaseFragment extends Fragment {
     protected BasePersenter basePersenter;
     private View inflate;
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -26,7 +25,6 @@ public abstract class BaseFragment extends Fragment {
         }
         return inflate;
     }
-
     protected abstract int initLayout();
 
     @Override

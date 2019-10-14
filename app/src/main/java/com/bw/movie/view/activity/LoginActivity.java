@@ -113,6 +113,21 @@ public class LoginActivity extends BaseActivity implements IViewContract.doView 
     }
 
     @Override
+    public void onShapeCurress(Object obj) {
+
+    }
+
+    @Override
+    public void onMyCurress(Object obj) {
+
+    }
+
+    @Override
+    public void onBannerCurress(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }

@@ -8,6 +8,11 @@ package com.bw.movie.view.base;
 public interface IBaseVIew {
 //    成功
     void onLogCurress(Object obj);
+    void onShapeCurress(Object obj);
+    void onMyCurress(Object obj);
+//    Banner轮播图
+    void onBannerCurress(Object obj);
+
 //    失败
     void onLogExurr(String str);
 }

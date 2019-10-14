@@ -84,6 +84,21 @@ public class BeShaowFragment extends BaseFragment implements IViewContract.doVie
     }
 
     @Override
+    public void onShapeCurress(Object obj) {
+
+    }
+
+    @Override
+    public void onMyCurress(Object obj) {
+
+    }
+
+    @Override
+    public void onBannerCurress(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }

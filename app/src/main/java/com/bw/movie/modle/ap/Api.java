@@ -1,8 +1,11 @@
 package com.bw.movie.modle.ap;
 
+import com.bw.movie.modle.bean.BannerBean;
 import com.bw.movie.modle.bean.CodeBean;
 import com.bw.movie.modle.bean.GuideBean;
+import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.modle.bean.MoVieListBean;
+import com.bw.movie.modle.bean.RecommendBean;
 import com.bw.movie.modle.bean.RegisterBean;
 import com.bw.movie.modle.bean.SoonMovieBean;
 
@@ -41,4 +44,16 @@ public interface Api {
 
     @GET("movieApi/movie/v2/findComingSoonMovieList")
     Observable<SoonMovieBean> Soonmovie(@HeaderMap Map<String,String> map, @QueryMap Map<String,Object> omap);
+
+    @GET("movieApi/movie/v2/findHotMovieList")
+    Observable<HotBean> Hotmovie(@QueryMap Map<String,Object> omap);
+
+    @GET("movieApi/tool/v2/banner")
+    Observable<BannerBean> Banner();
+
+
+    @GET("movieApi/cinema/v1/findRecommendCinemas")
+    Observable<RecommendBean> Recommend(@HeaderMap Map<String,Object> map,@QueryMap Map<String,Integer> imap);
+
+
 }

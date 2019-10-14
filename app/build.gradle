@@ -76,7 +76,8 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
 //图片上传
     implementation 'org.devio.takephoto:takephoto_library:4.1.0'
-
+    //banner依赖
+    implementation 'com.youth.banner:banner:1.4.9'
 //tablayout依赖 :
     implementation 'com.android.support:design:28.0.0'
 }
