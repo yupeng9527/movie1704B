@@ -32,8 +32,17 @@ public interface IViewContract {
     public abstract void HotMovieList(int page);
 //    推荐影院信息
     public abstract void DoBanner();
+
+//    推荐影院信息
+    public abstract void Cinema(Map<String,Object> map,Map<String,Object> omap);
+//    电影信息详情
+    public abstract void doDetail(Map<String,Object> map,Map<String,Object> omap);
 //    Banner轮播图
     public abstract void Recommend();
+//    取消关注
+    public abstract void doCancel(Map<String,Object> map,Map<String,Object> omap);
+//    关注
+    public abstract void doFollow(Map<String,Object> map,Map<String,Object> omap);
 }
 
 }

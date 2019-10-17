@@ -2,6 +2,7 @@ package com.bw.movie.modle.ap;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 /**
  * date:2019/9/27

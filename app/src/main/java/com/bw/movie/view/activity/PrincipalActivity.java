@@ -82,7 +82,6 @@ public class PrincipalActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.image_movei_dj:
-
                 imageMoveiDj.setVisibility(View.GONE);
                 imageCinemDj.setVisibility(View.VISIBLE);
                 imageMyyDj.setVisibility(View.VISIBLE);

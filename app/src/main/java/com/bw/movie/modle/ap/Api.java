@@ -1,7 +1,10 @@
 package com.bw.movie.modle.ap;
 
 import com.bw.movie.modle.bean.BannerBean;
+import com.bw.movie.modle.bean.CinemaBean;
 import com.bw.movie.modle.bean.CodeBean;
+import com.bw.movie.modle.bean.DetilBean;
+import com.bw.movie.modle.bean.FollowBean;
 import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.modle.bean.MoVieListBean;
@@ -51,9 +54,21 @@ public interface Api {
     @GET("movieApi/tool/v2/banner")
     Observable<BannerBean> Banner();
 
+    @GET("movieApi/movie/v2/findMoviesDetail")
+    Observable<DetilBean> Detail(@HeaderMap Map<String,Object> map,@QueryMap Map<String,Object> imap);
+
 
     @GET("movieApi/cinema/v1/findRecommendCinemas")
     Observable<RecommendBean> Recommend(@HeaderMap Map<String,Object> map,@QueryMap Map<String,Integer> imap);
+
+   @GET("movieApi/cinema/v1/findNearbyCinemas")
+    Observable<CinemaBean> Cinema(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> imap);
+//  关注
+   @GET("movieApi/movie/v1/verify/followMovie")
+    Observable<FollowBean> Follow(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> imap);
+//  取消关注
+   @GET("movieApi/movie/v1/verify/cancelFollowMovie")
+    Observable<FollowBean> Cancel(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> imap);
 
 
 }

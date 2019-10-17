@@ -95,7 +95,7 @@
         <ImageView
             android:id="@+id/imag_movie_span"
             android:layout_marginRight="@dimen/dp_25"
-            android:background="@mipmap/shape"
+            android:background="@mipmap/ape"
             android:layout_width="7dp"
             android:layout_height="@dimen/dp_12" />
     </LinearLayout>
@@ -120,7 +120,7 @@
                 android:gravity="center_horizontal"
                 android:layout_width="@dimen/dp_48"
                 android:orientation="vertical"
-                android:layout_height="@dimen/dp_46">
+                android:layout_height="@dimen/dp_48">
 
                 <ImageView
                     android:background="@mipmap/go"
@@ -132,7 +132,7 @@
                     android:layout_margin="@dimen/dp_8"
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m12" />
+                    android:layout_height="@dimen/m15" />
             </LinearLayout>
 
             <LinearLayout
@@ -141,7 +141,7 @@
                 android:gravity="center_horizontal"
                 android:layout_width="@dimen/dp_48"
                 android:orientation="vertical"
-                android:layout_height="@dimen/dp_46">
+                android:layout_height="@dimen/dp_48">
 
                 <ImageView
                     android:background="@mipmap/up"
@@ -153,7 +153,7 @@
                     android:text="我的预约"
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m12" />
+                    android:layout_height="@dimen/m15" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/line_ticket"
@@ -161,7 +161,7 @@
                 android:gravity="center_horizontal"
                 android:layout_width="@dimen/dp_48"
                 android:orientation="vertical"
-                android:layout_height="@dimen/dp_46">
+                android:layout_height="@dimen/dp_48">
 
                 <ImageView
                     android:background="@mipmap/chong"
@@ -173,7 +173,7 @@
                     android:text="购票记录"
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m12" />
+                    android:layout_height="@dimen/m15" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -189,7 +189,7 @@
                 android:gravity="center_horizontal"
                 android:layout_width="@dimen/dp_48"
                 android:orientation="vertical"
-                android:layout_height="@dimen/dp_46">
+                android:layout_height="@dimen/dp_48">
 
                 <ImageView
                     android:background="@mipmap/chongzhijilu"
@@ -201,7 +201,7 @@
                     android:layout_margin="8dp"
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m12" />
+                    android:layout_height="@dimen/m15" />
             </LinearLayout>
 
             <LinearLayout
@@ -210,7 +210,7 @@
                 android:gravity="center_horizontal"
                 android:layout_width="@dimen/dp_48"
                 android:orientation="vertical"
-                android:layout_height="@dimen/dp_46">
+                android:layout_height="@dimen/dp_48">
 
                 <ImageView
                     android:background="@mipmap/oup"
@@ -222,7 +222,7 @@
                     android:layout_margin="@dimen/dp_8"
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m12" />
+                    android:layout_height="@dimen/m15" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/line_tickling"
@@ -230,7 +230,7 @@
                 android:gravity="center_horizontal"
                 android:layout_width="@dimen/dp_48"
                 android:orientation="vertical"
-                android:layout_height="@dimen/dp_46">
+                android:layout_height="@dimen/dp_48">
 
                 <ImageView
                     android:background="@mipmap/yijianfankui"
@@ -242,7 +242,7 @@
                     android:layout_margin="@dimen/dp_8"
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m12" />
+                    android:layout_height="@dimen/m15" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -258,7 +258,7 @@
                 android:gravity="center_horizontal"
                 android:layout_width="@dimen/dp_48"
                 android:orientation="vertical"
-                android:layout_height="@dimen/dp_46">
+                android:layout_height="@dimen/dp_48">
 
                 <ImageView
                     android:background="@mipmap/invalid_name"
@@ -270,7 +270,7 @@
                     android:layout_margin="@dimen/dp_8"
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m12" />
+                    android:layout_height="@dimen/m15" />
             </LinearLayout>
 
             <LinearLayout

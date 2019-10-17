@@ -15,6 +15,7 @@ import com.bw.movie.view.adapter.MovieAdapter;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
+import com.bw.movie.view.zview.LazyLoadFragment;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import butterknife.Unbinder;
  * author:贺少伟(盗)
  * function:
  */
-public class HotShowFragment extends BaseFragment implements IViewContract.doView {
+public class HotShowFragment extends LazyLoadFragment implements IViewContract.doView {
     @BindView(R.id.xrec_list)
     XRecyclerView xrecList;
     Unbinder unbinder;
@@ -60,6 +61,11 @@ public class HotShowFragment extends BaseFragment implements IViewContract.doVie
 
     @Override
     protected void initData() {
+
+
+    }
+    @Override
+    public void fetchData() {
         list.clear();
         xrecList.setLoadingMoreEnabled(true);
         xrecList.setPullRefreshEnabled(true);
@@ -85,9 +91,7 @@ public class HotShowFragment extends BaseFragment implements IViewContract.doVie
         Persenter persenter = new Persenter(HotShowFragment.this);
         persenter.doMovieList(page);
         xrecList.refreshComplete();
-
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -125,4 +129,6 @@ public class HotShowFragment extends BaseFragment implements IViewContract.doVie
     public void onLogExurr(String str) {
 
     }
+
+
 }

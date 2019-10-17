@@ -1,7 +1,12 @@
 package com.bw.movie.view.fragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,6 +31,7 @@ import com.bw.movie.view.adapter.YMovieAdapter;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
+import com.bw.movie.view.zview.LazyLoadFragment;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -85,6 +91,7 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
+
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
@@ -92,7 +99,27 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     @Override
     protected void initData() {
 
-
+        butTextNot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.sh");
+                startActivity(intent);
+            }
+        });
+        butTextNotMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.sh");
+                startActivity(intent);
+            }
+        });
+        butTextShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.sh");
+                startActivity(intent);
+            }
+        });
         Persenter persenter = new Persenter(YMovieFragment.this);
         persenter.doMovieList(page);
         persenter.SoonMovieList(page);
@@ -176,4 +203,6 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
         super.onDestroyView();
         unbinder.unbind();
     }
+
+
 }

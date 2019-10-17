@@ -5,18 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
-import com.bw.movie.modle.ap.App;
-import com.bw.movie.modle.bean.HotBean;
-import com.bw.movie.modle.bean.MoVieListBean;
+import com.bw.movie.modle.bean.DetilBean;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
@@ -29,10 +25,11 @@ import butterknife.ButterKnife;
  * author:贺少伟(盗)
  * function:
  */
-public class HotAdapter extends XRecyclerView.Adapter<HotAdapter.MovieViewHolder> {
-    List<HotBean.ResultBean> resultBeanList;
+public class YuangyAdapter extends XRecyclerView.Adapter<YuangyAdapter.MovieViewHolder> {
+    List<DetilBean.ResultBean.MovieActorBean> resultBeanList;
 
-    public HotAdapter(List<HotBean.ResultBean> resultBeanList) {
+
+    public YuangyAdapter(List<DetilBean.ResultBean.MovieActorBean> resultBeanList) {
         this.resultBeanList = resultBeanList;
     }
 
@@ -40,26 +37,20 @@ public class HotAdapter extends XRecyclerView.Adapter<HotAdapter.MovieViewHolder
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View inflate = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_ymovie, viewGroup, false);
+                .inflate(R.layout.item_daoy, viewGroup, false);
         return new MovieViewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
 
-                Glide.with(movieViewHolder.itemView.getContext())
-                        .load(resultBeanList.get(i).imageUrl)
-                        .error(R.mipmap.ic_launcher)
-                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
-                        .into(movieViewHolder.imagView);
-                movieViewHolder.textName.setText(resultBeanList.get(i).name);
-                movieViewHolder.textScore.setText(resultBeanList.get(i).score+"分");
-                movieViewHolder.bitGaopiao.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(App.context, "正在购票中", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        Glide.with(movieViewHolder.itemView.getContext())
+                .load(resultBeanList.get(i).photo)
+                .error(R.mipmap.ic_launcher)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
+                .into(movieViewHolder.imagView);
+        movieViewHolder.textScore.setText(resultBeanList.get(i).name);
+
 
     }
 
@@ -74,13 +65,10 @@ public class HotAdapter extends XRecyclerView.Adapter<HotAdapter.MovieViewHolder
         ImageView imagView;
         @BindView(R.id.text_score)
         TextView textScore;
-        @BindView(R.id.text_name)
-        TextView textName;
-        @BindView(R.id.bit_gaopiao)
-        Button bitGaopiao;
+
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
 
         }
     }

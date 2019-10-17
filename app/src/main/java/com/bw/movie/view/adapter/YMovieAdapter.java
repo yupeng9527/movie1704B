@@ -1,5 +1,6 @@
 package com.bw.movie.view.adapter;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,7 +46,7 @@ public class YMovieAdapter extends XRecyclerView.Adapter<YMovieAdapter.MovieView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final MovieViewHolder movieViewHolder, final int i) {
         Glide.with(movieViewHolder.itemView.getContext())
                 .load(resultBeanList.get(i).imageUrl)
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
@@ -57,6 +58,14 @@ public class YMovieAdapter extends XRecyclerView.Adapter<YMovieAdapter.MovieView
             @Override
             public void onClick(View v) {
                 Toast.makeText(App.context, "正在购票中", Toast.LENGTH_SHORT).show();
+            }
+        });
+        movieViewHolder.imagView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent("com.bawei.Deil");
+                intent.putExtra("movieId",resultBeanList.get(i).movieId);
+                movieViewHolder.itemView.getContext().startActivity(intent);
             }
         });
     }

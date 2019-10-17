@@ -34,10 +34,10 @@
         </ExpandableListView>
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
+    <com.bw.movie.view.zview.CustomViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v4.view.ViewPager>
+    </com.bw.movie.view.zview.CustomViewPager>
 </LinearLayout>

@@ -14,6 +14,7 @@ import com.bw.movie.view.adapter.RecommedAdapter;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
+import com.bw.movie.view.zview.LazyLoadFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ import butterknife.Unbinder;
  * author:贺少伟(盗)
  * function:
  */
-public class RecommendFragment extends BaseFragment implements IViewContract.doView {
+public class RecommendFragment extends LazyLoadFragment implements IViewContract.doView {
     @BindView(R.id.rec_list)
     RecyclerView recList;
     Unbinder unbinder;
@@ -45,10 +46,13 @@ public class RecommendFragment extends BaseFragment implements IViewContract.doV
 
     @Override
     protected void initData() {
+
+    }
+    @Override
+    public void fetchData() {
         Persenter persenter = new Persenter(this);
         persenter.Recommend();
     }
-
     @Override
     public void onLogCurress(Object obj) {
         List<RecommendBean.ResultBean> resultBeans = (List<RecommendBean.ResultBean>) obj;
@@ -92,4 +96,6 @@ public class RecommendFragment extends BaseFragment implements IViewContract.doV
         super.onDestroyView();
         unbinder.unbind();
     }
+
+
 }

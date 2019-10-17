@@ -14,6 +14,7 @@ import com.bw.movie.view.adapter.SoonMovieAdapter;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
+import com.bw.movie.view.zview.LazyLoadFragment;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import butterknife.Unbinder;
  * author:贺少伟(盗)
  * function:
  */
-public class BeShaowFragment extends BaseFragment implements IViewContract.doView {
+public class BeShaowFragment extends LazyLoadFragment implements IViewContract.doView {
 
     @BindView(R.id.xrec_list)
     XRecyclerView xrecList;
@@ -48,6 +49,10 @@ public class BeShaowFragment extends BaseFragment implements IViewContract.doVie
 
     @Override
     protected void initData() {
+
+    }
+    @Override
+    public void fetchData() {
         list.clear();
         xrecList.setLoadingMoreEnabled(true);
         xrecList.setPullRefreshEnabled(true);
@@ -73,7 +78,6 @@ public class BeShaowFragment extends BaseFragment implements IViewContract.doVie
         persenter.SoonMovieList(page);
         xrecList.refreshComplete();
     }
-
     @Override
     public void onLogCurress(Object obj) {
         List<SoonMovieBean.ResultBean> resultBeans = (List<SoonMovieBean.ResultBean>) obj;
@@ -115,5 +119,6 @@ public class BeShaowFragment extends BaseFragment implements IViewContract.doVie
         super.onDestroyView();
         unbinder.unbind();
     }
+
 
 }

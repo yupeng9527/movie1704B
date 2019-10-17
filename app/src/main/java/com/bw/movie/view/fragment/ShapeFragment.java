@@ -3,18 +3,17 @@ package com.bw.movie.view.fragment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bw.movie.R;
-import com.bw.movie.modle.ap.App;
 import com.bw.movie.persenter.Persenter;
 import com.bw.movie.view.adapter.CnemaAdapter;
-import com.bw.movie.view.adapter.FragAdapter;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
+import com.bw.movie.view.zview.CustomViewPager;
+import com.bw.movie.view.zview.LazyLoadFragment;
 import com.bw.movie.view.zview.SearchView;
 
 import java.util.ArrayList;
@@ -29,16 +28,18 @@ import butterknife.Unbinder;
  * author:贺少伟(盗)
  * function:
  */
-public class ShapeFragment extends BaseFragment {
+public class ShapeFragment extends LazyLoadFragment {
     @BindView(R.id.sear_chv)
     SearchView searChv;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
-    @BindView(R.id.view_pager)
-    ViewPager viewPager;
+
     Unbinder unbinder;
-    List<String> list=new ArrayList<>();
-    List<Fragment> flist=new ArrayList<>();
+    List<String> list = new ArrayList<>();
+    List<Fragment> flist = new ArrayList<>();
+    @BindView(R.id.view_pager)
+    CustomViewPager viewPager;
+
     @Override
     protected int initLayout() {
         return R.layout.item_fragment_shape;
@@ -66,12 +67,17 @@ public class ShapeFragment extends BaseFragment {
                 tabLayout.addTab(tab);
             }
         }
+        viewPager.setScanScroll(false);
         tabLayout.setupWithViewPager(viewPager);
-        CnemaAdapter cnemaAdapter=new CnemaAdapter(getChildFragmentManager(),flist,list);
+        CnemaAdapter cnemaAdapter = new CnemaAdapter(getChildFragmentManager(), flist, list);
         cnemaAdapter.notifyDataSetChanged();
         viewPager.setAdapter(cnemaAdapter);
     }
 
+    @Override
+    public void fetchData() {
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
@@ -85,4 +91,6 @@ public class ShapeFragment extends BaseFragment {
         super.onDestroyView();
         unbinder.unbind();
     }
+
+
 }

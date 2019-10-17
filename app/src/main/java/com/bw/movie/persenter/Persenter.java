@@ -4,7 +4,10 @@ import android.widget.Toast;
 
 import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.BannerBean;
+import com.bw.movie.modle.bean.CinemaBean;
 import com.bw.movie.modle.bean.CodeBean;
+import com.bw.movie.modle.bean.DetilBean;
+import com.bw.movie.modle.bean.FollowBean;
 import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.modle.bean.MoVieListBean;
@@ -229,6 +232,59 @@ public class Persenter extends IViewContract.doData {
     }
 
     @Override
+    public void Cinema(Map<String, Object> map, Map<String, Object> omap) {
+        HttpUtil.getHttpUtil().getApi()
+                .Cinema(map,omap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CinemaBean>() {
+                    @Override
+                    public void accept(CinemaBean cinemaBean) throws Exception {
+                        if (iBaseVIew!=null) {
+                            List<CinemaBean.ResultBean> result = cinemaBean.result;
+                            if ("0000".equals(cinemaBean.status)) {
+                                iBaseVIew.onLogCurress(result);
+                            }else{
+                                Toast.makeText(App.context, cinemaBean.message, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    @Override
+    public void doDetail(Map<String, Object> map, Map<String, Object> omap) {
+        HttpUtil.getHttpUtil().getApi()
+                .Detail(map,omap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<DetilBean>() {
+                    @Override
+                    public void accept(DetilBean detilBean) throws Exception {
+                        if (iBaseVIew!=null) {
+                            if ("0000".equals(detilBean.status)) {
+                                iBaseVIew.onLogCurress(detilBean);
+                            }else{
+                                Toast.makeText(App.context, detilBean.message, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
+    @Override
     public void Recommend() {
         Map<String,Object> omap=new HashMap<>();
         omap.put("userId",18);
@@ -250,6 +306,52 @@ public class Persenter extends IViewContract.doData {
                             }else{
                                 Toast.makeText(App.context, recommendBean.message, Toast.LENGTH_SHORT).show();
                             }
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doCancel(Map<String, Object> map, Map<String, Object> omap) {
+        HttpUtil.getHttpUtil().getApi()
+                .Cancel(map,omap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<FollowBean>() {
+                    @Override
+                    public void accept(FollowBean followBean) throws Exception {
+                        if ("0000".equals(followBean.status)) {
+                            Toast.makeText(App.context, followBean.message, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(App.context, followBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doFollow(Map<String, Object> map, Map<String, Object> omap) {
+        HttpUtil.getHttpUtil().getApi()
+                .Follow(map,omap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<FollowBean>() {
+                    @Override
+                    public void accept(FollowBean followBean) throws Exception {
+                        if ("0000".equals(followBean.status)) {
+                            Toast.makeText(App.context, followBean.message, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(App.context, followBean.message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Consumer<Throwable>() {
