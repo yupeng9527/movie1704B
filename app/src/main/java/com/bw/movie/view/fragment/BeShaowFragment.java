@@ -1,5 +1,7 @@
 package com.bw.movie.view.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -18,7 +20,9 @@ import com.bw.movie.view.zview.LazyLoadFragment;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,13 +33,15 @@ import butterknife.Unbinder;
  * author:贺少伟(盗)
  * function:
  */
-public class BeShaowFragment extends LazyLoadFragment implements IViewContract.doView {
+public class BeShaowFragment extends BaseFragment implements IViewContract.doView {
 
     @BindView(R.id.xrec_list)
     XRecyclerView xrecList;
     Unbinder unbinder;
     ArrayList<SoonMovieBean.ResultBean> list = new ArrayList<>();
     int page = 1;
+    Map<String,Object> map=new HashMap<>();
+
     @Override
     protected int initLayout() {
         return R.layout.layout_beshao;
@@ -49,10 +55,11 @@ public class BeShaowFragment extends LazyLoadFragment implements IViewContract.d
 
     @Override
     protected void initData() {
-
-    }
-    @Override
-    public void fetchData() {
+        SharedPreferences sp = getContext().getSharedPreferences("feil", Context.MODE_PRIVATE);
+        String sessionId = sp.getString("sessionId", null);
+        int userId = sp.getInt("userId", 0);
+        map.put("userId", userId);
+        map.put("sessionId", sessionId);
         list.clear();
         xrecList.setLoadingMoreEnabled(true);
         xrecList.setPullRefreshEnabled(true);
@@ -62,7 +69,7 @@ public class BeShaowFragment extends LazyLoadFragment implements IViewContract.d
                 page = 1;
                 list.clear();
                 Persenter persenter = new Persenter(BeShaowFragment.this);
-                persenter.SoonMovieList(page);
+                persenter.SoonMovieList(map,page);
                 xrecList.refreshComplete();
             }
 
@@ -70,26 +77,27 @@ public class BeShaowFragment extends LazyLoadFragment implements IViewContract.d
             public void onLoadMore() {
                 page++;
                 Persenter persenter = new Persenter(BeShaowFragment.this);
-                persenter.SoonMovieList(page);
+                persenter.SoonMovieList(map,page);
                 xrecList.loadMoreComplete();
             }
         });
         Persenter persenter = new Persenter(BeShaowFragment.this);
-        persenter.SoonMovieList(page);
+        persenter.SoonMovieList(map,page);
         xrecList.refreshComplete();
     }
+
     @Override
     public void onLogCurress(Object obj) {
+
+    }
+
+    @Override
+    public void onShapeCurress(Object obj) {
         List<SoonMovieBean.ResultBean> resultBeans = (List<SoonMovieBean.ResultBean>) obj;
         list.addAll(resultBeans);
         SoonMovieAdapter soonMovieAdapter=new SoonMovieAdapter(list);
         xrecList.setLayoutManager(new LinearLayoutManager(getContext()));
         xrecList.setAdapter(soonMovieAdapter);
-    }
-
-    @Override
-    public void onShapeCurress(Object obj) {
-
     }
 
     @Override

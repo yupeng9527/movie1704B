@@ -4,6 +4,7 @@ import com.bw.movie.R;
 import com.bw.movie.persenter.Persenter;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
+import com.bw.movie.view.zview.LazyLoadFragment;
 
 /**
  * date:2019/9/28
@@ -26,5 +27,5 @@ public class FilmReviewFragment extends BaseFragment {
     protected void initData() {
 
     }
-    
+
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,12 +61,13 @@ public class GuideActivity extends BaseActivity implements IViewContract.doView 
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
         Intent intent = getIntent();
-        final String email = intent.getStringExtra("email");
+
+        String email = intent.getStringExtra("email");
+
         String pwd = intent.getStringExtra("pwd");
         String decrypt = EncryptUtil.decrypt(pwd);
         editEmil.setText(email);
         editPass.setText(decrypt);
-
         textZhuce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,11 +97,17 @@ public class GuideActivity extends BaseActivity implements IViewContract.doView 
         if ("0000".equals(guideBean.status)){
             Toast.makeText(this, guideBean.message, Toast.LENGTH_SHORT).show();
             SharedPreferences sp = getSharedPreferences("feil", Context.MODE_PRIVATE);
-            sp.edit()
+            String email = editEmil.getText().toString();
+            String pwd = editPass.getText().toString();
+
+            sp.edit().putString("email", email)
+                    .putString("pwd", pwd)
+                    .putString("nickName", guideBean.result.userInfo.nickName)
+                    .putString("headPic", guideBean.result.userInfo.headPic)
+                    .putInt("weq",1)
                     .putInt("userId",guideBean.result.userId)
                     .putString("sessionId",guideBean.result.sessionId)
                     .commit();
-            EventBus.getDefault().post(guideBean);
             finish();
         }else{
             Toast.makeText(this, guideBean.message, Toast.LENGTH_SHORT).show();

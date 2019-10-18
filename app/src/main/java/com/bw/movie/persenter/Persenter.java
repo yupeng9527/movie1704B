@@ -145,10 +145,7 @@ public class Persenter extends IViewContract.doData {
     }
 
     @Override
-    public void SoonMovieList(int page) {
-        Map<String,String> map=new HashMap<>();
-        map.put("userId","13686");
-        map.put("sessionId","157069301241213686");
+    public void SoonMovieList(Map<String,Object> map,int page) {
         Map<String,Object> omap=new HashMap<>();
         omap.put("page",page);
         omap.put("count",3);
@@ -352,6 +349,29 @@ public class Persenter extends IViewContract.doData {
                             Toast.makeText(App.context, followBean.message, Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(App.context, followBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doResert(Map<String, Object> map, Map<String, Object> omap) {
+        HttpUtil.getHttpUtil().getApi()
+                .Reserve(map,omap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CodeBean>() {
+                    @Override
+                    public void accept(CodeBean codeBean) throws Exception {
+                        if ("0000".equals(codeBean.status)) {
+                            Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Consumer<Throwable>() {

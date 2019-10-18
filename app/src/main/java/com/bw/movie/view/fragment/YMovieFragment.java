@@ -2,6 +2,7 @@ package com.bw.movie.view.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
+import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.BannerBean;
 import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.modle.bean.MoVieListBean;
@@ -38,7 +40,9 @@ import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,7 +78,8 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     TextView textScore;
     @BindView(R.id.bit_gaopiao)
     Button bitGaopiao;
-
+    Map<String, Object> map = new HashMap<>();
+    Map<String, Object> smap = new HashMap<>();
 
     @Override
     protected int initLayout() {
@@ -98,7 +103,11 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
 
     @Override
     protected void initData() {
-
+        SharedPreferences sp = getContext().getSharedPreferences("feil", Context.MODE_PRIVATE);
+        String sessionId = sp.getString("sessionId", null);
+        int userId = sp.getInt("userId", 0);
+        map.put("userId", userId);
+        map.put("sessionId", sessionId);
         butTextNot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +131,7 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
         });
         Persenter persenter = new Persenter(YMovieFragment.this);
         persenter.doMovieList(page);
-        persenter.SoonMovieList(page);
+        persenter.SoonMovieList(map,page);
         persenter.HotMovieList(page);
         persenter.DoBanner();
     }
@@ -144,9 +153,19 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     @Override
     public void onShapeCurress(Object obj) {
         List<SoonMovieBean.ResultBean> resultBeans = (List<SoonMovieBean.ResultBean>) obj;
-        SoonMovieAdapter soonMovieAdapter = new SoonMovieAdapter(resultBeans);
+        final SoonMovieAdapter soonMovieAdapter = new SoonMovieAdapter(resultBeans);
         xlistShow.setLayoutManager(new LinearLayoutManager(getContext()));
         xlistShow.setAdapter(soonMovieAdapter);
+        soonMovieAdapter.notifyDataSetChanged();
+        soonMovieAdapter.setIview(new SoonMovieAdapter.Iview() {
+            @Override
+            public void onCurr(int i) {
+                smap.put("movieId",i);
+                Persenter persenter=new Persenter(YMovieFragment.this);
+                persenter.doResert(map,smap);
+
+            }
+        });
     }
 
     @Override

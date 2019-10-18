@@ -3,7 +3,6 @@ package com.bw.movie.view.activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 
 import com.bw.movie.R;
 import com.bw.movie.persenter.Persenter;
@@ -13,6 +12,7 @@ import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.fragment.BeShaowFragment;
 import com.bw.movie.view.fragment.HotShowFragment;
 import com.bw.movie.view.fragment.MovieFragment;
+import com.bw.movie.view.zview.CustomViewPager;
 import com.bw.movie.view.zview.SearchView;
 
 import java.util.ArrayList;
@@ -28,10 +28,11 @@ public class ShowActivity extends BaseActivity {
     List<Fragment> list = new ArrayList<>();
     @BindView(R.id.tab_lay)
     TabLayout tabLay;
-    @BindView(R.id.view_page)
-    ViewPager viewPage;
+
     @BindView(R.id.sear_view)
     SearchView searView;
+    @BindView(R.id.view_page)
+    CustomViewPager viewPage;
 
     @Override
     protected int initLayout() {
@@ -65,7 +66,7 @@ public class ShowActivity extends BaseActivity {
         }
         tabLay.setupWithViewPager(viewPage);
         FragAdapter fragAdapter = new FragAdapter(getSupportFragmentManager(), list, slist);
-       fragAdapter.notifyDataSetChanged();
+        fragAdapter.notifyDataSetChanged();
         viewPage.setAdapter(fragAdapter);
 
     }

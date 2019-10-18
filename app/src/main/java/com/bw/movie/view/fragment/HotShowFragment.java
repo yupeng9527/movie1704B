@@ -30,7 +30,7 @@ import butterknife.Unbinder;
  * author:贺少伟(盗)
  * function:
  */
-public class HotShowFragment extends LazyLoadFragment implements IViewContract.doView {
+public class HotShowFragment extends BaseFragment implements IViewContract.doView {
     @BindView(R.id.xrec_list)
     XRecyclerView xrecList;
     Unbinder unbinder;
@@ -62,10 +62,6 @@ public class HotShowFragment extends LazyLoadFragment implements IViewContract.d
     @Override
     protected void initData() {
 
-
-    }
-    @Override
-    public void fetchData() {
         list.clear();
         xrecList.setLoadingMoreEnabled(true);
         xrecList.setPullRefreshEnabled(true);
@@ -92,6 +88,7 @@ public class HotShowFragment extends LazyLoadFragment implements IViewContract.d
         persenter.doMovieList(page);
         xrecList.refreshComplete();
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

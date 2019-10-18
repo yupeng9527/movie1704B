@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,6 +28,7 @@ import com.bw.movie.view.fragment.particulars.FilmReviewFragment;
 import com.bw.movie.view.fragment.particulars.ForeshowFragment;
 import com.bw.movie.view.fragment.particulars.IntroduceFragment;
 import com.bw.movie.view.fragment.particulars.StagePhotoFragment;
+import com.bw.movie.view.zview.CustomViewPager;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -67,8 +68,7 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
     RelativeLayout vvv;
     @BindView(R.id.details_tab)
     TabLayout detailsTab;
-    @BindView(R.id.details_page)
-    ViewPager detailsPage;
+
     @BindView(R.id.btn_reviews)
     Button btnReviews;
     @BindView(R.id.btn_seat)
@@ -81,6 +81,8 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
     ImageView detailsBtnImgFalse;
     @BindView(R.id.details_content_false)
     TextView detailsContentFalse;
+    @BindView(R.id.details_page)
+    CustomViewPager detailsPage;
     private int movieId;
 
     @Override
@@ -111,7 +113,12 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
         smap.put("movieId", movieId);
         Persenter persenter = new Persenter(this);
         persenter.doDetail(map, smap);
-
+        SharedPreferences pp = getSharedPreferences("qq", Context.MODE_PRIVATE);
+        pp.edit()
+                .putString("sessionId",sessionId)
+                .putInt("userId",userId)
+                .putInt("movieId",movieId)
+                .commit();
 
     }
 
@@ -132,6 +139,7 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
                 detailsTab.addTab(tab);
             }
         }
+        detailsPage.setScanScroll(false);
         detailsTab.setupWithViewPager(detailsPage);
         FragAdapter fragAdapter = new FragAdapter(getSupportFragmentManager(), list, slist);
         fragAdapter.notifyDataSetChanged();
@@ -143,8 +151,6 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
 
         DetilBean detilBean = (DetilBean) obj;
         final DetilBean.ResultBean result = detilBean.result;
-        EventBus.getDefault().post(result);
-
         Glide.with(this)
                 .load(result.imageUrl)
                 .error(R.mipmap.ic_launcher)

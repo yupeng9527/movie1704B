@@ -1,6 +1,8 @@
 package com.bw.movie.view.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,20 +11,28 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
+import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.persenter.Persenter;
+import com.bw.movie.view.activity.GuideActivity;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
+import com.bw.movie.view.contract.IViewContract;
+import com.bw.movie.view.mi.EncryptUtil;
 import com.bw.movie.view.zview.LazyLoadFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +43,7 @@ import butterknife.Unbinder;
  * author:贺少伟(盗)
  * function:
  */
-public class MyFragment extends LazyLoadFragment {
+public class MyFragment extends BaseFragment implements IViewContract.doView {
     @BindView(R.id.imag_xinxi)
     ImageView imagXinxi;
     @BindView(R.id.r_r)
@@ -79,7 +89,6 @@ public class MyFragment extends LazyLoadFragment {
 
     @Override
     protected void initData() {
-
         imagNameSpace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,15 +96,49 @@ public class MyFragment extends LazyLoadFragment {
                 startActivity(intent);
             }
         });
+        SharedPreferences sp = getContext().getSharedPreferences("feil", Context.MODE_PRIVATE);
+        int weq = sp.getInt("weq", 0);
+        String email = sp.getString("email", "");
+        String pwd = sp.getString("pwd", "");
+        String decrypt = EncryptUtil.decrypt(pwd);
+        if (weq==1){
+
+            Map<String,String> map=new HashMap<>();
+            map.put("email",email);
+            map.put("pwd",decrypt);
+            Persenter persenter=new Persenter(this);
+            persenter.doGuild(map);
+        }
+        String headPic = sp.getString("headPic", "");
+        String nickName = sp.getString("nickName", "");
+        Glide.with(getContext())
+                .load(headPic)
+                .error(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.ic_launcher_round)
+                .apply(RequestOptions.circleCropTransform())
+                .into(imageQwe);
+        textQweName.setText(nickName);
 
     }
+
     @Override
-    public void fetchData() {
-        EventBus.getDefault().register(this);
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
     }
-    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
-    public void activityFragment(GuideBean guideBean){
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+
+    @Override
+    public void onLogCurress(Object obj) {
+        GuideBean guideBean= (GuideBean) obj;
         GuideBean.ResultBean result = guideBean.result;
         GuideBean.ResultBean.UserInfoBean userInfo = result.userInfo;
         Glide.with(getContext())
@@ -106,22 +149,24 @@ public class MyFragment extends LazyLoadFragment {
                 .into(imageQwe);
         textQweName.setText(userInfo.nickName);
     }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-
-
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    public void onShapeCurress(Object obj) {
+
     }
 
+    @Override
+    public void onMyCurress(Object obj) {
 
+    }
+
+    @Override
+    public void onBannerCurress(Object obj) {
+
+    }
+
+    @Override
+    public void onLogExurr(String str) {
+
+    }
 }

@@ -46,7 +46,7 @@ public interface Api {
     Observable<MoVieListBean> movie(@QueryMap Map<String,Object> map);
 
     @GET("movieApi/movie/v2/findComingSoonMovieList")
-    Observable<SoonMovieBean> Soonmovie(@HeaderMap Map<String,String> map, @QueryMap Map<String,Object> omap);
+    Observable<SoonMovieBean> Soonmovie(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> omap);
 
     @GET("movieApi/movie/v2/findHotMovieList")
     Observable<HotBean> Hotmovie(@QueryMap Map<String,Object> omap);
@@ -69,6 +69,11 @@ public interface Api {
 //  取消关注
    @GET("movieApi/movie/v1/verify/cancelFollowMovie")
     Observable<FollowBean> Cancel(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> imap);
+
+//  预约
+    @FormUrlEncoded
+   @POST("movieApi/movie/v2/verify/reserve")
+    Observable<CodeBean> Reserve(@HeaderMap Map<String,Object> map, @FieldMap Map<String,Object> imap);
 
 
 }

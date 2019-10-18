@@ -27,7 +27,7 @@ public interface IViewContract {
 //    热映数据
     public abstract void doMovieList(int page);
 //      即将上映
-    public abstract void SoonMovieList(int page);
+    public abstract void SoonMovieList(Map<String,Object> map,int page);
 //      热门
     public abstract void HotMovieList(int page);
 //    推荐影院信息
@@ -43,6 +43,9 @@ public interface IViewContract {
     public abstract void doCancel(Map<String,Object> map,Map<String,Object> omap);
 //    关注
     public abstract void doFollow(Map<String,Object> map,Map<String,Object> omap);
+//    预约
+    public abstract void doResert(Map<String,Object> map,Map<String,Object> omap);
+
 }
 
 }
