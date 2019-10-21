@@ -3,6 +3,7 @@ package com.bw.movie.modle.ap;
 import com.bw.movie.modle.bean.BannerBean;
 import com.bw.movie.modle.bean.CinemaBean;
 import com.bw.movie.modle.bean.CodeBean;
+import com.bw.movie.modle.bean.CommentBean;
 import com.bw.movie.modle.bean.DetilBean;
 import com.bw.movie.modle.bean.FollowBean;
 import com.bw.movie.modle.bean.GuideBean;
@@ -75,5 +76,14 @@ public interface Api {
    @POST("movieApi/movie/v2/verify/reserve")
     Observable<CodeBean> Reserve(@HeaderMap Map<String,Object> map, @FieldMap Map<String,Object> imap);
 
+    @GET("movieApi/movie/v2/findAllMovieComment")
+    Observable<CommentBean> Comment(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> imap);
 
+    @FormUrlEncoded
+    @POST("movieApi/user/v1/verify/modifyUserPwd")
+    Observable<CodeBean> UserPwd(@HeaderMap Map<String,Object> map, @FieldMap Map<String,String> imap);
+//    添加用户对影片的评论
+    @FormUrlEncoded
+    @POST("movieApi/movie/v1/verify/movieComment")
+    Observable<CodeBean> MovComm(@FieldMap Map<String,Object> map,@FieldMap Map<String,Object> omap);
 }

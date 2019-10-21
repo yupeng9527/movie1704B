@@ -45,6 +45,12 @@ public interface IViewContract {
     public abstract void doFollow(Map<String,Object> map,Map<String,Object> omap);
 //    预约
     public abstract void doResert(Map<String,Object> map,Map<String,Object> omap);
+//    评论
+    public abstract void doCommit(Map<String,Object> map,Map<String,Object> omap);
+//    修改密码
+    public abstract void doUserPwd(Map<String,Object> map,Map<String,String> omap);
+//添加用户对影片的评论
+    public abstract void doMoviComm(Map<String,Object> map,Map<String,Object> omap);
 
 }
 

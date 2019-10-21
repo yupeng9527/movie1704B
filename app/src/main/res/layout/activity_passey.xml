@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@mipmap/bitmap"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.PasseyActivity">
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edit_emil"
+        android:hint="请输入邮箱格式"
+        android:textColorHint="#fff"
+        android:textColor="#fff"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edit_old_pass"
+        android:hint="请输入旧密码"
+        android:textColorHint="#fff"
+        android:textColor="#fff"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edit_new_pass"
+        android:hint="请输入新密码"
+        android:textColorHint="#fff"
+        android:textColor="#fff"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edit_qr_pass"
+        android:hint="确认新密码"
+        android:textColorHint="#fff"
+        android:textColor="#fff"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/but_dl"
+        android:textSize="20dp"
+        android:layout_margin="20dp"
+        android:background="#CC299C"
+        android:text="登录"
+        android:textColor="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

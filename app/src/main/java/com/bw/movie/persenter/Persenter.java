@@ -6,6 +6,7 @@ import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.BannerBean;
 import com.bw.movie.modle.bean.CinemaBean;
 import com.bw.movie.modle.bean.CodeBean;
+import com.bw.movie.modle.bean.CommentBean;
 import com.bw.movie.modle.bean.DetilBean;
 import com.bw.movie.modle.bean.FollowBean;
 import com.bw.movie.modle.bean.GuideBean;
@@ -370,6 +371,84 @@ public class Persenter extends IViewContract.doData {
                     public void accept(CodeBean codeBean) throws Exception {
                         if ("0000".equals(codeBean.status)) {
                             Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doCommit(Map<String, Object> map, Map<String, Object> omap) {
+        HttpUtil.getHttpUtil().getApi()
+                .Comment(map,omap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CommentBean>() {
+                    @Override
+                    public void accept(CommentBean commentBean) throws Exception {
+                        if (iBaseVIew!=null) {
+                            List<RecommendBean.ResultBean> result = commentBean.result;
+                            if ("0000".equals(commentBean.status)) {
+                                iBaseVIew.onLogCurress(result);
+                            }else{
+                                Toast.makeText(App.context, commentBean.message, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doUserPwd(Map<String, Object> map, Map<String, String> omap) {
+        HttpUtil.getHttpUtil().getApi()
+                .UserPwd(map,omap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CodeBean>() {
+                    @Override
+                    public void accept(CodeBean codeBean) throws Exception {
+                        if ("0000".equals(codeBean.status)) {
+                            Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
+                            if (iBaseVIew!=null) {
+                                iBaseVIew.onLogCurress("0");
+                            }
+                        } else {
+                            Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doMoviComm(Map<String, Object> map, Map<String, Object> omap) {
+        HttpUtil.getHttpUtil().getApi()
+                .MovComm(map,omap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CodeBean>() {
+                    @Override
+                    public void accept(CodeBean codeBean) throws Exception {
+                        if ("0000".equals(codeBean.status)) {
+                            Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
+                            if (iBaseVIew!=null) {
+                                iBaseVIew.onBannerCurress("0");
+                            }
                         } else {
                             Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
                         }

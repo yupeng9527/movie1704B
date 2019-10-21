@@ -115,11 +115,18 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
         persenter.doDetail(map, smap);
         SharedPreferences pp = getSharedPreferences("qq", Context.MODE_PRIVATE);
         pp.edit()
+//                .putString("")
                 .putString("sessionId",sessionId)
                 .putInt("userId",userId)
                 .putInt("movieId",movieId)
                 .commit();
-
+        btnReviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(DeilActivity.this, ReviewsActivity.class);
+                startActivity(intent1);
+            }
+        });
     }
 
     private void initTab() {

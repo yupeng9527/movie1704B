@@ -1,9 +1,12 @@
 package com.bw.movie.view.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
@@ -13,17 +16,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bw.movie.R;
+import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.persenter.Persenter;
 import com.bw.movie.view.base.BaseActivity;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
 import com.bw.movie.view.mi.EncryptUtil;
+import com.bw.movie.wxapi.MyApplication;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.modelbase.BaseReq;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.opensdk.modelmsg.WXTextObject;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,7 +58,8 @@ public class GuideActivity extends BaseActivity implements IViewContract.doView 
     Button butDl;
     @BindView(R.id.imag_view)
     ImageView imagView;
-
+    private static final String APP_ID="wxb3852e6a6b7d9516";
+//    private IWXAPI api;
     @Override
     protected int initLayout() {
         return R.layout.activity_guide;
@@ -88,8 +104,32 @@ public class GuideActivity extends BaseActivity implements IViewContract.doView 
                 persenter.doGuild(map);
             }
         });
+        butWjmm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent("com.bawei.passey");
+                startActivity(intent);
+            }
+        });
+//        微信
+        imagView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // send oauth request
+//                SendAuth.Req req = new SendAuth.Req();
+//                req.scope = "snsapi_userinfo";
+//                req.state = "wechat_sdk_demo_test";
+//                App.api.sendReq(req);
+                SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                req.state = UUID.randomUUID().toString();
+                MyApplication.getWXApi().sendReq(req);
+            }
+        });
 
     }
+
+
 
     @Override
     public void onLogCurress(Object obj) {

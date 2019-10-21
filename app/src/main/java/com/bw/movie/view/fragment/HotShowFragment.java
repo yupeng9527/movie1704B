@@ -61,7 +61,6 @@ public class HotShowFragment extends BaseFragment implements IViewContract.doVie
 
     @Override
     protected void initData() {
-
         list.clear();
         xrecList.setLoadingMoreEnabled(true);
         xrecList.setPullRefreshEnabled(true);
@@ -87,8 +86,8 @@ public class HotShowFragment extends BaseFragment implements IViewContract.doVie
         Persenter persenter = new Persenter(HotShowFragment.this);
         persenter.doMovieList(page);
         xrecList.refreshComplete();
-    }
 
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -126,6 +125,7 @@ public class HotShowFragment extends BaseFragment implements IViewContract.doVie
     public void onLogExurr(String str) {
 
     }
+
 
 
 }

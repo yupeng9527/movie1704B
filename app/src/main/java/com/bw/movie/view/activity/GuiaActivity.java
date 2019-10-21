@@ -42,6 +42,7 @@ public class GuiaActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent("com.bawei.Prin");
                 startActivity(intent);
+                finish();
             }
         });
     }

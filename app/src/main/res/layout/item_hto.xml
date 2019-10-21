@@ -7,9 +7,9 @@
     android:layout_height="160dp">
     <ImageView
         android:id="@+id/imag_view"
-        android:layout_margin="10dp"
-        android:layout_width="110dp"
-        android:layout_height="130dp" />
+        android:layout_margin="@dimen/dp_10"
+        android:layout_width="@dimen/dp_110"
+        android:layout_height="@dimen/dp_130" />
     <LinearLayout
         android:layout_toRightOf="@id/imag_view"
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
         <TextView
             android:layout_weight="1"
             android:id="@+id/text_name"
-            android:textSize="25dp"
+            android:textSize="@dimen/sp_14"
             android:textColor="#fff"
             android:textStyle="bold"
             android:text="拍摄能力差"
@@ -30,7 +30,7 @@
         <TextView
             android:layout_weight="1"
             android:id="@+id/text_director"
-
+            android:textSize="@dimen/sp_12"
             android:textColor="#fff"
             android:text="导演:"
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         <TextView
             android:layout_weight="1"
             android:id="@+id/text_starring"
-
+            android:textSize="@dimen/sp_12"
             android:textColor="#fff"
             android:text="主演:"
             android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
             <TextView
                 android:layout_weight="1"
                 android:id="@+id/text_score"
-
+                android:textSize="@dimen/sp_12"
                 android:textColor="#fff"
                 android:text="评分:"
                 android:layout_width="wrap_content"
@@ -61,11 +61,11 @@
             <Button
                 android:id="@+id/bit_gaopiao"
                 android:text="购票"
-                android:textSize="20dp"
+                android:textSize="@dimen/sp_12"
                 android:textColor="#fff"
                 android:background="#E62C67"
-                android:layout_width="60dp"
-                android:layout_height="30dp" />
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="@dimen/dp_22" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

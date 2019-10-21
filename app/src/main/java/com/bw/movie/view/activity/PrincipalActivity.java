@@ -2,9 +2,11 @@ package com.bw.movie.view.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.bw.movie.R;
 import com.bw.movie.persenter.Persenter;
@@ -110,4 +112,25 @@ public class PrincipalActivity extends BaseActivity implements View.OnClickListe
                 break;
         }
     }
+
+    private long firstTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        long secondTime = System.currentTimeMillis();
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (secondTime - firstTime < 2000) {
+                System.exit(0);
+            } else {
+                Toast.makeText(getApplicationContext(), "再按一次返回键退出", Toast.LENGTH_SHORT).show();
+                firstTime = System.currentTimeMillis();
+            }
+
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
 }
