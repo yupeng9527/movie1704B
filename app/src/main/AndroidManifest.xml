@@ -23,7 +23,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.activity.ReviewsActivity"></activity>
+        <activity android:name=".view.activity.RommActivity"></activity>
+        <activity android:name=".view.activity.FeedActivity">
+            <intent-filter>
+                <action android:name="com.bawei.feed" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.ReviewsActivity" />
         <activity android:name=".view.activity.PasseyActivity">
             <intent-filter>
                 <action android:name="com.bawei.passey" />

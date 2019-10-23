@@ -127,6 +127,13 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
                 startActivity(intent1);
             }
         });
+        btnSeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(DeilActivity.this, RommActivity.class);
+                startActivity(intent1);
+            }
+        });
     }
 
     private void initTab() {
@@ -209,7 +216,12 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
                 }
             });
         }
-
+        SharedPreferences qq = getSharedPreferences("qq_m", Context.MODE_PRIVATE);
+        qq.edit()
+                .putString("name",result.name)
+                .putInt("movieid",result.movieId)
+                .putString("imageUrl",result.imageUrl)
+                .commit();
     }
 
     @Override

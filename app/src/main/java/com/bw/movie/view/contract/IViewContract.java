@@ -51,7 +51,20 @@ public interface IViewContract {
     public abstract void doUserPwd(Map<String,Object> map,Map<String,String> omap);
 //添加用户对影片的评论
     public abstract void doMoviComm(Map<String,Object> map,Map<String,Object> omap);
-
+//意见反馈
+    public abstract void doFeedBack(Map<String,Object> map,Map<String,Object> omap);
+//位置
+    public abstract void doSeatle(int hallId);
+//电影位置
+    public abstract void doByRegin(Map<String,Object> map);
+//电位置
+    public abstract void doSchedule(Map<String,Object> map);
+//微信登录
+    public abstract void doWxLog(String code);
+//下单
+public abstract void doTickets(Map<String,Object> map,Map<String,Object> omap);
+//支付
+public abstract void doPay(Map<String,Object> map,Map<String,Object> omap);
 }
 
 }

@@ -1,17 +1,24 @@
 apply plugin: 'com.android.application'
 
 android {
-
     signingConfigs {
+        release {
+            keyAlias 'bw_movie'
+            keyPassword '123456'
+            storeFile file('H:/movie.keystore')
+            storePassword '123456'
+        }
         debug {
             keyAlias 'bw_movie'
             keyPassword '123456'
-            storeFile file('C:/Users/盗/Desktop/movie.keystore')
+            storeFile file('H:/movie/movie1703A/app/movie.keystore')
             storePassword '123456'
         }
     }
     compileSdkVersion 28
     defaultConfig {
+
+        multiDexEnabled true
         applicationId "com.bw.movie"
         minSdkVersion 15
         targetSdkVersion 28
@@ -26,6 +33,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
         }
     }
 }
@@ -45,6 +54,8 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 }
+
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'

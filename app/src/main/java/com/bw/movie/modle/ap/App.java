@@ -18,7 +18,10 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
  */
 public class App extends Application {
     public static Context context;
-    private static final String APP_ID="wxb3852e6a6b7d9516";
+    // APP_ID 替换为你的应用从官方网站申请到的合法appID
+    private static final String APP_ID = "wxb3852e6a6b7d9516";
+
+    // IWXAPI 是第三方app和微信通信的openApi接口
     public static IWXAPI api;
 
     @Override
@@ -44,6 +47,5 @@ public class App extends Application {
                 api.registerApp(APP_ID);
             }
         }, new IntentFilter(ConstantsAPI.ACTION_REFRESH_WXAPP));
-
     }
 }

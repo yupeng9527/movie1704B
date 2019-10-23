@@ -20,6 +20,7 @@ import com.bw.movie.R;
 import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.persenter.Persenter;
+import com.bw.movie.view.activity.FeedActivity;
 import com.bw.movie.view.activity.GuideActivity;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
@@ -118,7 +119,25 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
                 .apply(RequestOptions.circleCropTransform())
                 .into(imageQwe);
         textQweName.setText(nickName);
-
+        lineTickling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.feed");
+                startActivity(intent);
+            }
+        });
+//        SharedPreferences pp = getContext().getSharedPreferences("qaz", Context.MODE_PRIVATE);
+//        if (pp!=null){
+//            String nickName1 = pp.getString("nickName", null);
+//            String headPic1 = pp.getString("headPic", null);
+//            Glide.with(getContext())
+//                    .load(headPic1)
+//                    .error(R.mipmap.ic_launcher)
+//                    .placeholder(R.mipmap.ic_launcher_round)
+//                    .apply(RequestOptions.circleCropTransform())
+//                    .into(imageQwe);
+//            textQweName.setText(nickName1);
+//        }
     }
 
     @Override
@@ -139,6 +158,11 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
     @Override
     public void onLogCurress(Object obj) {
         GuideBean guideBean= (GuideBean) obj;
+        SharedPreferences sp = getContext().getSharedPreferences("qaz", Context.MODE_PRIVATE);
+        sp.edit()
+                .putInt("userId",guideBean.result.userId)
+                .putString("sessionId",guideBean.result.sessionId)
+                .commit();
         GuideBean.ResultBean result = guideBean.result;
         GuideBean.ResultBean.UserInfoBean userInfo = result.userInfo;
         Glide.with(getContext())
@@ -148,6 +172,7 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
                 .apply(RequestOptions.circleCropTransform())
                 .into(imageQwe);
         textQweName.setText(userInfo.nickName);
+
     }
 
     @Override
