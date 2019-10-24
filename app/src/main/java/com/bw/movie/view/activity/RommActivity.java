@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.SchedBean;
@@ -117,7 +118,9 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
         Persenter persenter = new Persenter(RommActivity.this);
         persenter.doSchedule(map);
         roomVideoPlayer.setUp(imageUrl, null);
-
+        Glide.with(this)
+                .load(string)
+                .into(roomVideoPlayer.ivThumb);
 
         btnPurchaseOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -258,8 +261,6 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
     @Override
     public void onBannerCurress(Object obj) {
         VerifyBean verifyBean= (VerifyBean) obj;
-
-                SendAuth.Req req = new SendAuth.Req();
                 PayReq payReq = new PayReq();
                 payReq.appId =verifyBean.appId;
                 payReq.partnerId = verifyBean.partnerId;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,6 +127,13 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
                 startActivity(intent);
             }
         });
+        lineTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.TicketRecord");
+                startActivity(intent);
+            }
+        });
 //        SharedPreferences pp = getContext().getSharedPreferences("qaz", Context.MODE_PRIVATE);
 //        if (pp!=null){
 //            String nickName1 = pp.getString("nickName", null);
@@ -163,6 +171,8 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
                 .putInt("userId",guideBean.result.userId)
                 .putString("sessionId",guideBean.result.sessionId)
                 .commit();
+        Log.i("qqq", "onLogCurress: "+guideBean.result.userId);
+        Log.i("qqq", "onLogCurress: "+guideBean.result.sessionId);
         GuideBean.ResultBean result = guideBean.result;
         GuideBean.ResultBean.UserInfoBean userInfo = result.userInfo;
         Glide.with(getContext())

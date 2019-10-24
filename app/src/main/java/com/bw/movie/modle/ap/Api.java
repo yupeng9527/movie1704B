@@ -15,6 +15,7 @@ import com.bw.movie.modle.bean.RegisterBean;
 import com.bw.movie.modle.bean.SchedBean;
 import com.bw.movie.modle.bean.SeatleBean;
 import com.bw.movie.modle.bean.SoonMovieBean;
+import com.bw.movie.modle.bean.TICketBean;
 import com.bw.movie.modle.bean.TicketsBean;
 import com.bw.movie.modle.bean.VerifyBean;
 import com.bw.movie.modle.bean.WxLogBean;
@@ -120,6 +121,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("movieApi/movie/v2/verify/pay")
     Observable<VerifyBean> Pay(@HeaderMap Map<String,Object> map, @FieldMap Map<String,Object> omap);
-
+//  订单支付于未支付
+    @POST("movieApi/user/v2/verify/findUserBuyTicketRecord")
+    Observable<TICketBean> onTicket(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> omap);
 
 }

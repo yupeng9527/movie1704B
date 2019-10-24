@@ -26,9 +26,6 @@ import butterknife.ButterKnife;
 public class RommSeatAdapter extends XRecyclerView.Adapter<RommSeatAdapter.MovieVIewHolder> {
 
     List<SchedBean.ResultBean> result;
-
-
-
     public RommSeatAdapter(List<SchedBean.ResultBean> result) {
         this.result = result;
     }

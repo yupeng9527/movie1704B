@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.modle.bean.DetilBean;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -43,6 +44,9 @@ public class ForMoierAdapter extends XRecyclerView.Adapter<ForMoierAdapter.Movie
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
 
         movieViewHolder.videoView.setUp(resultBeanList.get(i).videoUrl,null);
+        Glide.with(movieViewHolder.itemView.getContext())
+                .load(resultBeanList.get(i).imageUrl)
+                .into(movieViewHolder.videoView.ivThumb);
     }
 
     @Override
@@ -63,4 +67,5 @@ public class ForMoierAdapter extends XRecyclerView.Adapter<ForMoierAdapter.Movie
 
         }
     }
+
 }

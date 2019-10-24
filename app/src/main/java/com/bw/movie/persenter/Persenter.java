@@ -18,6 +18,7 @@ import com.bw.movie.modle.bean.RegisterBean;
 import com.bw.movie.modle.bean.SchedBean;
 import com.bw.movie.modle.bean.SeatleBean;
 import com.bw.movie.modle.bean.SoonMovieBean;
+import com.bw.movie.modle.bean.TICketBean;
 import com.bw.movie.modle.bean.TicketsBean;
 import com.bw.movie.modle.bean.VerifyBean;
 import com.bw.movie.modle.bean.WxLogBean;
@@ -646,6 +647,32 @@ public class Persenter extends IViewContract.doData {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doTicter(Map<String, Object> map, Map<String, Object> omap) {
+        HttpUtil.getHttpUtil().getApi()
+                .onTicket(map,omap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<TICketBean>() {
+                    @Override
+                    public void accept(TICketBean tiCketBean) throws Exception {
+                        if ("0000".equals(tiCketBean.status)) {
+                            if (iBaseVIew!=null) {
+                                iBaseVIew.onLogCurress(tiCketBean);
+                            }
+                        } else {
+                            Toast.makeText(App.context, tiCketBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 });
     }
