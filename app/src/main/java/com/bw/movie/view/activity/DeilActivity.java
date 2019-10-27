@@ -107,7 +107,7 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
         int userId = sp.getInt("userId", 0);
         String sessionId = sp.getString("sessionId", null);
         Intent intent = getIntent();
-        int movieId = intent.getExtras().getInt("movieId");
+        final int movieId = intent.getExtras().getInt("movieId");
         map.put("userId", userId);
         map.put("sessionId", sessionId);
         smap.put("movieId", movieId);
@@ -131,6 +131,8 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(DeilActivity.this, RommActivity.class);
+                intent1.putExtra("movieId",movieId);
+
                 startActivity(intent1);
             }
         });

@@ -14,6 +14,7 @@ import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.modle.bean.MoVieListBean;
 import com.bw.movie.modle.bean.RecommendBean;
+import com.bw.movie.modle.bean.RecordByBean;
 import com.bw.movie.modle.bean.RegisterBean;
 import com.bw.movie.modle.bean.SchedBean;
 import com.bw.movie.modle.bean.SeatleBean;
@@ -673,6 +674,31 @@ public class Persenter extends IViewContract.doData {
                     public void accept(Throwable throwable) throws Exception {
                         Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
 
+                    }
+                });
+    }
+
+    @Override
+    public void doRecordBy(Map<String, Object> map, Map<String, Object> omap) {
+        HttpUtil.getHttpUtil().getApi()
+                .onRecordBy(map,omap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<RecordByBean>() {
+                    @Override
+                    public void accept(RecordByBean recordByBean) throws Exception {
+                        if ("0000".equals(recordByBean.status)) {
+                            if (iBaseVIew!=null) {
+                                iBaseVIew.onLogCurress(recordByBean);
+                            }
+                        } else {
+                            Toast.makeText(App.context, recordByBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

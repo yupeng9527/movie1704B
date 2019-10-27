@@ -65,8 +65,14 @@ public interface IViewContract {
 public abstract void doTickets(Map<String,Object> map,Map<String,Object> omap);
 //支付
     public abstract void doPay(Map<String,Object> map,Map<String,Object> omap);
+
     //购票记录
     public abstract void doTicter(Map<String,Object> map,Map<String,Object> omap);
-}
+
+    //详情
+    public abstract void doRecordBy(Map<String,Object> map,Map<String,Object> omap);
+
+
+    }
 
 }

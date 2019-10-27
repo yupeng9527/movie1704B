@@ -3,24 +3,27 @@ package com.bw.movie.view.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Rect;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
+import com.bw.movie.gaode.MapUtils;
 import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.BannerBean;
 import com.bw.movie.modle.bean.HotBean;
@@ -33,7 +36,7 @@ import com.bw.movie.view.adapter.YMovieAdapter;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
-import com.bw.movie.view.zview.LazyLoadFragment;
+import com.bw.movie.view.zview.SearchView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -80,6 +83,8 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     Button bitGaopiao;
     Map<String, Object> map = new HashMap<>();
     Map<String, Object> smap = new HashMap<>();
+    @BindView(R.id.sear_ch)
+    SearchView searCh;
 
     @Override
     protected int initLayout() {
@@ -129,11 +134,23 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
                 startActivity(intent);
             }
         });
+        searCh.setOnIntersen(new SearchView.OnIntersen() {
+            @Override
+            public void onFinis(String str) {
+                Toast.makeText(App.context, str, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSs(String str) {
+
+            }
+        });
         Persenter persenter = new Persenter(YMovieFragment.this);
         persenter.doMovieList(page);
-        persenter.SoonMovieList(map,page);
+        persenter.SoonMovieList(map, page);
         persenter.HotMovieList(page);
         persenter.DoBanner();
+
     }
 
 
@@ -160,9 +177,9 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
         soonMovieAdapter.setIview(new SoonMovieAdapter.Iview() {
             @Override
             public void onCurr(int i) {
-                smap.put("movieId",i);
-                Persenter persenter=new Persenter(YMovieFragment.this);
-                persenter.doResert(map,smap);
+                smap.put("movieId", i);
+                Persenter persenter = new Persenter(YMovieFragment.this);
+                persenter.doResert(map, smap);
 
             }
         });
@@ -178,7 +195,7 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                 .into(imagView);
         textName.setText(result.get(0).name);
-        textScore.setText(result.get(0).score+"分");
+        textScore.setText(result.get(0).score + "分");
         HotAdapter hotAdapter = new HotAdapter(result);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
@@ -188,8 +205,8 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
 
     @Override
     public void onBannerCurress(Object obj) {
-        List<BannerBean.ResultBean> resultBeans= (List<BannerBean.ResultBean>) obj;
-        List<String> list=new ArrayList<>();
+        List<BannerBean.ResultBean> resultBeans = (List<BannerBean.ResultBean>) obj;
+        List<String> list = new ArrayList<>();
         banNer.setDelayTime(3000);
         for (int i = 0; i < resultBeans.size(); i++) {
             list.add(resultBeans.get(i).imageUrl);
@@ -199,12 +216,12 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
                 .setImageLoader(new ImageLoader() {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
-                      Glide.with(context)
-                      .load(path)
-                      .error(R.mipmap.ic_launcher)
-                      .placeholder(R.mipmap.ic_launcher_round)
-                      .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
-                      .into(imageView);
+                        Glide.with(context)
+                                .load(path)
+                                .error(R.mipmap.ic_launcher)
+                                .placeholder(R.mipmap.ic_launcher_round)
+                                .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                                .into(imageView);
                     }
                 })
                 .isAutoPlay(true)
@@ -221,6 +238,7 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+
     }
 
 

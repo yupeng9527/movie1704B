@@ -1,6 +1,7 @@
 package com.bw.movie.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -78,7 +79,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
     ImageView imagGb;
     private String string;
     private long sum;
-    private double fare = 0.1;
+    private double fare=0.1;
     private double zf;
     private CheckBox wxzf;
     private String orderId;
@@ -108,13 +109,15 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
         SharedPreferences qq = getSharedPreferences("qq_m", Context.MODE_PRIVATE);
         final String name = qq.getString("name", null);
         final String imageUrl = qq.getString("imageUrl", null);
-        int movieid = qq.getInt("movieid", 0);
+//        int movieid = qq.getInt("movieid", 0);
         SharedPreferences sp = getSharedPreferences("hallId", Context.MODE_PRIVATE);
         final int hallId = sp.getInt("hallId", 0);
         roomName.setText(name);
+        Intent intent = getIntent();
+        int movieId = intent.getIntExtra("movieId", 0);
         final Map<String, Object> map = new HashMap<>();
         map.put("cinemaId", 1);
-        map.put("movieId", 5);
+        map.put("movieId", 3);
         Persenter persenter = new Persenter(RommActivity.this);
         persenter.doSchedule(map);
         roomVideoPlayer.setUp(imageUrl, null);
@@ -158,7 +161,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
                 }
                 if (sum > 4) {
                     Toast.makeText(RommActivity.this, "最多" + sum + "张", Toast.LENGTH_SHORT).show();
-                    return;
+
                 } else {
                     //设置价格
                     if (sum != 0) {
@@ -203,7 +206,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
             @Override
             public void getBack(String s) {
                 Persenter persenter = new Persenter(RommActivity.this);
-                persenter.doSeatle(1);
+                persenter.doSeatle(3);
             }
 
             @Override
@@ -245,6 +248,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
     public void onMyCurress(Object obj) {
         TicketsBean ticketsBean= (TicketsBean) obj;
         SharedPreferences fp = getSharedPreferences("feil", Context.MODE_PRIVATE);
+
         String sessionId = fp.getString("sessionId", null);
         int userId = fp.getInt("userId", 0);
         Map<String,Object> ma=new HashMap<>();
@@ -261,16 +265,16 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
     @Override
     public void onBannerCurress(Object obj) {
         VerifyBean verifyBean= (VerifyBean) obj;
-                PayReq payReq = new PayReq();
-                payReq.appId =verifyBean.appId;
-                payReq.partnerId = verifyBean.partnerId;
-                payReq.prepayId = verifyBean.prepayId;
-                payReq.nonceStr = verifyBean.nonceStr;
-                payReq.timeStamp = verifyBean.timeStamp;
-                payReq.packageValue = verifyBean.packageValue;
-                payReq.sign = verifyBean.sign;
-                payReq.extData = "app data"; // optional
-                App.api.sendReq(payReq);
+        PayReq payReq = new PayReq();
+        payReq.appId =verifyBean.appId;
+        payReq.partnerId = verifyBean.partnerId;
+        payReq.prepayId = verifyBean.prepayId;
+        payReq.nonceStr = verifyBean.nonceStr;
+        payReq.timeStamp = verifyBean.timeStamp;
+        payReq.packageValue = verifyBean.packageValue;
+        payReq.sign = verifyBean.sign;
+        payReq.extData = "app data"; // optional
+        App.api.sendReq(payReq);
 
 
     }

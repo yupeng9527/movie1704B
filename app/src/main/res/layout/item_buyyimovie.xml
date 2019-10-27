@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp_312"
+    android:background="#1c2243"
+    android:layout_gravity="center_horizontal"
+    android:id="@+id/lin_imag"
+    android:layout_margin="@dimen/dp_10"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:layout_height="@dimen/dp_134">
+    
+    <ImageView
+        android:id="@+id/buy_imag_view"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_width="@dimen/dp_95"
+        android:layout_height="@dimen/dp_114" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <TextView
+            android:gravity="center_vertical"
+            android:textColor="#fff"
+            android:layout_weight="1"
+            android:id="@+id/buy_text_name"
+            android:textSize="@dimen/sp_14"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_20" />
+        
+        <TextView
+            android:textColor="#fff"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:id="@+id/buy_text_ding_da"
+            android:textSize="@dimen/sp_12"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_17" />
+        <TextView
+            android:textColor="#fff"
+
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:id="@+id/buy_text_ding_time"
+            android:textSize="@dimen/sp_12"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_17" />
+
+        <TextView
+            android:textColor="#fff"
+            android:text="订单详情>>"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:id="@+id/buy_text_xiang_qing"
+            android:textSize="@dimen/sp_12"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_17" />
+    </LinearLayout>
+
+</LinearLayout>
