@@ -72,7 +72,29 @@ public abstract void doTickets(Map<String,Object> map,Map<String,Object> omap);
     //详情
     public abstract void doRecordBy(Map<String,Object> map,Map<String,Object> omap);
 
+    //查询用户预约电影信息
+    public abstract void doUserBean(Map<String,Object> map);
 
-    }
+    //我的电影票
+    public abstract void doMyBean(Map<String,Object> map);
+
+    //查询用户关注电影列表
+    public abstract void doMOvieList(Map<String,Object> map,Map<String,Object> omap);
+
+
+    //查询用户关注电影列表
+    public abstract void doCinemaList(Map<String,Object> map,Map<String,Object> omap);
+
+
+    //查询看过的电影
+    public abstract void doSeenMovie(Map<String,Object> map);
+
+    //查询系统消息列表
+    public abstract void doSysMsgList(Map<String,Object> map,Map<String,Object> omap);
+
+    //查询一周排期的时间
+    public abstract void doDateList();
+
+}
 
 }

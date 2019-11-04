@@ -5,19 +5,26 @@ import com.bw.movie.modle.bean.ByRegionBean;
 import com.bw.movie.modle.bean.CinemaBean;
 import com.bw.movie.modle.bean.CodeBean;
 import com.bw.movie.modle.bean.CommentBean;
+import com.bw.movie.modle.bean.DateListBean;
 import com.bw.movie.modle.bean.DetilBean;
 import com.bw.movie.modle.bean.FollowBean;
 import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.modle.bean.MoVieListBean;
+import com.bw.movie.modle.bean.MyMovieBean;
+import com.bw.movie.modle.bean.OnCimenBean;
+import com.bw.movie.modle.bean.OnMovieBean;
 import com.bw.movie.modle.bean.RecommendBean;
 import com.bw.movie.modle.bean.RecordByBean;
 import com.bw.movie.modle.bean.RegisterBean;
 import com.bw.movie.modle.bean.SchedBean;
 import com.bw.movie.modle.bean.SeatleBean;
+import com.bw.movie.modle.bean.SeenMovieBean;
 import com.bw.movie.modle.bean.SoonMovieBean;
+import com.bw.movie.modle.bean.SysMsgListBean;
 import com.bw.movie.modle.bean.TICketBean;
 import com.bw.movie.modle.bean.TicketsBean;
+import com.bw.movie.modle.bean.UserBean;
 import com.bw.movie.modle.bean.VerifyBean;
 import com.bw.movie.modle.bean.WxLogBean;
 
@@ -128,5 +135,34 @@ public interface Api {
 //详情
     @GET("movieApi/user/v2/verify/findBuyTicketRecordByOrderId")
     Observable<RecordByBean> onRecordBy(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> omap);
+//查询用户预约电影信息
+    @GET("movieApi/user/v2/verify/findUserReserve")
+    Observable<UserBean> onUserBean(@HeaderMap Map<String,Object> map);
+
+    //我的电影票
+    @GET("movieApi/user/v2/verify/findMyMovieTicket")
+    Observable<MyMovieBean> onMyBean(@HeaderMap Map<String,Object> map);
+
+    //查询用户关注电影列表
+    @GET("movieApi/user/v2/verify/findUserFollowMovieList")
+    Observable<OnMovieBean> onMOvieList(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> omap);
+
+
+    //查询用户关注影院列表
+    @GET("movieApi/user/v2/verify/findUserFollowCinemaList")
+    Observable<OnCimenBean> onCinemaList(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> omap);
+
+    //查询一周排期的时间
+    @GET("movieApi/tool/v2/findDateList")
+    Observable<DateListBean> onDateList();
+
+    //查询看过的电影
+    @GET("movieApi/user/v2/verify/findSeenMovie")
+    Observable<SeenMovieBean> onSeenMovie(@HeaderMap Map<String,Object> map);
+
+    //查询系统消息列表
+    @GET("movieApi/tool/v1/verify/findAllSysMsgList")
+    Observable<SysMsgListBean> onSysMsgList(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> omap);
+
 
 }

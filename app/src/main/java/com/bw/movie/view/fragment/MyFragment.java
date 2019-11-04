@@ -12,26 +12,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
-import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.persenter.Persenter;
-import com.bw.movie.view.activity.FeedActivity;
-import com.bw.movie.view.activity.GuideActivity;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
 import com.bw.movie.view.mi.EncryptUtil;
-import com.bw.movie.view.zview.LazyLoadFragment;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,8 +50,6 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
     LinearLayout linLau;
     @BindView(R.id.imag_movie_span)
     ImageView imagMovieSpan;
-    @BindView(R.id.lin_lay)
-    LinearLayout linLay;
     @BindView(R.id.line_attention)
     LinearLayout lineAttention;
     @BindView(R.id.line_subscribe)
@@ -77,6 +65,8 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
     @BindView(R.id.line_install)
     LinearLayout lineInstall;
     Unbinder unbinder;
+    @BindView(R.id.lin_lay)
+    LinearLayout linLay;
 
     @Override
     protected int initLayout() {
@@ -94,7 +84,7 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
         imagNameSpace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent("com.bawei.guide");
+                Intent intent = new Intent("com.bawei.guide");
                 startActivity(intent);
             }
         });
@@ -103,12 +93,12 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
         String email = sp.getString("email", "");
         String pwd = sp.getString("pwd", "");
         String decrypt = EncryptUtil.decrypt(pwd);
-        if (weq==1){
+        if (weq == 1) {
 
-            Map<String,String> map=new HashMap<>();
-            map.put("email",email);
-            map.put("pwd",decrypt);
-            Persenter persenter=new Persenter(this);
+            Map<String, String> map = new HashMap<>();
+            map.put("email", email);
+            map.put("pwd", decrypt);
+            Persenter persenter = new Persenter(this);
             persenter.doGuild(map);
         }
         String headPic = sp.getString("headPic", "");
@@ -134,18 +124,41 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
                 startActivity(intent);
             }
         });
-//        SharedPreferences pp = getContext().getSharedPreferences("qaz", Context.MODE_PRIVATE);
-//        if (pp!=null){
-//            String nickName1 = pp.getString("nickName", null);
-//            String headPic1 = pp.getString("headPic", null);
-//            Glide.with(getContext())
-//                    .load(headPic1)
-//                    .error(R.mipmap.ic_launcher)
-//                    .placeholder(R.mipmap.ic_launcher_round)
-//                    .apply(RequestOptions.circleCropTransform())
-//                    .into(imageQwe);
-//            textQweName.setText(nickName1);
-//        }
+        lineSubscribe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.user");
+                startActivity(intent);
+            }
+        });
+        linLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.MyMovie");
+                startActivity(intent);
+            }
+        });
+        lineAttention.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.Attention");
+                startActivity(intent);
+            }
+        });
+        lineSeekMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.SeenMovie");
+                startActivity(intent);
+            }
+        });
+        imagXinxi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.SysMsgList");
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -165,14 +178,14 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
 
     @Override
     public void onLogCurress(Object obj) {
-        GuideBean guideBean= (GuideBean) obj;
+        GuideBean guideBean = (GuideBean) obj;
         SharedPreferences sp = getContext().getSharedPreferences("qaz", Context.MODE_PRIVATE);
         sp.edit()
-                .putInt("userId",guideBean.result.userId)
-                .putString("sessionId",guideBean.result.sessionId)
+                .putInt("userId", guideBean.result.userId)
+                .putString("sessionId", guideBean.result.sessionId)
                 .commit();
-        Log.i("qqq", "onLogCurress: "+guideBean.result.userId);
-        Log.i("qqq", "onLogCurress: "+guideBean.result.sessionId);
+        Log.i("qqq", "onLogCurress: " + guideBean.result.userId);
+        Log.i("qqq", "onLogCurress: " + guideBean.result.sessionId);
         GuideBean.ResultBean result = guideBean.result;
         GuideBean.ResultBean.UserInfoBean userInfo = result.userInfo;
         Glide.with(getContext())
