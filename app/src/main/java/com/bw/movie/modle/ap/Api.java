@@ -26,6 +26,7 @@ import com.bw.movie.modle.bean.TICketBean;
 import com.bw.movie.modle.bean.TicketsBean;
 import com.bw.movie.modle.bean.UserBean;
 import com.bw.movie.modle.bean.VerifyBean;
+import com.bw.movie.modle.bean.VersionBean;
 import com.bw.movie.modle.bean.WxLogBean;
 
 import java.util.Map;
@@ -164,5 +165,12 @@ public interface Api {
     @GET("movieApi/tool/v1/verify/findAllSysMsgList")
     Observable<SysMsgListBean> onSysMsgList(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> omap);
 
+    //查询新版本
+    @GET("movieApi/tool/v1/findNewVersion")
+    Observable<VersionBean> onVersion(@HeaderMap Map<String,Object> map);
+    //修改用户生日
+    @FormUrlEncoded
+    @POST("movieApi/user/v2/verify/updateUserBirthday")
+    Observable<CodeBean> onBirthday(@HeaderMap Map<String,Object> map,@FieldMap Map<String,String> smap);
 
 }

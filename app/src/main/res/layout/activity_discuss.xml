@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="#141931"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.myfragment.DiscussActivity">
+
+    <RelativeLayout
+        android:layout_margin="@dimen/dp_30"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/dp_26">
+
+        <ImageView
+            android:id="@+id/details_back"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:src="@mipmap/left_shape" />
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:text="我的评论"
+            android:textColor="#fff"
+            android:textSize="@dimen/sp_16"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_22" />
+    </RelativeLayout>
+</LinearLayout>

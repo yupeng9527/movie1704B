@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,9 +94,11 @@ public class StagePhotoFragment extends BaseFragment implements IViewContract.do
         final DetilBean.ResultBean result = detilBean.result;
         List<String> posterList = result.posterList;
         StageAdapter stageAdapter=new StageAdapter(posterList);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        staggeredGridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
 
-        itemListPhone.setLayoutManager(gridLayoutManager);
+        itemListPhone.setLayoutManager(staggeredGridLayoutManager);
         itemListPhone.setAdapter(stageAdapter);
     }
 

@@ -29,6 +29,7 @@ import com.bw.movie.modle.bean.TICketBean;
 import com.bw.movie.modle.bean.TicketsBean;
 import com.bw.movie.modle.bean.UserBean;
 import com.bw.movie.modle.bean.VerifyBean;
+import com.bw.movie.modle.bean.VersionBean;
 import com.bw.movie.modle.bean.WxLogBean;
 import com.bw.movie.modle.utils.HttpUtil;
 import com.bw.movie.view.base.IBaseVIew;
@@ -877,6 +878,55 @@ public class Persenter extends IViewContract.doData {
                             }
                         } else {
                             Toast.makeText(App.context, dateListBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doVersion(Map<String, Object> map) {
+        HttpUtil.getHttpUtil().getApi()
+                .onVersion(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<VersionBean>() {
+                    @Override
+                    public void accept(VersionBean versionBean) throws Exception {
+                        if ("0000".equals(versionBean.status)) {
+                            if (iBaseVIew!=null) {
+                                iBaseVIew.onLogCurress(versionBean);
+                            }
+                        } else {
+                            Toast.makeText(App.context, versionBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doBirthday(Map<String, Object> map, Map<String, String> smap) {
+        HttpUtil.getHttpUtil().getApi()
+                .onBirthday(map,smap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CodeBean>() {
+                    @Override
+                    public void accept(CodeBean codeBean) throws Exception {
+                        if ("0000".equals(codeBean.status)) {
+                            Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
+                            iBaseVIew.onMyCurress("0");
+                        } else {
+                            Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Consumer<Throwable>() {

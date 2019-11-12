@@ -34,6 +34,41 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.activity.myfragment.MyActivity">
+            <intent-filter>
+                <action android:name="com.bawei.Sysmy" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.myfragment.DiscussActivity">
+            <intent-filter>
+                <action android:name="com.bawei.Discuss" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.myfragment.ResetActivity">
+            <intent-filter>
+                <action android:name="com.bawei.Reset" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.myfragment.VersionActivity">
+            <intent-filter>
+                <action android:name="com.bawei.Version" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.myfragment.InstallActivity">
+            <intent-filter>
+                <action android:name="com.bawei.Install" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".view.activity.myfragment.SysMsgListActivity">
             <intent-filter>
                 <action android:name="com.bawei.SysMsgList" />

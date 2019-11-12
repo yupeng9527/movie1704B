@@ -95,6 +95,10 @@ public abstract void doTickets(Map<String,Object> map,Map<String,Object> omap);
     //查询一周排期的时间
     public abstract void doDateList();
 
+    //查询看过的电影
+    public abstract void doVersion(Map<String,Object> map);
+    //修改用户生日
+    public abstract void doBirthday(Map<String,Object> map,Map<String,String> smap);
 }
 
 }

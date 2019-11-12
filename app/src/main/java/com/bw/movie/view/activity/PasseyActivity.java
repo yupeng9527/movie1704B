@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bw.movie.R;
@@ -36,6 +37,8 @@ public class PasseyActivity extends BaseActivity implements IViewContract.doView
     EditText editQrPass;
     @BindView(R.id.but_dl)
     Button butDl;
+    @BindView(R.id.details_back)
+    ImageView detailsBack;
     private SharedPreferences sp;
     private String qrpas;
 
@@ -46,7 +49,7 @@ public class PasseyActivity extends BaseActivity implements IViewContract.doView
 
     @Override
     protected BasePersenter initPersenter() {
-        Persenter persenter= (Persenter) basePersenter;
+        Persenter persenter = (Persenter) basePersenter;
         return persenter;
     }
 
@@ -55,13 +58,19 @@ public class PasseyActivity extends BaseActivity implements IViewContract.doView
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        detailsBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         sp = getSharedPreferences("feil", Context.MODE_PRIVATE);
         String email = sp.getString("email", "");
         int userId = sp.getInt("userId", 0);
         String sessionId = sp.getString("sessionId", null);
         editEmil.setText(email);
-        final Map<String,String> imap=new HashMap<>();
-        final Map<String,Object> map=new HashMap<>();
+        final Map<String, String> imap = new HashMap<>();
+        final Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
         map.put("sessionId", sessionId);
 
@@ -71,30 +80,29 @@ public class PasseyActivity extends BaseActivity implements IViewContract.doView
                 final String newpass = editNewPass.getText().toString();
                 final String oldpass = editOldPass.getText().toString();
                 final String qrpass = editQrPass.getText().toString();
-                if (!newpass.equals(qrpass)){
+                if (!newpass.equals(qrpass)) {
                     Toast.makeText(App.context, "密码不一致", Toast.LENGTH_SHORT).show();
-                }else{
-                    String oldpa = EncryptUtil.decrypt(oldpass);
-                    String decrypt = EncryptUtil.decrypt(newpass);
-                    qrpas = EncryptUtil.decrypt(qrpass);
+                } else {
+                    String oldpa = EncryptUtil.encrypt(oldpass);
+                    String decrypt = EncryptUtil.encrypt(newpass);
+                    qrpas = EncryptUtil.encrypt(qrpass);
                     imap.put("oldPwd", oldpa);
                     imap.put("newPwd", decrypt);
                     imap.put("newPwd2", qrpas);
-                    Persenter persenter=new Persenter(PasseyActivity.this);
-                    persenter.doUserPwd(map,imap);
+                    Persenter persenter = new Persenter(PasseyActivity.this);
+                    persenter.doUserPwd(map, imap);
                 }
             }
         });
-
 
 
     }
 
     @Override
     public void onLogCurress(Object obj) {
-        sp.edit().putString("pwd",qrpas)
+        sp.edit().putString("pwd", qrpas)
                 .commit();
-        Intent intent=new Intent("com.bawei.Prin");
+        Intent intent = new Intent("com.bawei.Prin");
         startActivity(intent);
     }
 

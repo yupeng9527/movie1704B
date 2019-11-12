@@ -67,6 +67,8 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
     Unbinder unbinder;
     @BindView(R.id.lin_lay)
     LinearLayout linLay;
+    @BindView(R.id.ling_log)
+    LinearLayout lingLog;
 
     @Override
     protected int initLayout() {
@@ -81,7 +83,7 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
 
     @Override
     protected void initData() {
-        imagNameSpace.setOnClickListener(new View.OnClickListener() {
+        lingLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.bawei.guide");
@@ -156,6 +158,27 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.bawei.SysMsgList");
+                startActivity(intent);
+            }
+        });
+        imageQwe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.Sysmy");
+                startActivity(intent);
+            }
+        });
+        lineInstall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.Install");
+                startActivity(intent);
+            }
+        });
+        lineDiscuss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.bawei.Discuss");
                 startActivity(intent);
             }
         });
