@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
 import com.bw.movie.modle.bean.DetilBean;
 import com.bw.movie.modle.bean.HotBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
@@ -44,12 +45,7 @@ public class DaoyAdapter extends XRecyclerView.Adapter<DaoyAdapter.MovieViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
-
-        Glide.with(movieViewHolder.itemView.getContext())
-                .load(resultBeanList.get(i).photo)
-                .error(R.mipmap.ic_launcher)
-                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
-                .into(movieViewHolder.imagView);
+        movieViewHolder.imagView.setImageURI(resultBeanList.get(i).photo);
         movieViewHolder.textScore.setText(resultBeanList.get(i).name);
 
 
@@ -63,7 +59,7 @@ public class DaoyAdapter extends XRecyclerView.Adapter<DaoyAdapter.MovieViewHold
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imag_view)
-        ImageView imagView;
+        SimpleDraweeView imagView;
         @BindView(R.id.text_score)
         TextView textScore;
 

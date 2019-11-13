@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -29,6 +30,7 @@ public class App extends Application {
         super.onCreate();
         context=this;
         regToWx();
+        Fresco.initialize(this);
     }
 
     private void regToWx() {

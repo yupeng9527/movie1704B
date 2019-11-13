@@ -66,6 +66,8 @@ public class PrincipalActivity extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        setTranslucent(this);
+        setColor(this,R.color.colordark);
         list.add(new YMovieFragment());
         list.add(new ShapeFragment());
         list.add(new MyFragment());

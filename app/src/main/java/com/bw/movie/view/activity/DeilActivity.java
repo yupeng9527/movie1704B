@@ -29,6 +29,7 @@ import com.bw.movie.view.fragment.particulars.ForeshowFragment;
 import com.bw.movie.view.fragment.particulars.IntroduceFragment;
 import com.bw.movie.view.fragment.particulars.StagePhotoFragment;
 import com.bw.movie.view.zview.CustomViewPager;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -47,7 +48,7 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
     @BindView(R.id.details_back)
     ImageView detailsBack;
     @BindView(R.id.details_img)
-    ImageView detailsImg;
+    SimpleDraweeView detailsImg;
     @BindView(R.id.details_mark)
     TextView detailsMark;
     @BindView(R.id.details_critic)
@@ -101,7 +102,7 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-
+        setTranslucent(this);
         initTab();
         SharedPreferences sp = getSharedPreferences("feil", Context.MODE_PRIVATE);
         int userId = sp.getInt("userId", 0);
@@ -167,12 +168,7 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
 
         DetilBean detilBean = (DetilBean) obj;
         final DetilBean.ResultBean result = detilBean.result;
-        Glide.with(this)
-                .load(result.imageUrl)
-                .error(R.mipmap.ic_launcher)
-                .placeholder(R.mipmap.ic_launcher_round)
-                .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
-                .into(detailsImg);
+        detailsImg.setImageURI(result.imageUrl);
         detailsMark.setText("评分:   " + result.score);
         detailsCritic.setText("评论:   " + result.commentNum);
         detailsName.setText(result.name);

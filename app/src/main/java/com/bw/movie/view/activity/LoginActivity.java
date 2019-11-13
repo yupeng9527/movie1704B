@@ -61,6 +61,7 @@ public class LoginActivity extends BaseActivity implements IViewContract.doView 
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        setTranslucent(this);
         persenter = new Persenter((IBaseVIew) LoginActivity.this);
     }
 

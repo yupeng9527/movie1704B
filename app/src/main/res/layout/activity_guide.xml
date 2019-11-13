@@ -16,6 +16,7 @@
     </LinearLayout>
 
     <EditText
+
         android:id="@+id/edit_emil"
         android:hint="请输入邮箱格式"
         android:textColorHint="#fff"
@@ -61,6 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:visibility="gone"
         android:id="@+id/but_wx"
         android:textSize="20dp"
         android:layout_margin="20dp"

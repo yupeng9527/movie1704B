@@ -50,6 +50,7 @@ public class ShowActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        setTranslucent(this);
         list.add(new HotShowFragment());
         list.add(new BeShaowFragment());
         list.add(new MovieFragment());

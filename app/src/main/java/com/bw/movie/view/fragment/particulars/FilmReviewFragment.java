@@ -67,7 +67,7 @@ public class FilmReviewFragment extends BaseFragment implements IViewContract.do
     @Override
     public void onLogCurress(Object obj) {
         List<CommentBean.ResultBean> result = (List<CommentBean.ResultBean>) obj;
-//        CommitAdapter commitAdapter=new CommitAdapter(result);
+        CommitAdapter commitAdapter=new CommitAdapter(result);
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 //        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
 //        rlinkView.setLayoutManager(linearLayoutManager);

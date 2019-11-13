@@ -48,6 +48,7 @@ public class SysMsgListActivity extends BaseActivity implements IViewContract.do
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        setTranslucent(this);
         detailsBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

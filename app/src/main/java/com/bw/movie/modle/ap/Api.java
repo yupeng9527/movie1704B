@@ -3,12 +3,14 @@ package com.bw.movie.modle.ap;
 import com.bw.movie.modle.bean.BannerBean;
 import com.bw.movie.modle.bean.ByRegionBean;
 import com.bw.movie.modle.bean.CinemaBean;
+import com.bw.movie.modle.bean.CinemaByBean;
 import com.bw.movie.modle.bean.CodeBean;
 import com.bw.movie.modle.bean.CommentBean;
 import com.bw.movie.modle.bean.DateListBean;
 import com.bw.movie.modle.bean.DetilBean;
 import com.bw.movie.modle.bean.FollowBean;
 import com.bw.movie.modle.bean.GuideBean;
+import com.bw.movie.modle.bean.HeadPicBean;
 import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.modle.bean.MoVieListBean;
 import com.bw.movie.modle.bean.MyMovieBean;
@@ -16,6 +18,7 @@ import com.bw.movie.modle.bean.OnCimenBean;
 import com.bw.movie.modle.bean.OnMovieBean;
 import com.bw.movie.modle.bean.RecommendBean;
 import com.bw.movie.modle.bean.RecordByBean;
+import com.bw.movie.modle.bean.RegionListBean;
 import com.bw.movie.modle.bean.RegisterBean;
 import com.bw.movie.modle.bean.SchedBean;
 import com.bw.movie.modle.bean.SeatleBean;
@@ -29,16 +32,20 @@ import com.bw.movie.modle.bean.VerifyBean;
 import com.bw.movie.modle.bean.VersionBean;
 import com.bw.movie.modle.bean.WxLogBean;
 
+import java.io.File;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -172,5 +179,22 @@ public interface Api {
     @FormUrlEncoded
     @POST("movieApi/user/v2/verify/updateUserBirthday")
     Observable<CodeBean> onBirthday(@HeaderMap Map<String,Object> map,@FieldMap Map<String,String> smap);
+
+    //上传用户头像
+    @Multipart
+    @POST("movieApi/user/v1/verify/uploadHeadPic")
+    Observable<HeadPicBean> onloadHeadPic(@HeaderMap Map<String,Object> map,@Part MultipartBody.Part file);
+
+    //修改用户手机号
+    @FormUrlEncoded
+    @POST("movieApi/user/v2/verify/updateUserPhone")
+    Observable<CodeBean> onUserPhone(@HeaderMap Map<String,Object> map,@FieldMap Map<String,String> smap);
+
+    //查询区域列表
+    @GET("movieApi/tool/v2/findRegionList")
+    Observable<RegionListBean> onRegionList();
+//      根据区域查询影院
+    @GET("movieApi/cinema/v2/findCinemaByRegion")
+    Observable<CinemaByBean> onByRegion(@Query("regionId") int regionId);
 
 }

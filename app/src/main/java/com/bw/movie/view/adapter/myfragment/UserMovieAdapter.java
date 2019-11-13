@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.modle.bean.SoonMovieBean;
 import com.bw.movie.modle.bean.UserBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.text.SimpleDateFormat;
@@ -43,10 +44,7 @@ public class UserMovieAdapter extends XRecyclerView.Adapter<UserMovieAdapter.Soo
 
     @Override
     public void onBindViewHolder(@NonNull final SoonViewHolder soonViewHolder, final int i) {
-        Glide.with(soonViewHolder.itemView.getContext())
-                .load(resultBeans.get(i).imageUrl)
-                .error(R.mipmap.ic_launcher)
-                .into(soonViewHolder.imagSoon);
+        soonViewHolder.imagSoon.setImageURI(resultBeans.get(i).imageUrl);
         soonViewHolder.textMoviename.setText(resultBeans.get(i).name);
         soonViewHolder.textNum.setText(resultBeans.get(i).wantSeeNum+"人想看");
         final long releaseTime = resultBeans.get(i).releaseTime;
@@ -70,7 +68,7 @@ public class UserMovieAdapter extends XRecyclerView.Adapter<UserMovieAdapter.Soo
 
     public class SoonViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imag_soon)
-        ImageView imagSoon;
+        SimpleDraweeView imagSoon;
         @BindView(R.id.text_moviename)
         TextView textMoviename;
         @BindView(R.id.text_sooktime)

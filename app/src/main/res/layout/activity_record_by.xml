@@ -42,7 +42,8 @@
             android:layout_width="@dimen/dp_292"
             android:layout_height="@dimen/dp_130">
             
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
+                app:placeholderImage="@mipmap/ic_launcher"
                 android:id="@+id/xq_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
 import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.MoVieListBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -47,11 +48,7 @@ public class YMovieAdapter extends XRecyclerView.Adapter<YMovieAdapter.MovieView
 
     @Override
     public void onBindViewHolder(@NonNull final MovieViewHolder movieViewHolder, final int i) {
-        Glide.with(movieViewHolder.itemView.getContext())
-                .load(resultBeanList.get(i).imageUrl)
-                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
-                .error(R.mipmap.ic_launcher)
-                .into(movieViewHolder.imagView);
+        movieViewHolder.imagView.setImageURI(resultBeanList.get(i).imageUrl);
         movieViewHolder.textName.setText(resultBeanList.get(i).name);
         movieViewHolder.textScore.setText(resultBeanList.get(i).score+"分");
         movieViewHolder.bitGaopiao.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +75,7 @@ public class YMovieAdapter extends XRecyclerView.Adapter<YMovieAdapter.MovieView
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imag_view)
-        ImageView imagView;
+        SimpleDraweeView imagView;
         @BindView(R.id.text_score)
         TextView textScore;
         @BindView(R.id.text_name)

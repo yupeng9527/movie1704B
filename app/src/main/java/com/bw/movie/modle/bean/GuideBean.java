@@ -8,7 +8,7 @@ package com.bw.movie.modle.bean;
 public class GuideBean {
 
     /**
-     * result : {"sessionId":"156965719651213584","userId":13584,"userInfo":{"email":"715220171@qq.com","headPic":"http://172.17.8.100/images/movie/head_pic/bwjy.jpg","id":13584,"lastLoginTime":1569576738000,"nickName":"打死","sex":1}}
+     * result : {"sessionId":"15320592619803","userId":3,"userInfo":{"birthday":320256000000,"id":3,"lastLoginTime":1532059192000,"nickName":"你的益达","phone":"18600151568","sex":1,"headPic":"http://172.17.8.100/images/head_pic/bwjy.jpg"}}
      * message : 登陆成功
      * status : 0000
      */
@@ -19,9 +19,9 @@ public class GuideBean {
 
     public static class ResultBean {
         /**
-         * sessionId : 156965719651213584
-         * userId : 13584
-         * userInfo : {"email":"715220171@qq.com","headPic":"http://172.17.8.100/images/movie/head_pic/bwjy.jpg","id":13584,"lastLoginTime":1569576738000,"nickName":"打死","sex":1}
+         * sessionId : 15320592619803
+         * userId : 3
+         * userInfo : {"birthday":320256000000,"id":3,"lastLoginTime":1532059192000,"nickName":"你的益达","phone":"18600151568","sex":1,"headPic":"http://172.17.8.100/images/head_pic/bwjy.jpg"}
          */
 
         public String sessionId;
@@ -30,20 +30,22 @@ public class GuideBean {
 
         public static class UserInfoBean {
             /**
-             * email : 715220171@qq.com
-             * headPic : http://172.17.8.100/images/movie/head_pic/bwjy.jpg
-             * id : 13584
-             * lastLoginTime : 1569576738000
-             * nickName : 打死
+             * birthday : 320256000000
+             * id : 3
+             * lastLoginTime : 1532059192000
+             * nickName : 你的益达
+             * phone : 18600151568
              * sex : 1
+             * headPic : http://172.17.8.100/images/head_pic/bwjy.jpg
              */
 
-            public String email;
-            public String headPic;
+            public long birthday;
             public int id;
             public long lastLoginTime;
             public String nickName;
+            public String phone;
             public int sex;
+            public String headPic;
         }
     }
 }

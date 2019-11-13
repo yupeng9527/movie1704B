@@ -32,7 +32,8 @@
                 android:layout_height="match_parent">
 
 
-                <ImageView
+                <com.facebook.drawee.view.SimpleDraweeView
+                    app:placeholderImage="@mipmap/ic_launcher"
                     android:id="@+id/details_img"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_500" />

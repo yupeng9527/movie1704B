@@ -15,6 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
 import com.bw.movie.modle.bean.CommentBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
@@ -71,7 +72,7 @@ public class CommitAdapter extends XRecyclerView.Adapter<CommitAdapter.MovieView
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.commit_image_name)
-        ImageView commitImageName;
+        SimpleDraweeView commitImageName;
         @BindView(R.id.commit_text_name)
         TextView commitTextName;
         @BindView(R.id.commit_rat_bar)

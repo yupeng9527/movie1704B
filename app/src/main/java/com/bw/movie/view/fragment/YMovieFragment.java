@@ -37,6 +37,7 @@ import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
 import com.bw.movie.view.zview.SearchView;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -74,7 +75,7 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     @BindView(R.id.xlist_movie)
     RecyclerView xlistMovie;
     @BindView(R.id.imag_view)
-    ImageView imagView;
+    SimpleDraweeView imagView;
     @BindView(R.id.text_name)
     TextView textName;
     @BindView(R.id.text_score)
@@ -101,7 +102,6 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
-
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
@@ -188,12 +188,7 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     @Override
     public void onMyCurress(Object obj) {
         List<HotBean.ResultBean> result = (List<HotBean.ResultBean>) obj;
-        Glide.with(this)
-                .load(result.get(0).horizontalImage)
-                .error(R.mipmap.ic_launcher)
-                .placeholder(R.mipmap.ic_launcher_round)
-                .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
-                .into(imagView);
+        imagView.setImageURI(result.get(0).horizontalImage);
         textName.setText(result.get(0).name);
         textScore.setText(result.get(0).score + "分");
         HotAdapter hotAdapter = new HotAdapter(result);
@@ -216,6 +211,7 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
                 .setImageLoader(new ImageLoader() {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
+
                         Glide.with(context)
                                 .load(path)
                                 .error(R.mipmap.ic_launcher)

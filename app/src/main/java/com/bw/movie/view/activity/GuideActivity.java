@@ -63,6 +63,7 @@ public class GuideActivity extends BaseActivity implements IViewContract.doView 
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        setTranslucent(this);
         Intent intent = getIntent();
 
         String email = intent.getStringExtra("email");

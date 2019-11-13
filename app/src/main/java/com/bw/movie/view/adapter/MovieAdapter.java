@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.MoVieListBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.lang.reflect.Array;
@@ -45,10 +46,11 @@ public class MovieAdapter extends XRecyclerView.Adapter<MovieAdapter.MovieViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
-        Glide.with(movieViewHolder.itemView.getContext())
-                .load(resultBeans.get(i).imageUrl)
-                .error(R.mipmap.ic_launcher)
-                .into(movieViewHolder.imagView);
+        movieViewHolder.imagView.setImageURI(resultBeans.get(i).imageUrl);
+ //        Glide.with(movieViewHolder.itemView.getContext())
+//                .load(resultBeans.get(i).imageUrl)
+//                .error(R.mipmap.ic_launcher)
+//                .into(movieViewHolder.imagView);
         movieViewHolder.textName.setText(resultBeans.get(i).name);
         movieViewHolder.textDirector.setText("导演: "+resultBeans.get(i).director);
         movieViewHolder.textStarring.setText("主演: "+resultBeans.get(i).starring);
@@ -68,7 +70,7 @@ public class MovieAdapter extends XRecyclerView.Adapter<MovieAdapter.MovieViewHo
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imag_view)
-        ImageView imagView;
+        SimpleDraweeView imagView;
         @BindView(R.id.text_name)
         TextView textName;
         @BindView(R.id.text_director)

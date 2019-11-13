@@ -58,6 +58,7 @@ public class ReviewsActivity extends BaseActivity implements IViewContract.doVie
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        setTranslucent(this);
         sp = getSharedPreferences("qq", Context.MODE_PRIVATE);
         SharedPreferences feil = getSharedPreferences("feil", Context.MODE_PRIVATE);
         int userId = feil.getInt("userId", 0);

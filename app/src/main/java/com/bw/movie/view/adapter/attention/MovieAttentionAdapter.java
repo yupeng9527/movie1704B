@@ -15,6 +15,7 @@ import com.bw.movie.R;
 import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.MoVieListBean;
 import com.bw.movie.modle.bean.OnMovieBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -46,10 +47,7 @@ public class MovieAttentionAdapter extends XRecyclerView.Adapter<MovieAttentionA
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
-        Glide.with(movieViewHolder.itemView.getContext())
-                .load(result.get(i).imageUrl)
-                .error(R.mipmap.ic_launcher)
-                .into(movieViewHolder.imagView);
+        movieViewHolder.imagView.setImageURI(result.get(i).imageUrl);
         movieViewHolder.textName.setText(result.get(i).name);
         movieViewHolder.textDirector.setText("导演: "+result.get(i).director);
         movieViewHolder.textStarring.setText("主演: "+result.get(i).starring);
@@ -63,7 +61,7 @@ public class MovieAttentionAdapter extends XRecyclerView.Adapter<MovieAttentionA
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imag_view)
-        ImageView imagView;
+        SimpleDraweeView imagView;
         @BindView(R.id.text_name)
         TextView textName;
         @BindView(R.id.text_director)

@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
 import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.HotBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
@@ -31,18 +32,7 @@ import butterknife.ButterKnife;
  */
 public class HtoAdapter extends XRecyclerView.Adapter<HtoAdapter.MovieViewHolder> {
     List<HotBean.ResultBean> resultBeanList;
-    @BindView(R.id.imag_view)
-    ImageView imagView;
-    @BindView(R.id.text_name)
-    TextView textName;
-    @BindView(R.id.text_director)
-    TextView textDirector;
-    @BindView(R.id.text_starring)
-    TextView textStarring;
-    @BindView(R.id.text_score)
-    TextView textScore;
-    @BindView(R.id.bit_gaopiao)
-    Button bitGaopiao;
+
 
     public HtoAdapter(List<HotBean.ResultBean> resultBeanList) {
         this.resultBeanList = resultBeanList;
@@ -58,12 +48,12 @@ public class HtoAdapter extends XRecyclerView.Adapter<HtoAdapter.MovieViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final MovieViewHolder movieViewHolder, final int i) {
-
-        Glide.with(movieViewHolder.itemView.getContext())
-                .load(resultBeanList.get(i).imageUrl)
-                .error(R.mipmap.ic_launcher)
-                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
-                .into(movieViewHolder.imagView);
+            movieViewHolder.imagView.setImageURI(resultBeanList.get(i).imageUrl);
+//        Glide.with(movieViewHolder.itemView.getContext())
+//                .load(resultBeanList.get(i).imageUrl)
+//                .error(R.mipmap.ic_launcher)
+//                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
+//                .into(movieViewHolder.imagView);
         movieViewHolder.textName.setText(resultBeanList.get(i).name);
         movieViewHolder.textDirector.setText("导演:  "+resultBeanList.get(i).director);
         movieViewHolder.textStarring.setText("演员:  "+resultBeanList.get(i).starring);
@@ -93,7 +83,7 @@ public class HtoAdapter extends XRecyclerView.Adapter<HtoAdapter.MovieViewHolder
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imag_view)
-        ImageView imagView;
+        SimpleDraweeView imagView;
         @BindView(R.id.text_name)
         TextView textName;
         @BindView(R.id.text_director)

@@ -37,6 +37,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        setTranslucent(this);
         final Intent intent = new Intent(this, GuideActivity.class);
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {

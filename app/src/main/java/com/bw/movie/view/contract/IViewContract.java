@@ -3,7 +3,10 @@ package com.bw.movie.view.contract;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.base.IBaseVIew;
 
+import java.io.File;
 import java.util.Map;
+
+import okhttp3.MultipartBody;
 
 /**
  * date:2019/9/27
@@ -99,6 +102,16 @@ public abstract void doTickets(Map<String,Object> map,Map<String,Object> omap);
     public abstract void doVersion(Map<String,Object> map);
     //修改用户生日
     public abstract void doBirthday(Map<String,Object> map,Map<String,String> smap);
+
+    //上传用户头像
+    public abstract void doloadHeadPic(Map<String,Object> map, MultipartBody.Part file);
+    //修改用户手机号
+    public abstract void doUserPhone(Map<String,Object> map, Map<String,String> smap);
+
+    //修改用户手机号
+    public abstract void doRegionList();
+    //修改用户手机号
+    public abstract void dofindCinemaByRegion(int regionId);
 }
 
 }

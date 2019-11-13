@@ -21,6 +21,7 @@ import com.bw.movie.persenter.Persenter;
 import com.bw.movie.view.base.BaseActivity;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class RecordByActivity extends BaseActivity implements IViewContract.doVi
     @BindView(R.id.details_back)
     ImageView detailsBack;
     @BindView(R.id.xq_image_view)
-    ImageView xqImageView;
+    SimpleDraweeView xqImageView;
     @BindView(R.id.xq_text_name)
     TextView xqTextName;
     @BindView(R.id.xq_re_lay)
@@ -73,6 +74,7 @@ public class RecordByActivity extends BaseActivity implements IViewContract.doVi
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        setTranslucent(this);
         SharedPreferences fp = getSharedPreferences("feil", Context.MODE_PRIVATE);
         String sessionId = fp.getString("sessionId", null);
         int userId = fp.getInt("userId", 0);
@@ -98,11 +100,7 @@ public class RecordByActivity extends BaseActivity implements IViewContract.doVi
     public void onLogCurress(Object obj) {
         RecordByBean recordByBean= (RecordByBean) obj;
         RecordByBean.ResultBean result = recordByBean.result;
-        Glide.with(this)
-                .load(imageUrl)
-                .error(R.mipmap.ic_launcher)
-                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
-                .into(xqImageView);
+        xqImageView.setImageURI(imageUrl);
         xqTextCinema.setText(result.cinemaName);
         xqTextName.setText(result.movieName);
         xqTextScreeningHall.setText(result.screeningHall);

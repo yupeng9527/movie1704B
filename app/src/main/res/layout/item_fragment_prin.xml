@@ -140,11 +140,16 @@
         android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="@dimen/m190">
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
+            app:roundTopLeft="true"
+            app:roundTopRight="true"
+            app:roundBottomLeft="true"
+            app:roundBottomRight="true"
+            app:placeholderImage="@mipmap/ic_launcher"
             android:id="@+id/imag_view"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/m190" />
+            android:layout_height="@dimen/m185" />
 
         <LinearLayout
             android:layout_alignBottom="@id/imag_view"
@@ -189,7 +194,6 @@
     </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/xlist_movie"
-
         android:layout_marginRight="@dimen/dp_8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

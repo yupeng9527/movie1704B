@@ -22,6 +22,7 @@ import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
 import com.bw.movie.view.mi.EncryptUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +42,7 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
     @BindView(R.id.r_r)
     RelativeLayout rR;
     @BindView(R.id.image_qwe)
-    ImageView imageQwe;
+    SimpleDraweeView imageQwe;
     @BindView(R.id.text_qwe_name)
     TextView textQweName;
     @BindView(R.id.imag_name_space)
@@ -105,12 +106,7 @@ public class MyFragment extends BaseFragment implements IViewContract.doView {
         }
         String headPic = sp.getString("headPic", "");
         String nickName = sp.getString("nickName", "");
-        Glide.with(getContext())
-                .load(headPic)
-                .error(R.mipmap.ic_launcher)
-                .placeholder(R.mipmap.ic_launcher_round)
-                .apply(RequestOptions.circleCropTransform())
-                .into(imageQwe);
+        imageQwe.setImageURI(headPic);
         textQweName.setText(nickName);
         lineTickling.setOnClickListener(new View.OnClickListener() {
             @Override

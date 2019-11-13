@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_margin="20dp"
     android:background="#1E1E41"
     android:gravity="center_vertical"
     android:layout_height="@dimen/dp_115">
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
+        app:placeholderImage="@mipmap/ic_launcher"
         android:id="@+id/imag_soon"
         android:layout_margin="@dimen/dp_10"
         android:layout_width="@dimen/dp_88"

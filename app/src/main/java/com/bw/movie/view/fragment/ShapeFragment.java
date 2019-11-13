@@ -55,9 +55,11 @@ public class ShapeFragment extends LazyLoadFragment {
     protected void initData() {
         flist.add(new RecommendFragment());
         flist.add(new NearByFragment());
+        flist.add(new AreaFragment());
 
         list.add("推荐影院");
         list.add("附近影院");
+        list.add("海淀区");
 
         for (int i = 0; i < list.size(); i++) {
             String title = list.get(i);

@@ -15,6 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
 import com.bw.movie.modle.bean.TICketBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.text.SimpleDateFormat;
@@ -46,11 +47,12 @@ public class BuyyiMoierAdapter extends XRecyclerView.Adapter<BuyyiMoierAdapter.M
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, final int i) {
-        Glide.with(movieViewHolder.itemView.getContext())
-                .load(resultBeanList.get(i).imageUrl)
-                .error(R.mipmap.ic_launcher)
-                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
-                .into(movieViewHolder.buyImagView);
+        movieViewHolder.buyImagView.setImageURI(resultBeanList.get(i).imageUrl);
+//        Glide.with(movieViewHolder.itemView.getContext())
+//                .load(resultBeanList.get(i).imageUrl)
+//                .error(R.mipmap.ic_launcher)
+//                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
+//                .into(movieViewHolder.buyImagView);
         movieViewHolder.buyTextName.setText(resultBeanList.get(i).movieName);
         movieViewHolder.buyTextDingDa.setText("订 单 号  " + resultBeanList.get(i).orderId);
         long createTime = resultBeanList.get(i).createTime;
@@ -75,7 +77,7 @@ public class BuyyiMoierAdapter extends XRecyclerView.Adapter<BuyyiMoierAdapter.M
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.buy_imag_view)
-        ImageView buyImagView;
+        SimpleDraweeView buyImagView;
         @BindView(R.id.buy_text_name)
         TextView buyTextName;
         @BindView(R.id.buy_text_ding_da)

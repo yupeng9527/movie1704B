@@ -33,6 +33,7 @@ public class DiscussActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        setTranslucent(this);
         detailsBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

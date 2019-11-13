@@ -15,6 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
 import com.bw.movie.modle.bean.TICketBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.text.SimpleDateFormat;
@@ -30,6 +31,19 @@ import butterknife.ButterKnife;
  */
 public class BuyMoierAdapter extends XRecyclerView.Adapter<BuyMoierAdapter.MovieViewHolder> {
     List<TICketBean.ResultBean> resultBeanList;
+    @BindView(R.id.buy_imag_view)
+    SimpleDraweeView buyImagView;
+    @BindView(R.id.buy_text_name)
+    TextView buyTextName;
+    @BindView(R.id.buy_text_ding_da)
+    TextView buyTextDingDa;
+    @BindView(R.id.buy_text_ding_time)
+    TextView buyTextDingTime;
+    @BindView(R.id.buy_but)
+    Button buyBut;
+    @BindView(R.id.lin_imag)
+    LinearLayout linImag;
+
     public BuyMoierAdapter(List<TICketBean.ResultBean> resultBeanList) {
         this.resultBeanList = resultBeanList;
     }
@@ -44,17 +58,18 @@ public class BuyMoierAdapter extends XRecyclerView.Adapter<BuyMoierAdapter.Movie
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, final int i) {
-        Glide.with(movieViewHolder.itemView.getContext())
-                .load(resultBeanList.get(i).imageUrl)
-                .error(R.mipmap.ic_launcher)
-                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
-                .into(movieViewHolder.buyImagView);
+        movieViewHolder.buyImagView.setImageURI(resultBeanList.get(i).imageUrl);
+//        Glide.with(movieViewHolder.itemView.getContext())
+//                .load(resultBeanList.get(i).imageUrl)
+//                .error(R.mipmap.ic_launcher)
+//                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
+//                .into(movieViewHolder.buyImagView);
         movieViewHolder.buyTextName.setText(resultBeanList.get(i).movieName);
-        movieViewHolder.buyTextDingDa.setText("订 单 号  "+resultBeanList.get(i).orderId);
+        movieViewHolder.buyTextDingDa.setText("订 单 号  " + resultBeanList.get(i).orderId);
         long createTime = resultBeanList.get(i).createTime;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String format = formatter.format(createTime);
-        movieViewHolder.buyTextDingTime.setText("创建时间  "+format);
+        movieViewHolder.buyTextDingTime.setText("创建时间  " + format);
         movieViewHolder.buyBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +88,7 @@ public class BuyMoierAdapter extends XRecyclerView.Adapter<BuyMoierAdapter.Movie
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.buy_imag_view)
-        ImageView buyImagView;
+        SimpleDraweeView buyImagView;
         @BindView(R.id.buy_text_name)
         TextView buyTextName;
         @BindView(R.id.buy_text_ding_da)
@@ -84,6 +99,7 @@ public class BuyMoierAdapter extends XRecyclerView.Adapter<BuyMoierAdapter.Movie
         Button buyBut;
         @BindView(R.id.lin_imag)
         LinearLayout linImag;
+
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -95,8 +111,9 @@ public class BuyMoierAdapter extends XRecyclerView.Adapter<BuyMoierAdapter.Movie
         this.onBuy = onBuy;
     }
 
-    public  OnBuy onBuy;
-    public interface OnBuy{
+    public OnBuy onBuy;
+
+    public interface OnBuy {
         void onCurress(int i);
     }
 }

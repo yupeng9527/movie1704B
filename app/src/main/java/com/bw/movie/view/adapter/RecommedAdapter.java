@@ -13,6 +13,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
 import com.bw.movie.modle.bean.RecommendBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
@@ -43,12 +44,7 @@ public class RecommedAdapter extends XRecyclerView.Adapter<RecommedAdapter.Movie
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
-
-        Glide.with(movieViewHolder.itemView.getContext())
-                .load(resultBeanList.get(i).logo)
-                .error(R.mipmap.ic_launcher)
-                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
-                .into(movieViewHolder.imagView);
+        movieViewHolder.imagView.setImageURI(resultBeanList.get(i).logo);
         movieViewHolder.textName.setText(resultBeanList.get(i).address);
         movieViewHolder.textScore.setText(resultBeanList.get(i).name);
     }
@@ -61,7 +57,7 @@ public class RecommedAdapter extends XRecyclerView.Adapter<RecommedAdapter.Movie
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imag_view)
-        ImageView imagView;
+        SimpleDraweeView imagView;
         @BindView(R.id.text_score)
         TextView textScore;
         @BindView(R.id.text_name)

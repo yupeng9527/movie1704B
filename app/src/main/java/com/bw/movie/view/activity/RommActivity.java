@@ -100,6 +100,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        setTranslucent(this);
         roomBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
