@@ -1,5 +1,6 @@
 package com.bw.movie.view.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -32,9 +33,11 @@ import butterknife.ButterKnife;
  */
 public class HotAdapter extends XRecyclerView.Adapter<HotAdapter.MovieViewHolder> {
     List<HotBean.ResultBean> resultBeanList;
+    Context context;
 
-    public HotAdapter(List<HotBean.ResultBean> resultBeanList) {
+    public HotAdapter(List<HotBean.ResultBean> resultBeanList, Context context) {
         this.resultBeanList = resultBeanList;
+        this.context = context;
     }
 
     @NonNull
@@ -58,7 +61,7 @@ public class HotAdapter extends XRecyclerView.Adapter<HotAdapter.MovieViewHolder
                 movieViewHolder.bitGaopiao.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(App.context, "正在购票中", Toast.LENGTH_SHORT).show();
+                        areaView.onCurress(resultBeanList.get(i).movieId);
                     }
                 });
         movieViewHolder.imagView.setOnClickListener(new View.OnClickListener() {
@@ -92,5 +95,15 @@ public class HotAdapter extends XRecyclerView.Adapter<HotAdapter.MovieViewHolder
             ButterKnife.bind(this,itemView);
 
         }
+
+    }
+    public void setAreaView(AreaView areaView) {
+        this.areaView = areaView;
+    }
+
+    AreaView areaView;
+
+    public interface AreaView {
+        void onCurress(int id);
     }
 }

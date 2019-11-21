@@ -125,13 +125,14 @@ public class DeilActivity extends BaseActivity implements IViewContract.doView {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(DeilActivity.this, ReviewsActivity.class);
+                intent1.putExtra("movieId",movieId);
                 startActivity(intent1);
             }
         });
         btnSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(DeilActivity.this, RommActivity.class);
+                Intent intent1 = new Intent("com.bawei.SelectMovie");
                 intent1.putExtra("movieId",movieId);
 
                 startActivity(intent1);

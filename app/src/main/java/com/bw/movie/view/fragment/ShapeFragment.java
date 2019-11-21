@@ -69,7 +69,7 @@ public class ShapeFragment extends LazyLoadFragment {
                 tabLayout.addTab(tab);
             }
         }
-        viewPager.setScanScroll(false);
+        viewPager.setScanScroll(true);
         tabLayout.setupWithViewPager(viewPager);
         CnemaAdapter cnemaAdapter = new CnemaAdapter(getChildFragmentManager(), flist, list);
         cnemaAdapter.notifyDataSetChanged();

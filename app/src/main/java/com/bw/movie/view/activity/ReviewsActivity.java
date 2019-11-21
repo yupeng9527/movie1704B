@@ -1,6 +1,7 @@
 package com.bw.movie.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -39,8 +40,9 @@ public class ReviewsActivity extends BaseActivity implements IViewContract.doVie
     Button butTj;
     private SharedPreferences sp;
     private int userId;
-    private int movieId;
+//    private int movieId;
     private String sessionId;
+    private int movieId;
 
     @Override
     protected int initLayout() {
@@ -61,9 +63,10 @@ public class ReviewsActivity extends BaseActivity implements IViewContract.doVie
         setTranslucent(this);
         sp = getSharedPreferences("qq", Context.MODE_PRIVATE);
         SharedPreferences feil = getSharedPreferences("feil", Context.MODE_PRIVATE);
-        int userId = feil.getInt("userId", 0);
-        String sessionId = feil.getString("sessionId", null);
-
+        userId = feil.getInt("userId", 0);
+        sessionId = feil.getString("sessionId", null);
+        Intent intent = getIntent();
+        movieId = intent.getIntExtra("movieId", 0);
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> smap = new HashMap<>();
         map.put("userId", userId);
@@ -83,17 +86,19 @@ public class ReviewsActivity extends BaseActivity implements IViewContract.doVie
     public void onLogCurress(Object obj) {
         DetilBean detilBean = (DetilBean) obj;
         final DetilBean.ResultBean result = detilBean.result;
+        String name = result.name;
+        textName.setText(name);
+
 butTj.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        String name = result.name;
-        textName.setText(name);
         float rating = ratingBar.getRating();
+        textPingf.setText("我的评分  ("+rating+"分)");
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> smap = new HashMap<>();
-        SharedPreferences feil = getSharedPreferences("feil", Context.MODE_PRIVATE);
-        int userId = feil.getInt("userId", 0);
-        String sessionId = feil.getString("sessionId", null);
+//        SharedPreferences feil = getSharedPreferences("feil", Context.MODE_PRIVATE);
+//        int userId = feil.getInt("userId", 0);
+//        String sessionId = feil.getString("sessionId", null);
         map.put("userId", userId);
         map.put("sessionId", sessionId);
         smap.put("movieId", result.movieId);
@@ -118,10 +123,7 @@ butTj.setOnClickListener(new View.OnClickListener() {
 
     @Override
     public void onBannerCurress(Object obj) {
-        int i= (int) obj;
-        if (i==0){
             finish();
-        }
     }
 
     @Override

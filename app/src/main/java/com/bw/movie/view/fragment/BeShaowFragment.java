@@ -95,7 +95,7 @@ public class BeShaowFragment extends BaseFragment implements IViewContract.doVie
     public void onShapeCurress(Object obj) {
         List<SoonMovieBean.ResultBean> resultBeans = (List<SoonMovieBean.ResultBean>) obj;
         list.addAll(resultBeans);
-        SoonMovieAdapter soonMovieAdapter=new SoonMovieAdapter(list);
+        SoonMovieAdapter soonMovieAdapter=new SoonMovieAdapter(list,getContext());
         xrecList.setLayoutManager(new LinearLayoutManager(getContext()));
         xrecList.setAdapter(soonMovieAdapter);
     }

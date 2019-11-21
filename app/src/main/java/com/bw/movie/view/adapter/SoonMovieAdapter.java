@@ -37,8 +37,11 @@ import butterknife.ButterKnife;
  */
 public class SoonMovieAdapter extends XRecyclerView.Adapter<SoonMovieAdapter.SoonViewHolder> {
     List<SoonMovieBean.ResultBean> resultBeans;
-    public SoonMovieAdapter(List<SoonMovieBean.ResultBean> resultBeans) {
+    Context context;
+
+    public SoonMovieAdapter(List<SoonMovieBean.ResultBean> resultBeans, Context context) {
         this.resultBeans = resultBeans;
+        this.context = context;
     }
 
     @NonNull

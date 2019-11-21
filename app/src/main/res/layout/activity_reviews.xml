@@ -37,6 +37,7 @@
         android:layout_height="@dimen/dp_38">
 
         <TextView
+            android:textColor="#fff"
             android:layout_marginLeft="@dimen/dp_30"
             android:id="@+id/text_name"
             android:textSize="@dimen/sp_14"
@@ -59,9 +60,10 @@
             android:layout_width="@dimen/dp_106"
             android:layout_height="@dimen/dp_17" />
         <RatingBar
+            android:progressBackgroundTint="#fff"
+            android:progressTint="#e8185e"
             android:id="@+id/rating_bar"
             android:numStars="5"
-            android:rating="1.5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView

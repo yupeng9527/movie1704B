@@ -34,6 +34,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.activity.SelectMovieActivity">
+            <intent-filter>
+                <action android:name="com.bawei.SelectMovie" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.ScheduleActivity">
+            <intent-filter>
+                <action android:name="com.bawei.Schedule" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.ParticularsActivity">
+            <intent-filter>
+                <action android:name="com.bawei.Particulars" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".view.activity.myfragment.MyActivity">
             <intent-filter>
                 <action android:name="com.bawei.Sysmy" />
@@ -125,7 +146,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.RommActivity" />
+        <activity android:name=".view.activity.RommActivity" >
+            <intent-filter>
+                <action android:name="com.bawei.Romm" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".view.activity.FeedActivity">
             <intent-filter>
                 <action android:name="com.bawei.feed" />

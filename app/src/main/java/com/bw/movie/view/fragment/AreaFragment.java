@@ -1,5 +1,6 @@
 package com.bw.movie.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -65,6 +66,28 @@ public class AreaFragment extends BaseFragment implements IViewContract.doView {
 
     @Override
     public void onLogCurress(Object obj) {
+
+    }
+
+    @Override
+    public void onShapeCurress(Object obj) {
+        CinemaByBean cinemaByBean= (CinemaByBean) obj;
+        List<CinemaByBean.ResultBean> result = cinemaByBean.result;
+        FindCinemaAdapter findCinemaAdapter=new FindCinemaAdapter(result);
+        recyRightView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyRightView.setAdapter(findCinemaAdapter);
+        findCinemaAdapter.setAreaView(new FindCinemaAdapter.AreaView() {
+            @Override
+            public void onCurress(int id) {
+                Intent intent=new Intent("com.bawei.Particulars");
+                intent.putExtra("id",id);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onMyCurress(Object obj) {
         RegionListBean regionListBean= (RegionListBean) obj;
         List<RegionListBean.ResultBean> result = regionListBean.result;
         AreaAdapter areaAdapter=new AreaAdapter(result);
@@ -79,20 +102,6 @@ public class AreaFragment extends BaseFragment implements IViewContract.doView {
 
             }
         });
-    }
-
-    @Override
-    public void onShapeCurress(Object obj) {
-        CinemaByBean cinemaByBean= (CinemaByBean) obj;
-        List<CinemaByBean.ResultBean> result = cinemaByBean.result;
-        FindCinemaAdapter findCinemaAdapter=new FindCinemaAdapter(result);
-        recyRightView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyRightView.setAdapter(findCinemaAdapter);
-    }
-
-    @Override
-    public void onMyCurress(Object obj) {
-
     }
 
     @Override

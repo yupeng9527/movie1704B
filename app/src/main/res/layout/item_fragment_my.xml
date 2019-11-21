@@ -50,6 +50,8 @@
 
             <com.facebook.drawee.view.SimpleDraweeView
                 app:placeholderImage="@mipmap/ic_launcher"
+                app:actualImageScaleType="centerInside"
+                app:roundAsCircle="true"
                 android:id="@+id/image_qwe"
                 android:background="@mipmap/qwe"
                 android:layout_width="@dimen/dp_46"

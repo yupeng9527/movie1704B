@@ -34,6 +34,7 @@ public class MyMovieActivity extends BaseActivity implements IViewContract.doVie
     ImageView detailsBack;
     @BindView(R.id.re_list_view)
     RecyclerView reListView;
+    private Map<String, Object> map;
 
     @Override
     protected int initLayout() {
@@ -61,7 +62,7 @@ public class MyMovieActivity extends BaseActivity implements IViewContract.doVie
         SharedPreferences sp = getSharedPreferences("feil", Context.MODE_PRIVATE);
         String sessionId = sp.getString("sessionId", "");
         int userId = sp.getInt("userId", 0);
-        Map<String,Object> map=new HashMap<>();
+        map = new HashMap<>();
         map.put("userId",userId);
         map.put("sessionId",sessionId);
         Persenter persenter=new Persenter(this);
@@ -77,6 +78,7 @@ public class MyMovieActivity extends BaseActivity implements IViewContract.doVie
         myMovieAdapter.setIview(new MyMovieAdapter.onMovie() {
             @Override
             public void onCurr(int i) {
+                int i1 = i;
 
 //                Bitmap bitmap = BitmapFactory.decodeFile(result.get(i).cinemaName);// 这里是获取图片Bitmap，也可以传入其他参数到Dialog中
 //                CustomPopDialog2.Builder dialogBuild = new CustomPopDialog2.Builder(getBaseContext());

@@ -77,6 +77,7 @@
                 android:layout_marginTop="@dimen/dp_30">
 
                 <TextView
+                    android:text="选择影厅和时间(0)"
                     android:id="@+id/room_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

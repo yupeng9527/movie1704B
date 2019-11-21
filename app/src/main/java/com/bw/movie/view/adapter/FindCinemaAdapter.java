@@ -41,7 +41,13 @@ public class FindCinemaAdapter extends XRecyclerView.Adapter<FindCinemaAdapter.M
     @Override
     public void onBindViewHolder(@NonNull final MovieViewHolder movieViewHolder, final int i) {
         movieViewHolder.textNameData.setText(result.get(i).name);
-
+        movieViewHolder.textNameData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movieViewHolder.textNameData.setTextSize(14);
+                areaView.onCurress(result.get(i).id);
+            }
+        });
     }
 
     @Override

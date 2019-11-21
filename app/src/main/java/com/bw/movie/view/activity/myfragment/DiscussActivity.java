@@ -1,13 +1,25 @@
 package com.bw.movie.view.activity.myfragment;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bw.movie.R;
 import com.bw.movie.persenter.Persenter;
+import com.bw.movie.view.adapter.CnemaAdapter;
 import com.bw.movie.view.base.BaseActivity;
 import com.bw.movie.view.base.BasePersenter;
+import com.bw.movie.view.fragment.attention.CinemaAttentionFragment;
+import com.bw.movie.view.fragment.attention.MovieAttentionFragment;
+import com.bw.movie.view.fragment.discuss.CinemaDuscussFragment;
+import com.bw.movie.view.fragment.discuss.MovieDiscussFragment;
+import com.bw.movie.view.fragment.particular.CinemaDetailsFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,6 +28,12 @@ public class DiscussActivity extends BaseActivity {
 
     @BindView(R.id.details_back)
     ImageView detailsBack;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
+    List<String> list = new ArrayList<>();
+    List<Fragment> flist = new ArrayList<>();
 
     @Override
     protected int initLayout() {
@@ -40,5 +58,25 @@ public class DiscussActivity extends BaseActivity {
                 finish();
             }
         });
+        flist.add(new MovieDiscussFragment());
+        flist.add(new CinemaDuscussFragment());
+
+        list.add("电影");
+        list.add("影院");
+
+        for (int i = 0; i < list.size(); i++) {
+            String title = list.get(i);
+
+            TabLayout.Tab tab = tabLayout.newTab();
+            if (tab != null) {
+                tab.setText(title);
+                tabLayout.addTab(tab);
+            }
+        }
+
+        tabLayout.setupWithViewPager(viewPager);
+        CnemaAdapter cnemaAdapter = new CnemaAdapter(getSupportFragmentManager(), flist, list);
+        cnemaAdapter.notifyDataSetChanged();
+        viewPager.setAdapter(cnemaAdapter);
     }
 }

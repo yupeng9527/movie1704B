@@ -32,6 +32,6 @@ public class ByRegionBean {
         public int cinemaId;
         public String logo;
         public String name;
-        public int price;
+        public Double price;
     }
 }

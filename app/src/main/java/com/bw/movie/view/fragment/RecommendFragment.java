@@ -1,5 +1,6 @@
 package com.bw.movie.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import com.bw.movie.R;
 import com.bw.movie.modle.bean.RecommendBean;
 import com.bw.movie.persenter.Persenter;
+import com.bw.movie.view.adapter.FindCinemaAdapter;
 import com.bw.movie.view.adapter.RecommedAdapter;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
@@ -28,7 +30,7 @@ import butterknife.Unbinder;
  * author:贺少伟(盗)
  * function:
  */
-public class RecommendFragment extends LazyLoadFragment implements IViewContract.doView {
+public class RecommendFragment extends BaseFragment implements IViewContract.doView {
     @BindView(R.id.rec_list)
     RecyclerView recList;
     Unbinder unbinder;
@@ -46,13 +48,10 @@ public class RecommendFragment extends LazyLoadFragment implements IViewContract
 
     @Override
     protected void initData() {
-
-    }
-    @Override
-    public void fetchData() {
         Persenter persenter = new Persenter(this);
         persenter.Recommend();
     }
+
     @Override
     public void onLogCurress(Object obj) {
         List<RecommendBean.ResultBean> resultBeans = (List<RecommendBean.ResultBean>) obj;
@@ -61,6 +60,14 @@ public class RecommendFragment extends LazyLoadFragment implements IViewContract
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recList.setLayoutManager(linearLayoutManager);
         recList.setAdapter(recommedAdapter);
+        recommedAdapter.setAreaView(new RecommedAdapter.AreaView() {
+            @Override
+            public void onCurress(int id) {
+                Intent intent=new Intent("com.bawei.Particulars");
+                intent.putExtra("id",id);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

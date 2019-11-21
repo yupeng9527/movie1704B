@@ -79,10 +79,11 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
     ImageView imagGb;
     private String string;
     private long sum;
-    private double fare=0.1;
+    private double fare;
     private double zf;
     private CheckBox wxzf;
     private String orderId;
+    private int cinemaId;
 
     @Override
     protected int initLayout() {
@@ -109,21 +110,25 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
         });
         SharedPreferences qq = getSharedPreferences("qq_m", Context.MODE_PRIVATE);
         final String name = qq.getString("name", null);
-        final String imageUrl = qq.getString("imageUrl", null);
+//        final String imageUrl = qq.getString("imageUrl", null);
 //        int movieid = qq.getInt("movieid", 0);
         SharedPreferences sp = getSharedPreferences("hallId", Context.MODE_PRIVATE);
         final int hallId = sp.getInt("hallId", 0);
         roomName.setText(name);
         Intent intent = getIntent();
         int movieId = intent.getIntExtra("movieId", 0);
+        cinemaId = intent.getIntExtra("cinemaId", 0);
+        String photo = intent.getStringExtra("photo");
+        fare = intent.getDoubleExtra("price",0);
+        String imageUrl = intent.getStringExtra("imageUrl");
         final Map<String, Object> map = new HashMap<>();
-        map.put("cinemaId", 1);
-        map.put("movieId", 3);
+        map.put("cinemaId", cinemaId);
+        map.put("movieId", movieId);
         Persenter persenter = new Persenter(RommActivity.this);
         persenter.doSchedule(map);
-        roomVideoPlayer.setUp(imageUrl, null);
+        roomVideoPlayer.setUp(photo, null);
         Glide.with(this)
-                .load(string)
+                .load(imageUrl)
                 .into(roomVideoPlayer.ivThumb);
 
         btnPurchaseOrder.setOnClickListener(new View.OnClickListener() {
@@ -198,7 +203,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
     public void onShapeCurress(Object obj) {
         SchedBean schedBean = (SchedBean) obj;
         List<SchedBean.ResultBean> result = schedBean.result;
-
+        roomTime.setText("选择影厅和时间("+result.size()+")");
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         roomRecycler.setLayoutManager(manager);
         RommSeatAdapter adapter = new RommSeatAdapter(result);
@@ -207,7 +212,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
             @Override
             public void getBack(String s) {
                 Persenter persenter = new Persenter(RommActivity.this);
-                persenter.doSeatle(3);
+                persenter.doSeatle(cinemaId);
             }
 
             @Override

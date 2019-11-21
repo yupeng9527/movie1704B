@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_margin="20dp"
+    android:background="#1E1E41"
+    android:gravity="center_vertical"
+    android:layout_height="wrap_content">
+    <com.facebook.drawee.view.SimpleDraweeView
+        app:placeholderImage="@mipmap/ic_launcher"
+        android:id="@+id/imag_view"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_width="@dimen/dp_110"
+        android:layout_height="@dimen/dp_130" />
+    <LinearLayout
+        android:layout_toRightOf="@id/imag_view"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_height="@dimen/dp_131">
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/text_name"
+            android:textSize="@dimen/sp_14"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:text="拍摄能力差"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/text_director"
+            android:textSize="@dimen/sp_12"
+            android:textColor="#fff"
+            android:text="导演:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/text_starring"
+            android:textColor="#fff"
+            android:text="主演:"
+            android:textSize="@dimen/sp_12"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/text_score"
+                android:textSize="@dimen/sp_12"
+
+                android:textColor="#fff"
+                android:text="评分:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/linear_layout"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/imag_view"
+        android:background="#fff"
+        android:layout_width="@dimen/dp_292"
+        android:layout_height="@dimen/dp_2">
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_below="@id/linear_layout"
+        android:orientation="vertical"
+        android:layout_width="@dimen/dp_292"
+        android:layout_height="wrap_content">
+        
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/text_discuss_name"
+            android:textSize="@dimen/sp_14"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_20" />
+        <TextView
+            android:layout_marginTop="@dimen/dp_10"
+            android:id="@+id/text_discuss_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <RatingBar
+                android:id="@+id/filmReview_ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:progressBackgroundTint="#fff"
+                android:progressTint="#e8185e" />
+            <TextView
+                android:id="@+id/text_discuss_score"
+                android:layout_marginLeft="@dimen/dp_13"
+                android:textColor="#fff"
+                android:textSize="@dimen/sp_11"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/text_discuss_time"
+                android:layout_weight="2"
+                android:textColor="#fff"
+                android:gravity="right"
+                android:textSize="@dimen/sp_11"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

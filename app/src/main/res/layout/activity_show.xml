@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.ShowActivity">
     <com.bw.movie.view.zview.SearchView
+        android:layout_margin="@dimen/dp_20"
         android:id="@+id/sear_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

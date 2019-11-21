@@ -108,10 +108,37 @@ public abstract void doTickets(Map<String,Object> map,Map<String,Object> omap);
     //修改用户手机号
     public abstract void doUserPhone(Map<String,Object> map, Map<String,String> smap);
 
-    //修改用户手机号
+    //查询区域列表
     public abstract void doRegionList();
-    //修改用户手机号
+    //根据区域查询影院
     public abstract void dofindCinemaByRegion(int regionId);
+    //查询电影信息明细
+    public abstract void doCinemaInfo(Map<String,Object> map,int regionId);
+
+    //关注影院
+    public abstract void onFollow(Map<String,Object> map,int regionId);
+
+    //取消关注影院
+    public abstract void onCancel(Map<String,Object> map,int regionId);
+
+    //取消关注影院
+    public abstract void onCinemaComment(Map<String,Object> map,Map<String,Object> omap);
+
+    //取消关注影院
+    public abstract void onScheduleList(Map<String,Object> map);
+
+    //根据电影id，时间 查询播放影院信息
+    public abstract void onByCineamDate(Map<String,Object> map);
+
+//根据电影价格查询播放影院信息
+    public abstract void onPriceBy(Map<String,Object> map);
+//查询我对电影的评论列表
+    public abstract void onCommentList(Map<String,Object> map,Map<String,Object> omap);
+//查询我对影院评论列表
+    public abstract void onCinemaDiscussList(Map<String,Object> map,Map<String,Object> omap);
+//电影评论点赞
+    public abstract void doGreat(Map<String,Object> map,Map<String,Object> omap);
+
 }
 
 }

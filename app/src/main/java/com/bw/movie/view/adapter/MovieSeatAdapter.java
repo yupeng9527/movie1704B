@@ -44,9 +44,6 @@ public class MovieSeatAdapter extends XRecyclerView.Adapter<MovieSeatAdapter.Mov
 
     @Override
     public void onBindViewHolder(@NonNull final MovieVIewHolder movieVIewHolder, final int i) {
-//        String row = result.get(i).row;
-//        String seat1 = result.get(i).seat;
-//        String seat = row + "-" + seat1;
 
 
         int status = result.get(i).status;

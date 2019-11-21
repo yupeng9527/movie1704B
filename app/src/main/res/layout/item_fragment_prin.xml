@@ -8,196 +8,212 @@
     android:background="#141931"
     android:fitsSystemWindows="true"
     tools:context=".view.activity.PrincipalActivity">
-<LinearLayout
+    <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <com.bw.movie.view.zview.SearchView
+        android:layout_margin="@dimen/m20"
         android:id="@+id/sear_ch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/dp_27">
 
     </com.bw.movie.view.zview.SearchView>
-    <com.youth.banner.Banner
-        android:id="@+id/ban_ner"
-        android:layout_margin="@dimen/m20"
+    <!--<com.stx.xhb.xbanner.XBanner-->
+    <!--android:id="@+id/ban_ner"-->
+    <!--app:AutoPlayTime="3000"-->
+    <!--app:isAutoPlay="true"-->
+    <!--app:isClipChildrenMode="true"-->
+    <!--app:pointsPosition="RIGHT"-->
+    <!--app:isShowNumberIndicator="true"-->
+    <!--app:pointContainerPosition="BOTTOM"-->
+    <!--android:layout_margin="@dimen/m20"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/m150">-->
+
+    <!--</com.stx.xhb.xbanner.XBanner>-->
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/xlist_view_d"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/m150">
+        android:layout_height="match_parent">
 
-    </com.youth.banner.Banner>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:background="#1c2243"
-        android:gravity="center_vertical"
-        android:layout_height="@dimen/m38">
-        
-        <ImageView
-            android:layout_marginLeft="@dimen/m20"
-            android:background="@mipmap/w"
-            android:layout_width="19dp"
-            android:layout_height="@dimen/m20" />
-        <TextView
-            android:textSize="@dimen/m14"
-            android:textColor="#ffffff"
-            android:layout_marginLeft="15dp"
-            android:text="正在热映"
-            android:layout_width="@dimen/m56"
-            android:layout_height="@dimen/m20" />
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/m1" />
-        <TextView
-            android:id="@+id/but_text_not"
-            android:textSize="@dimen/m12"
-            android:textColor="#ffffff"
-            android:text="更多"
-            android:layout_marginRight="@dimen/m25"
-            android:layout_width="28dp"
-            android:layout_height="@dimen/m17" />
-    </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/xlist_not"
-        android:layout_marginLeft="@dimen/m20"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
+    <!--<LinearLayout-->
+        <!--android:layout_marginTop="@dimen/dp_20"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="#1c2243"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_height="@dimen/m38">-->
+        <!---->
+        <!--<ImageView-->
+            <!--android:layout_marginLeft="@dimen/m20"-->
+            <!--android:background="@mipmap/w"-->
+            <!--android:layout_width="19dp"-->
+            <!--android:layout_height="@dimen/m20" />-->
+        <!--<TextView-->
+            <!--android:textSize="@dimen/m14"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:text="正在热映"-->
+            <!--android:layout_width="@dimen/m56"-->
+            <!--android:layout_height="@dimen/m20" />-->
+        <!--<TextView-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="@dimen/m1" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/but_text_not"-->
+            <!--android:textSize="@dimen/m12"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:text="更多"-->
+            <!--android:layout_marginRight="@dimen/m25"-->
+            <!--android:layout_width="28dp"-->
+            <!--android:layout_height="@dimen/m17" />-->
+    <!--</LinearLayout>-->
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/xlist_not"-->
+        <!--android:layout_marginLeft="@dimen/m20"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-    </android.support.v7.widget.RecyclerView>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:background="#1c2243"
-        android:gravity="center_vertical"
-        android:layout_height="@dimen/m38">
+    <!--</android.support.v7.widget.RecyclerView>-->
+    <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="#1c2243"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_height="@dimen/m38">-->
 
-        <ImageView
-            android:layout_marginLeft="@dimen/m20"
-            android:background="@mipmap/e"
-            android:layout_width="19dp"
-            android:layout_height="@dimen/m20" />
-        <TextView
-            android:textSize="@dimen/m14"
-            android:textColor="#ffffff"
-            android:layout_marginLeft="15dp"
-            android:text="即将上映"
-            android:layout_width="@dimen/m56"
-            android:layout_height="@dimen/m20" />
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/m1" />
-        <TextView
-            android:id="@+id/but_text_show"
-            android:textSize="@dimen/m12"
-            android:textColor="#ffffff"
-            android:text="更多"
-            android:layout_marginRight="@dimen/m25"
-            android:layout_width="28dp"
-            android:layout_height="@dimen/m17" />
-    </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/xlist_show"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <!--<ImageView-->
+            <!--android:layout_marginLeft="@dimen/m20"-->
+            <!--android:background="@mipmap/e"-->
+            <!--android:layout_width="19dp"-->
+            <!--android:layout_height="@dimen/m20" />-->
+        <!--<TextView-->
+            <!--android:textSize="@dimen/m14"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:text="即将上映"-->
+            <!--android:layout_width="@dimen/m56"-->
+            <!--android:layout_height="@dimen/m20" />-->
+        <!--<TextView-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="@dimen/m1" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/but_text_show"-->
+            <!--android:textSize="@dimen/m12"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:text="更多"-->
+            <!--android:layout_marginRight="@dimen/m25"-->
+            <!--android:layout_width="28dp"-->
+            <!--android:layout_height="@dimen/m17" />-->
+    <!--</LinearLayout>-->
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/xlist_show"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-    </android.support.v7.widget.RecyclerView>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:background="#1c2243"
-        android:gravity="center_vertical"
-        android:layout_height="@dimen/m38">
+    <!--</android.support.v7.widget.RecyclerView>-->
+    <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="#1c2243"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_height="@dimen/m38">-->
 
-        <ImageView
-            android:layout_marginLeft="@dimen/m20"
-            android:background="@mipmap/r"
-            android:layout_width="19dp"
-            android:layout_height="@dimen/m20" />
-        <TextView
-            android:textSize="@dimen/m14"
-            android:textColor="#ffffff"
-            android:layout_marginLeft="15dp"
-            android:text="热门电影"
-            android:layout_width="@dimen/m56"
-            android:layout_height="@dimen/m20" />
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/m1" />
-        <TextView
-            android:id="@+id/but_text_not_movie"
-            android:textSize="@dimen/m12"
-            android:textColor="#ffffff"
-            android:text="更多"
-            android:layout_marginRight="@dimen/m25"
-            android:layout_width="28dp"
-            android:layout_height="@dimen/m17" />
-    </LinearLayout>
-    <RelativeLayout
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/m190">
-        <com.facebook.drawee.view.SimpleDraweeView
-            app:roundTopLeft="true"
-            app:roundTopRight="true"
-            app:roundBottomLeft="true"
-            app:roundBottomRight="true"
-            app:placeholderImage="@mipmap/ic_launcher"
-            android:id="@+id/imag_view"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/m185" />
+        <!--<ImageView-->
+            <!--android:layout_marginLeft="@dimen/m20"-->
+            <!--android:background="@mipmap/r"-->
+            <!--android:layout_width="19dp"-->
+            <!--android:layout_height="@dimen/m20" />-->
+        <!--<TextView-->
+            <!--android:textSize="@dimen/m14"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:text="热门电影"-->
+            <!--android:layout_width="@dimen/m56"-->
+            <!--android:layout_height="@dimen/m20" />-->
+        <!--<TextView-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="@dimen/m1" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/but_text_not_movie"-->
+            <!--android:textSize="@dimen/m12"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:text="更多"-->
+            <!--android:layout_marginRight="@dimen/m25"-->
+            <!--android:layout_width="28dp"-->
+            <!--android:layout_height="@dimen/m17" />-->
+    <!--</LinearLayout>-->
+    <!--<RelativeLayout-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/m190">-->
+        <!--<com.facebook.drawee.view.SimpleDraweeView-->
+            <!--app:roundTopLeft="true"-->
+            <!--app:roundTopRight="true"-->
+            <!--app:roundBottomLeft="true"-->
+            <!--app:roundBottomRight="true"-->
+            <!--app:placeholderImage="@mipmap/ic_launcher"-->
+            <!--android:id="@+id/imag_view"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/m185" />-->
 
-        <LinearLayout
-            android:layout_alignBottom="@id/imag_view"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+        <!--<LinearLayout-->
+            <!--android:layout_alignBottom="@id/imag_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_height="wrap_content">-->
 
-            <TextView
+            <!--<TextView-->
 
-                android:layout_marginLeft="@dimen/m20"
-                android:id="@+id/text_name"
-                android:textSize="14sp"
-                android:textColor="#fff"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:text="拍摄能力差"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/m20" />
+                <!--android:layout_marginLeft="@dimen/m20"-->
+                <!--android:id="@+id/text_name"-->
+                <!--android:textSize="14sp"-->
+                <!--android:textColor="#fff"-->
+                <!--android:textStyle="bold"-->
+                <!--android:maxLines="1"-->
+                <!--android:text="拍摄能力差"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="@dimen/m20" />-->
 
-            <TextView
-                android:layout_marginLeft="@dimen/m15"
-                android:id="@+id/text_score"
-                android:textColor="#fff"
-                android:text="评分:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <Button
-                android:layout_marginRight="@dimen/m10"
-                android:contextClickable="true"
-                android:id="@+id/bit_gaopiao"
-                android:text="购票"
-                android:textSize="12dp"
-                android:textColor="#fff"
-                android:background="#E62C67"
-                android:layout_width="40dp"
-                android:layout_height="17dp" />
-        </LinearLayout>
-    </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/xlist_movie"
-        android:layout_marginRight="@dimen/dp_8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <!--<TextView-->
+                <!--android:layout_marginLeft="@dimen/m15"-->
+                <!--android:id="@+id/text_score"-->
+                <!--android:textColor="#fff"-->
+                <!--android:text="评分:"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<Button-->
+                <!--android:layout_marginRight="@dimen/m10"-->
+                <!--android:contextClickable="true"-->
+                <!--android:id="@+id/bit_gaopiao"-->
+                <!--android:text="购票"-->
+                <!--android:textSize="12dp"-->
+                <!--android:textColor="#fff"-->
+                <!--android:background="#E62C67"-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="17dp" />-->
+        <!--</LinearLayout>-->
+    <!--</RelativeLayout>-->
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/xlist_movie"-->
+        <!--android:layout_marginRight="@dimen/dp_8"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-    </android.support.v7.widget.RecyclerView>
+    <!--</android.support.v7.widget.RecyclerView>-->
 </LinearLayout>
+
 </ScrollView>

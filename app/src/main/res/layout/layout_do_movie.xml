@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#141931"
+    android:gravity="center_horizontal"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="#1c2243"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/m38">
+
+        <ImageView
+            android:layout_marginLeft="@dimen/m20"
+            android:background="@mipmap/r"
+            android:layout_width="19dp"
+            android:layout_height="@dimen/m20" />
+        <TextView
+            android:textSize="@dimen/m14"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="15dp"
+            android:text="热门电影"
+            android:layout_width="@dimen/m56"
+            android:layout_height="@dimen/m20" />
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/m1" />
+        <TextView
+            android:id="@+id/but_text_not_movie"
+            android:textSize="@dimen/m12"
+            android:textColor="#ffffff"
+            android:text="更多"
+            android:layout_marginRight="@dimen/m25"
+            android:layout_width="28dp"
+            android:layout_height="@dimen/m17" />
+    </LinearLayout>
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m190">
+        <com.facebook.drawee.view.SimpleDraweeView
+            app:roundTopLeft="true"
+            app:roundTopRight="true"
+            app:roundBottomLeft="true"
+            app:roundBottomRight="true"
+            app:placeholderImage="@mipmap/ic_launcher"
+            android:id="@+id/imag_view"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m185" />
+
+        <LinearLayout
+            android:layout_alignBottom="@id/imag_view"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+
+                android:layout_marginLeft="@dimen/m20"
+                android:id="@+id/text_name"
+                android:textSize="14sp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:text="拍摄能力差"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/m20" />
+
+            <TextView
+                android:layout_marginLeft="@dimen/m15"
+                android:id="@+id/text_score"
+                android:textColor="#fff"
+                android:text="评分:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:layout_marginRight="@dimen/m10"
+                android:contextClickable="true"
+                android:id="@+id/bit_gaopiao"
+                android:text="购票"
+                android:textSize="12dp"
+                android:textColor="#fff"
+                android:background="#E62C67"
+                android:layout_width="40dp"
+                android:layout_height="17dp" />
+        </LinearLayout>
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/xlist_movie"
+        android:layout_marginRight="@dimen/dp_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

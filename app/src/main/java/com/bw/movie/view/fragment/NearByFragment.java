@@ -1,5 +1,6 @@
 package com.bw.movie.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -94,6 +95,14 @@ public class NearByFragment extends LazyLoadFragment implements IViewContract.do
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recList.setLayoutManager(linearLayoutManager);
         recList.setAdapter(cinemaAdapter);
+        cinemaAdapter.setAreaView(new CinemaAdapter.AreaView() {
+            @Override
+            public void onCurress(int id) {
+                Intent intent=new Intent("com.bawei.Particulars");
+                intent.putExtra("id",id);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

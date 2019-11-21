@@ -98,8 +98,6 @@ public class HotShowFragment extends BaseFragment implements IViewContract.doVie
     public void onLogCurress(Object obj) {
         List<MoVieListBean.ResultBean> resultBeans = (List<MoVieListBean.ResultBean>) obj;
         list.addAll(resultBeans);
-        Log.i("qq", "onLogCurress: " + list.size());
-
         movieAdapter = new MovieAdapter(list);
         movieAdapter.notifyDataSetChanged();
         xrecList.setLayoutManager(new LinearLayoutManager(getContext()));

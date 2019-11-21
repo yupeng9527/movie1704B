@@ -4,6 +4,9 @@ import com.bw.movie.modle.bean.BannerBean;
 import com.bw.movie.modle.bean.ByRegionBean;
 import com.bw.movie.modle.bean.CinemaBean;
 import com.bw.movie.modle.bean.CinemaByBean;
+import com.bw.movie.modle.bean.CinemaCommentBean;
+import com.bw.movie.modle.bean.CinemaDiscussBean;
+import com.bw.movie.modle.bean.CinemaInfoBean;
 import com.bw.movie.modle.bean.CodeBean;
 import com.bw.movie.modle.bean.CommentBean;
 import com.bw.movie.modle.bean.DateListBean;
@@ -13,14 +16,17 @@ import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.modle.bean.HeadPicBean;
 import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.modle.bean.MoVieListBean;
+import com.bw.movie.modle.bean.MovieDiscussBean;
 import com.bw.movie.modle.bean.MyMovieBean;
 import com.bw.movie.modle.bean.OnCimenBean;
 import com.bw.movie.modle.bean.OnMovieBean;
+import com.bw.movie.modle.bean.PriceByBean;
 import com.bw.movie.modle.bean.RecommendBean;
 import com.bw.movie.modle.bean.RecordByBean;
 import com.bw.movie.modle.bean.RegionListBean;
 import com.bw.movie.modle.bean.RegisterBean;
 import com.bw.movie.modle.bean.SchedBean;
+import com.bw.movie.modle.bean.ScheduleListBean;
 import com.bw.movie.modle.bean.SeatleBean;
 import com.bw.movie.modle.bean.SeenMovieBean;
 import com.bw.movie.modle.bean.SoonMovieBean;
@@ -46,6 +52,7 @@ import retrofit2.http.HeaderMap;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -110,7 +117,7 @@ public interface Api {
 //    添加用户对影片的评论
     @FormUrlEncoded
     @POST("movieApi/movie/v1/verify/movieComment")
-    Observable<CodeBean> MovComm(@FieldMap Map<String,Object> map,@FieldMap Map<String,Object> omap);
+    Observable<CodeBean> MovComm(@HeaderMap Map<String,Object> map,@FieldMap Map<String,Object> omap);
 //    意见反馈
     @FormUrlEncoded
     @POST("movieApi/tool/v1/verify/recordFeedBack")
@@ -122,11 +129,11 @@ public interface Api {
 //根据影厅id 查询座位信息
     @GET("movieApi/movie/v2/findSeatInfo")
     Observable<SeatleBean> Seatle(@Query("hallId") int hallId);
-
+//    根据电影id,区域id 查询播放影院信息
     @GET("movieApi/movie/v2/findCinemasInfoByRegion")
     Observable<ByRegionBean> ByRegion(@QueryMap Map<String,Object> map);
 
-
+//  根据电影ID和影院ID查询电影排期列表
     @GET("movieApi/movie/v2/findMovieSchedule")
     Observable<SchedBean> BySchedule(@QueryMap Map<String,Object> map);
 //购票下单
@@ -196,5 +203,48 @@ public interface Api {
 //      根据区域查询影院
     @GET("movieApi/cinema/v2/findCinemaByRegion")
     Observable<CinemaByBean> onByRegion(@Query("regionId") int regionId);
+
+    //      查询影院信息明细
+    @GET("movieApi/cinema/v1/findCinemaInfo")
+    Observable<CinemaInfoBean> onCinemaInfo(@HeaderMap Map<String,Object> map, @Query("cinemaId") int cinemaId);
+
+    //  关注影院
+    @GET("movieApi/cinema/v1/verify/followCinema")
+    Observable<FollowBean> onFollow(@HeaderMap Map<String,Object> map, @Query("cinemaId") int cinemaId);
+    //  取消关注影院
+    @GET("movieApi/cinema/v1/verify/cancelFollowCinema")
+    Observable<FollowBean> onCancel(@HeaderMap Map<String,Object> map, @Query("cinemaId") int cinemaId);
+
+
+    //     查询影院用户评论列表
+    @GET("movieApi/cinema/v1/findAllCinemaComment")
+    Observable<CinemaCommentBean> onCinemaComment(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> omap);
+
+    //    查询影院下的电影排期
+    @GET("movieApi/cinema/v2/findCinemaScheduleList")
+    Observable<ScheduleListBean> onScheduleList(@QueryMap Map<String,Object> omap);
+
+    //    根据电影id，时间 查询播放影院信息
+    @GET("movieApi/movie/v2/findCinemasInfoByDate")
+    Observable<ByRegionBean> onCinemasByDate(@QueryMap Map<String,Object> map);
+
+    //    根据电影价格查询播放影院信息
+    @GET("movieApi/movie/v2/findCinemasInfoByPrice")
+    Observable<ByRegionBean> onPriceBy(@QueryMap Map<String,Object> map);
+
+
+    //查询用户关注电影列表
+    @GET("movieApi/user/v2/verify/findMyMovieCommentList")
+    Observable<MovieDiscussBean> onCommentList(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> omap);
+
+    //查询我对影院评论列表
+    @GET("movieApi/user/v2/verify/findMyCinemaCommentList")
+    Observable<CinemaDiscussBean> onCinemaDiscussList(@HeaderMap Map<String,Object> map, @QueryMap Map<String,Object> omap);
+
+    //    电影评论点赞
+    @FormUrlEncoded
+    @POST("movieApi/movie/v1/verify/movieCommentGreat")
+    Observable<CodeBean> doGreat(@HeaderMap Map<String,Object> map,@FieldMap Map<String,Object> omap);
+
 
 }

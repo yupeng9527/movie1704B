@@ -1,49 +1,39 @@
 package com.bw.movie.view.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
-import com.bw.movie.gaode.MapUtils;
 import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.BannerBean;
 import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.modle.bean.MoVieListBean;
 import com.bw.movie.modle.bean.SoonMovieBean;
 import com.bw.movie.persenter.Persenter;
-import com.bw.movie.view.adapter.HotAdapter;
-import com.bw.movie.view.adapter.SoonMovieAdapter;
-import com.bw.movie.view.adapter.YMovieAdapter;
+import com.bw.movie.view.adapter.CinemaXRecycleAdapter;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
 import com.bw.movie.view.zview.SearchView;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.youth.banner.Banner;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.stx.xhb.xbanner.XBanner;
+import com.stx.xhb.xbanner.entity.SimpleBannerInfo;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
 
-import java.util.ArrayList;
+import java.util.AbstractList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,34 +48,20 @@ import butterknife.Unbinder;
  * function:
  */
 public class YMovieFragment extends BaseFragment implements IViewContract.doView {
-    @BindView(R.id.ban_ner)
-    Banner banNer;
-    @BindView(R.id.but_text_not)
-    TextView butTextNot;
-    @BindView(R.id.but_text_show)
-    TextView butTextShow;
-    @BindView(R.id.but_text_not_movie)
-    TextView butTextNotMovie;
+
+
     Unbinder unbinder;
     int page = 1;
-    @BindView(R.id.xlist_not)
-    RecyclerView xlistNot;
-    @BindView(R.id.xlist_show)
-    RecyclerView xlistShow;
-    @BindView(R.id.xlist_movie)
-    RecyclerView xlistMovie;
-    @BindView(R.id.imag_view)
-    SimpleDraweeView imagView;
-    @BindView(R.id.text_name)
-    TextView textName;
-    @BindView(R.id.text_score)
-    TextView textScore;
-    @BindView(R.id.bit_gaopiao)
-    Button bitGaopiao;
+
     Map<String, Object> map = new HashMap<>();
     Map<String, Object> smap = new HashMap<>();
+    @BindView(R.id.xlist_view_d)
+    XRecyclerView xlistViewD;
+
+    private CinemaXRecycleAdapter cinemaXRecycleAdapter;
     @BindView(R.id.sear_ch)
     SearchView searCh;
+
 
     @Override
     protected int initLayout() {
@@ -113,27 +89,8 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
         int userId = sp.getInt("userId", 0);
         map.put("userId", userId);
         map.put("sessionId", sessionId);
-        butTextNot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent("com.bawei.sh");
-                startActivity(intent);
-            }
-        });
-        butTextNotMovie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent("com.bawei.sh");
-                startActivity(intent);
-            }
-        });
-        butTextShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent("com.bawei.sh");
-                startActivity(intent);
-            }
-        });
+
+
         searCh.setOnIntersen(new SearchView.OnIntersen() {
             @Override
             public void onFinis(String str) {
@@ -150,79 +107,64 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
         persenter.SoonMovieList(map, page);
         persenter.HotMovieList(page);
         persenter.DoBanner();
-
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        xlistViewD.setLayoutManager(linearLayoutManager);
+        cinemaXRecycleAdapter = new CinemaXRecycleAdapter(getActivity());
+        xlistViewD.setPullRefreshEnabled(false);
+        xlistViewD.setLoadingMoreEnabled(false);
     }
 
 
     @Override
     public void onLogCurress(Object obj) {
         List<MoVieListBean.ResultBean> resultBeanList = (List<MoVieListBean.ResultBean>) obj;
-
-        YMovieAdapter yMovieAdapter = new YMovieAdapter(resultBeanList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        xlistNot.setLayoutManager(linearLayoutManager);
-        xlistNot.setAdapter(yMovieAdapter);
-
-
+        cinemaXRecycleAdapter.getResultA(resultBeanList);
     }
 
     @Override
     public void onShapeCurress(Object obj) {
         List<SoonMovieBean.ResultBean> resultBeans = (List<SoonMovieBean.ResultBean>) obj;
-        final SoonMovieAdapter soonMovieAdapter = new SoonMovieAdapter(resultBeans);
-        xlistShow.setLayoutManager(new LinearLayoutManager(getContext()));
-        xlistShow.setAdapter(soonMovieAdapter);
-        soonMovieAdapter.notifyDataSetChanged();
-        soonMovieAdapter.setIview(new SoonMovieAdapter.Iview() {
-            @Override
-            public void onCurr(int i) {
-                smap.put("movieId", i);
-                Persenter persenter = new Persenter(YMovieFragment.this);
-                persenter.doResert(map, smap);
+        cinemaXRecycleAdapter.getResultB(resultBeans);
 
-            }
-        });
     }
 
     @Override
     public void onMyCurress(Object obj) {
         List<HotBean.ResultBean> result = (List<HotBean.ResultBean>) obj;
-        imagView.setImageURI(result.get(0).horizontalImage);
-        textName.setText(result.get(0).name);
-        textScore.setText(result.get(0).score + "分");
-        HotAdapter hotAdapter = new HotAdapter(result);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        xlistMovie.setLayoutManager(linearLayoutManager);
-        xlistMovie.setAdapter(hotAdapter);
+        cinemaXRecycleAdapter.getResultC(result);
+        xlistViewD.setAdapter(cinemaXRecycleAdapter);
     }
 
     @Override
     public void onBannerCurress(Object obj) {
-        List<BannerBean.ResultBean> resultBeans = (List<BannerBean.ResultBean>) obj;
-        List<String> list = new ArrayList<>();
-        banNer.setDelayTime(3000);
-        for (int i = 0; i < resultBeans.size(); i++) {
-            list.add(resultBeans.get(i).imageUrl);
-        }
-        banNer.setImages(list)
-                .setBannerStyle(BannerConfig.NUM_INDICATOR)
-                .setImageLoader(new ImageLoader() {
-                    @Override
-                    public void displayImage(Context context, Object path, ImageView imageView) {
+        final List<BannerBean.ResultBean> resultBeans = (List<BannerBean.ResultBean>) obj;
+        View inflate = LinearLayout.inflate(getActivity(), R.layout.layout_frces, null);
+        XBanner banNer = inflate.findViewById (R.id.ban_ner);
+        banNer.setBannerData(R.layout.image_fresco, new AbstractList<SimpleBannerInfo>() {
+            @Override
+            public int size() {
+                return resultBeans.size();
+            }
 
-                        Glide.with(context)
-                                .load(path)
-                                .error(R.mipmap.ic_launcher)
-                                .placeholder(R.mipmap.ic_launcher_round)
-                                .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
-                                .into(imageView);
-                    }
-                })
-                .isAutoPlay(true)
-                .setBannerAnimation(Transformer.DepthPage)
-                .start();
+            @Override
+            public SimpleBannerInfo get(int index) {
+                return null;
+            }
+        });
+        banNer.loadImage(new XBanner.XBannerAdapter() {
+            @Override
+            public void loadBanner(XBanner banner, Object model, View view, int position) {
+                String imageUrl = resultBeans.get(position).imageUrl;
+                SimpleDraweeView simpleDraweeView = view.findViewById(R.id.my_image_view);
+                AbstractDraweeController build = Fresco.newDraweeControllerBuilder()
+                        .setUri(imageUrl)
+                        .setAutoPlayAnimations(true)
+                        .build();
+                simpleDraweeView.setController(build);
+
+            }
+        });
+        xlistViewD.addHeaderView(inflate);
     }
 
     @Override

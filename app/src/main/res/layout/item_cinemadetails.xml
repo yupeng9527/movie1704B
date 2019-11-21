@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#141931"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_margin="@dimen/dp_20"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_26">
+        
+        <ImageView
+            android:background="@mipmap/location"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24" />
+        <TextView
+            android:id="@+id/text_address"
+            android:textColor="#fff"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_20" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="@dimen/dp_20"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_26">
+
+        <ImageView
+            android:background="@mipmap/dianhua"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24" />
+        <TextView
+            android:id="@+id/text_phone"
+            android:textColor="#fff"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_20" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_margin="@dimen/dp_20"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="乘车路线"
+            android:textColor="#fff"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_20" />
+        <TextView
+            android:id="@+id/text_lu"
+            android:textColor="#fff"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>
