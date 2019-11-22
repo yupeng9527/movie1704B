@@ -67,7 +67,6 @@ public class SeenMovieActivity extends BaseActivity implements IViewContract.doV
     @Override
     public void onLogCurress(Object obj) {
         SeenMovieBean seenMovieBean= (SeenMovieBean) obj;
-        Toast.makeText(this, seenMovieBean.message, Toast.LENGTH_SHORT).show();
         linearView.setVisibility(View.VISIBLE);
     }
 

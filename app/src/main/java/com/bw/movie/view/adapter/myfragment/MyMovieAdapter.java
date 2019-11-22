@@ -53,7 +53,7 @@ public class MyMovieAdapter extends XRecyclerView.Adapter<MyMovieAdapter.SoonVie
         soonViewHolder.butQu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iview.onCurr(resultBeans.get(i).userId);
+                iview.onCurr(resultBeans.get(i).id);
             }
         });
     }

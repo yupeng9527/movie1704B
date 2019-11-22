@@ -14,6 +14,7 @@ import com.bw.movie.modle.bean.CodeBean;
 import com.bw.movie.modle.bean.CommentBean;
 import com.bw.movie.modle.bean.DateListBean;
 import com.bw.movie.modle.bean.DetilBean;
+import com.bw.movie.modle.bean.ExchangeCodeBean;
 import com.bw.movie.modle.bean.FollowBean;
 import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.modle.bean.HeadPicBean;
@@ -205,7 +206,7 @@ public class Persenter extends IViewContract.doData {
     public void HotMovieList(int page) {
         Map<String,Object> omap=new HashMap<>();
         omap.put("page",page);
-        omap.put("count",3);
+        omap.put("count",6);
         HttpUtil.getHttpUtil().getApi()
                 .Hotmovie(omap)
                 .subscribeOn(Schedulers.io())
@@ -1283,6 +1284,32 @@ public class Persenter extends IViewContract.doData {
                     public void accept(Throwable throwable) throws Exception {
                         Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
 
+                    }
+                });
+    }
+
+    @Override
+    public void doExchangeCode(Map<String, Object> map, int recordId) {
+        HttpUtil.getHttpUtil().getApi()
+                .onExchangeCode(map,recordId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ExchangeCodeBean>() {
+                    @Override
+                    public void accept(ExchangeCodeBean exchangeCodeBean) throws Exception {
+                        if ("0000".equals(exchangeCodeBean.status)) {
+                            Toast.makeText(App.context, exchangeCodeBean.message, Toast.LENGTH_SHORT).show();
+                            if (iBaseVIew!=null) {
+                                iBaseVIew.onShapeCurress(exchangeCodeBean);
+                            }
+                        } else {
+                            Toast.makeText(App.context, exchangeCodeBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

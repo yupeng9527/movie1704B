@@ -1,6 +1,8 @@
 package com.bw.movie.view.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -257,14 +259,24 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
 
         String sessionId = fp.getString("sessionId", null);
         int userId = fp.getInt("userId", 0);
-        Map<String,Object> ma=new HashMap<>();
+        final Map<String,Object> ma=new HashMap<>();
         ma.put("userId", userId);
         ma.put("sessionId", sessionId);
-        Map<String,Object> lmap=new HashMap<>();
+        final Map<String,Object> lmap=new HashMap<>();
         lmap.put("payType",1);
         lmap.put("orderId",ticketsBean.orderId);
-        Persenter persenter=new Persenter(this);
-        persenter.doPay(ma,lmap);
+        AlertDialog.Builder builder = new AlertDialog.Builder(RommActivity.this);
+        builder.setMessage("是否选择跳转购买");
+        builder.setTitle("支付金额:￥"+zf);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Persenter persenter=new Persenter(RommActivity.this);
+                persenter.doPay(ma,lmap);
+            }
+        });
+       builder.setNegativeButton("取消",null);
+       builder.show();
 
     }
 

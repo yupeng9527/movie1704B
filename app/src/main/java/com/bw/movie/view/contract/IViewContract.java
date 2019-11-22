@@ -7,6 +7,8 @@ import java.io.File;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
+import retrofit2.http.HeaderMap;
+import retrofit2.http.Query;
 
 /**
  * date:2019/9/27
@@ -138,6 +140,8 @@ public abstract void doTickets(Map<String,Object> map,Map<String,Object> omap);
     public abstract void onCinemaDiscussList(Map<String,Object> map,Map<String,Object> omap);
 //电影评论点赞
     public abstract void doGreat(Map<String,Object> map,Map<String,Object> omap);
+//查询取票码
+    public abstract void doExchangeCode(Map<String,Object> map,int recordId);
 
 }
 

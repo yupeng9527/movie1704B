@@ -6,42 +6,42 @@
     android:background="#141931"
     android:gravity="center_horizontal"
     android:layout_height="wrap_content">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:background="#1c2243"
-        android:gravity="center_vertical"
-        android:layout_height="@dimen/m38">
+    <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="#1c2243"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_height="@dimen/m38">-->
 
-        <ImageView
-            android:layout_marginLeft="@dimen/m20"
-            android:background="@mipmap/e"
-            android:layout_width="19dp"
-            android:layout_height="@dimen/m20" />
-        <TextView
-            android:textSize="@dimen/m14"
-            android:textColor="#ffffff"
-            android:layout_marginLeft="15dp"
-            android:text="即将上映"
-            android:layout_width="@dimen/m56"
-            android:layout_height="@dimen/m20" />
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/m1" />
-        <TextView
-            android:id="@+id/but_text_show"
-            android:textSize="@dimen/m12"
-            android:textColor="#ffffff"
-            android:text="更多"
-            android:layout_marginRight="@dimen/m25"
-            android:layout_width="28dp"
-            android:layout_height="@dimen/m17" />
-    </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/xlist_show"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <!--<ImageView-->
+            <!--android:layout_marginLeft="@dimen/m20"-->
+            <!--android:background="@mipmap/e"-->
+            <!--android:layout_width="19dp"-->
+            <!--android:layout_height="@dimen/m20" />-->
+        <!--<TextView-->
+            <!--android:textSize="@dimen/m14"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:text="即将上映"-->
+            <!--android:layout_width="@dimen/m56"-->
+            <!--android:layout_height="@dimen/m20" />-->
+        <!--<TextView-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="@dimen/m1" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/but_text_show"-->
+            <!--android:textSize="@dimen/m12"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:text="更多"-->
+            <!--android:layout_marginRight="@dimen/m25"-->
+            <!--android:layout_width="28dp"-->
+            <!--android:layout_height="@dimen/m17" />-->
+    <!--</LinearLayout>-->
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/xlist_show"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-    </android.support.v7.widget.RecyclerView>
+    <!--</android.support.v7.widget.RecyclerView>-->
 </LinearLayout>

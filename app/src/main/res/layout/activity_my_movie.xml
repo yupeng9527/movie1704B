@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:background="#141931"
     android:layout_height="match_parent"
     tools:context=".view.activity.myfragment.MyMovieActivity">
     <RelativeLayout
+        android:id="@+id/rel_list"
         android:layout_margin="@dimen/dp_30"
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -27,8 +27,51 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_22" />
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/re_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-</LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="@dimen/dp_80"
+            android:id="@+id/re_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+        
+ <LinearLayout
+     android:visibility="gone"
+     android:id="@+id/lin_layout"
+     android:alpha="0.8"
+     android:background="#030303"
+     android:orientation="vertical"
+     android:gravity="center"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+
+     <TextView
+         android:text="扫码取票"
+         android:textStyle="bold"
+         android:alpha="1"
+         android:textSize="@dimen/sp_16"
+         android:textColor="#fff"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+     <com.facebook.drawee.view.SimpleDraweeView
+         android:id="@+id/simp_view"
+         android:alpha="1"
+         android:layout_marginTop="@dimen/dp_20"
+         android:layout_width="@dimen/dp_174"
+         android:layout_height="@dimen/dp_174" />
+     
+     <Button
+         android:layout_marginTop="@dimen/dp_60"
+         android:id="@+id/but_ton"
+         android:alpha="1"
+         android:textStyle="bold"
+         android:textSize="@dimen/sp_14"
+         android:text="取消"
+         android:textColor="#fff"
+         android:background="#e8185e"
+         android:layout_width="@dimen/dp_56"
+         android:layout_height="@dimen/dp_26" />
+ </LinearLayout>
+    
+</RelativeLayout>

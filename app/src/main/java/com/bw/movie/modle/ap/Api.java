@@ -11,6 +11,7 @@ import com.bw.movie.modle.bean.CodeBean;
 import com.bw.movie.modle.bean.CommentBean;
 import com.bw.movie.modle.bean.DateListBean;
 import com.bw.movie.modle.bean.DetilBean;
+import com.bw.movie.modle.bean.ExchangeCodeBean;
 import com.bw.movie.modle.bean.FollowBean;
 import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.modle.bean.HeadPicBean;
@@ -245,6 +246,10 @@ public interface Api {
     @FormUrlEncoded
     @POST("movieApi/movie/v1/verify/movieCommentGreat")
     Observable<CodeBean> doGreat(@HeaderMap Map<String,Object> map,@FieldMap Map<String,Object> omap);
+
+    //查询我对影院评论列表
+    @GET("movieApi/user/v2/verify/findExchangeCode")
+    Observable<ExchangeCodeBean> onExchangeCode(@HeaderMap Map<String,Object> map, @Query("recordId")int recordId);
 
 
 }

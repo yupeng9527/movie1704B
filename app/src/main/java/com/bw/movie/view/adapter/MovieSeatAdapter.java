@@ -47,30 +47,30 @@ public class MovieSeatAdapter extends XRecyclerView.Adapter<MovieSeatAdapter.Mov
 
 
         int status = result.get(i).status;
-        if (status == 1) {
+        if (status == 2) {
             movieVIewHolder.cheBox.setChecked(false);
-        } else if (status == 2) {
-            movieVIewHolder.cheBox.setChecked(true);
-            movieVIewHolder.cheBox.setBackgroundColor(R.drawable.myy_shape);
-        }
-        final ArrayList<String> list=new ArrayList<>();
-        movieVIewHolder.cheBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (movieVIewHolder.cheBox.isChecked()) {
-                    result.get(i).status=3;
-                    String row1 = result.get(i).row;
-                    String seat2 = result.get(i).seat;
-                    String s = row1 + "-" + seat2;
-                    list.addAll(Collections.singleton(s));
-                    callBack.getStrng(list);
-                    callBack.getBack(result.get(i).row + "排" + result.get(i).seat + "座");
-                } else {
-                    result.get(i).status=1;
-                    callBack.getBack("取消选座");
+            movieVIewHolder.cheBox.setBackgroundResource(R.drawable.screen_checkboxy);
+        }else{
+            final ArrayList<String> list=new ArrayList<>();
+            movieVIewHolder.cheBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (movieVIewHolder.cheBox.isChecked()) {
+                        result.get(i).status=3;
+                        String row1 = result.get(i).row;
+                        String seat2 = result.get(i).seat;
+                        String s = row1 + "-" + seat2;
+                        list.addAll(Collections.singleton(s));
+                        callBack.getStrng(list);
+                        callBack.getBack(result.get(i).row + "排" + result.get(i).seat + "座");
+                    } else {
+                        result.get(i).status=1;
+                        callBack.getBack("取消选座");
+                    }
                 }
-            }
-        });
+            });
+        }
+
     }
 
     @Override
