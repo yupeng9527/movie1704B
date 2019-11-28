@@ -109,6 +109,11 @@ public class FilmReviewFragment extends BaseFragment implements IViewContract.do
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
         Log.i("qqq", "onLogExurr: "+str);
     }

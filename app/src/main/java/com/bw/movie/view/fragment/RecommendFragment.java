@@ -86,6 +86,11 @@ public class RecommendFragment extends BaseFragment implements IViewContract.doV
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }

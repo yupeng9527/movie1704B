@@ -176,6 +176,11 @@ public class GuideActivity extends BaseActivity implements IViewContract.doView 
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }

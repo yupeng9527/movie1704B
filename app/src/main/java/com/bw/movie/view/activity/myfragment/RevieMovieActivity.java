@@ -1,25 +1,23 @@
-package com.bw.movie.view.activity;
+package com.bw.movie.view.activity.myfragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.bw.movie.R;
-import com.bw.movie.modle.bean.DateListBean;
-import com.bw.movie.modle.bean.ScheduleListBean;
+import com.bw.movie.modle.bean.SeenMovieBean;
 import com.bw.movie.persenter.Persenter;
-import com.bw.movie.view.adapter.ScheduleListAdapter;
-import com.bw.movie.view.adapter.ScheduleTabAdapter;
 import com.bw.movie.view.base.BaseActivity;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,21 +25,27 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ScheduleActivity extends BaseActivity implements IViewContract.doView {
+public class RevieMovieActivity extends BaseActivity implements IViewContract.doView {
 
     @BindView(R.id.details_back)
     ImageView detailsBack;
-    @BindView(R.id.tab_lay)
-    TabLayout tabLay;
-    @BindView(R.id.view_pager)
-    ViewPager viewPager;
-    private int did;
-
-
-
+    @BindView(R.id.text_name)
+    TextView textName;
+    @BindView(R.id.text_pingf)
+    TextView textPingf;
+    @BindView(R.id.rating_bar)
+    RatingBar ratingBar;
+    @BindView(R.id.edit_txt)
+    EditText editTxt;
+    @BindView(R.id.text_cinme_name)
+    TextView textCinmeName;
+    @BindView(R.id.edit_txt_cinme)
+    EditText editTxtCinme;
+    @BindView(R.id.but_tj)
+    Button butTj;
     @Override
     protected int initLayout() {
-        return R.layout.activity_schedule;
+        return R.layout.activity_revie_movie;
     }
 
     @Override
@@ -55,17 +59,13 @@ public class ScheduleActivity extends BaseActivity implements IViewContract.doVi
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+
         detailsBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        Intent intent = getIntent();
-        did = intent.getIntExtra("did", 0);
-
-        Persenter persenter = new Persenter(this);
-        persenter.doDateList();
     }
 
     @Override
@@ -85,21 +85,6 @@ public class ScheduleActivity extends BaseActivity implements IViewContract.doVi
 
     @Override
     public void onBannerCurress(Object obj) {
-        DateListBean dateListBean = (DateListBean) obj;
-        final List<String> result = dateListBean.result;
-        for (int i = 0; i < result.size(); i++) {
-            final String s = result.get(i);
-            TabLayout.Tab tab = tabLay.newTab();
-            if (tab != null) {
-                tab.setText(s);
-                tabLay.addTab(tab);
-            }
-        }
-        ScheduleTabAdapter scheduleTabAdapter = new ScheduleTabAdapter(getSupportFragmentManager(), result,did);
-        tabLay.setupWithViewPager(viewPager);
-        viewPager.setAdapter(scheduleTabAdapter);
-
-
 
     }
 
@@ -112,6 +97,4 @@ public class ScheduleActivity extends BaseActivity implements IViewContract.doVi
     public void onLogExurr(String str) {
 
     }
-
-
 }

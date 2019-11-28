@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
 public class MovieSeatAdapter extends XRecyclerView.Adapter<MovieSeatAdapter.MovieVIewHolder> {
 
     List<SeatleBean.ResultBean> result ;
-
+    final List<String> list=new ArrayList<>();
     public  MovieSeatAdapter(List<SeatleBean.ResultBean> result) {
         this.result = result;
     }
@@ -50,26 +50,27 @@ public class MovieSeatAdapter extends XRecyclerView.Adapter<MovieSeatAdapter.Mov
         if (status == 2) {
             movieVIewHolder.cheBox.setChecked(false);
             movieVIewHolder.cheBox.setBackgroundResource(R.drawable.screen_checkboxy);
-        }else{
-            final ArrayList<String> list=new ArrayList<>();
-            movieVIewHolder.cheBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        }
+        movieVIewHolder.cheBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    String row1 = result.get(i).row;
+                    String seat2 = result.get(i).seat;
+                    String s = row1 + "-" + seat2;
                     if (movieVIewHolder.cheBox.isChecked()) {
                         result.get(i).status=3;
-                        String row1 = result.get(i).row;
-                        String seat2 = result.get(i).seat;
-                        String s = row1 + "-" + seat2;
-                        list.addAll(Collections.singleton(s));
+                        list.add(s);
                         callBack.getStrng(list);
                         callBack.getBack(result.get(i).row + "排" + result.get(i).seat + "座");
                     } else {
                         result.get(i).status=1;
                         callBack.getBack("取消选座");
+                        list.remove(s);
+                        callBack.getStrng(list);
                     }
                 }
             });
-        }
+
 
     }
 
@@ -88,7 +89,7 @@ public class MovieSeatAdapter extends XRecyclerView.Adapter<MovieSeatAdapter.Mov
     }
     public interface CallBack {
         void getBack(String s);
-        void getStrng(ArrayList<String> list);
+        void getStrng(List<String> list);
     }
 
     CallBack callBack;

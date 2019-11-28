@@ -86,6 +86,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
     private CheckBox wxzf;
     private String orderId;
     private int cinemaId;
+    private String str;
 
     @Override
     protected int initLayout() {
@@ -121,7 +122,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
         int movieId = intent.getIntExtra("movieId", 0);
         cinemaId = intent.getIntExtra("cinemaId", 0);
         String photo = intent.getStringExtra("photo");
-        fare = intent.getDoubleExtra("price",0);
+//        fare = intent.getDoubleExtra("price",0);
         String imageUrl = intent.getStringExtra("imageUrl");
         final Map<String, Object> map = new HashMap<>();
         map.put("cinemaId", cinemaId);
@@ -187,16 +188,18 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
             }
 
             @Override
-            public void getStrng(ArrayList<String> list) {
-                String str = null;
+            public void getStrng(List<String> list) {
+                str = "";
                 for (int i = 0; i < list.size(); i++) {
-                    String s = list.get(i);
-                    str=s+",";
+                    if (str.length()==0){
+                        str +=list.get(i);
+                    }else{
+                        str +=","+list.get(i);
+                    }
                 }
-                Log.i("qqq", "getStrng: "+str);
-                String seat = str.substring(0, str.lastIndexOf(","));
+                Log.i("qqq", "getStrng: "+ str);
                 SharedPreferences qq = getSharedPreferences("zw", Context.MODE_PRIVATE);
-                qq.edit().putString("seat",seat).commit();
+                qq.edit().putString("seat", str).commit();
             }
         });
     }
@@ -211,12 +214,18 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
         RommSeatAdapter adapter = new RommSeatAdapter(result);
         roomRecycler.setAdapter(adapter);
         adapter.setCallBack(new RommSeatAdapter.iCallBack() {
+
+
+
             @Override
             public void getBack(String s) {
                 Persenter persenter = new Persenter(RommActivity.this);
                 persenter.doSeatle(cinemaId);
             }
-
+            @Override
+            public void getPrice(Double price) {
+                fare=price;
+            }
             @Override
             public void getId(final int idd) {
 //                SharedPreferences qq = getSharedPreferences("zw", Context.MODE_PRIVATE);
@@ -224,10 +233,10 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
                 SharedPreferences fp = getSharedPreferences("feil", Context.MODE_PRIVATE);
                 final String sessionId = fp.getString("sessionId", null);
                 final int userId = fp.getInt("userId", 0);
-                String s = userId +"" +idd+"movie";
-                Log.i("qqq", "onClick: "+idd);
+                String s = userId + "" + idd + "movie";
+                Log.i("qqq", "onClick: " + idd);
                 final String sign = MD5(s);
-                Log.i("qqq", "onClick: "+sign);
+                Log.i("qqq", "onClick: " + sign);
                 radioWx.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -235,16 +244,16 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
                         SharedPreferences qw = getSharedPreferences("zw", Context.MODE_PRIVATE);
                         String seat = qw.getString("seat", null);
 //                        String scheduleId = qw.getString("scheduleId", null);
-                        Map<String,Object> ma=new HashMap<>();
+                        Map<String, Object> ma = new HashMap<>();
                         ma.put("userId", userId);
                         ma.put("sessionId", sessionId);
-                        Map<String,Object> oma=new HashMap<>();
+                        Map<String, Object> oma = new HashMap<>();
                         oma.put("scheduleId", idd);
                         oma.put("seat", seat);
                         oma.put("sign", sign);
-                        if (radioWx.isChecked()){
-                            Persenter persenter1=new Persenter(RommActivity.this);
-                            persenter1.doTickets(ma,oma);
+                        if (radioWx.isChecked()) {
+                            Persenter persenter1 = new Persenter(RommActivity.this);
+                            persenter1.doTickets(ma, oma);
                         }
                     }
                 });
@@ -294,6 +303,11 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
         payReq.extData = "app data"; // optional
         App.api.sendReq(payReq);
 
+
+    }
+
+    @Override
+    public void onMovieCinema(Object obj) {
 
     }
 

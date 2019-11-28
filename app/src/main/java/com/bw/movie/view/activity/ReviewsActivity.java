@@ -127,6 +127,11 @@ butTj.setOnClickListener(new View.OnClickListener() {
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }

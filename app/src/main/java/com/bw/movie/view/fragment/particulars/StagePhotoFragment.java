@@ -118,6 +118,11 @@ public class StagePhotoFragment extends BaseFragment implements IViewContract.do
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }

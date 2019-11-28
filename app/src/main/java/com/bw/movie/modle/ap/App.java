@@ -11,6 +11,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 /**
  * date:2019/9/27
@@ -31,6 +32,7 @@ public class App extends Application {
         context=this;
         regToWx();
         Fresco.initialize(this);
+        ZXingLibrary.initDisplayOpinion ( this );
     }
 
     private void regToWx() {

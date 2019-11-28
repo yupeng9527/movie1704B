@@ -261,6 +261,11 @@ public class SelectMovieActivity extends BaseActivity implements IViewContract.d
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }

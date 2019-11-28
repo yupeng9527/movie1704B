@@ -17,6 +17,7 @@ import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.modle.bean.HeadPicBean;
 import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.modle.bean.MoVieListBean;
+import com.bw.movie.modle.bean.MovieByKeyBean;
 import com.bw.movie.modle.bean.MovieDiscussBean;
 import com.bw.movie.modle.bean.MyMovieBean;
 import com.bw.movie.modle.bean.OnCimenBean;
@@ -251,5 +252,10 @@ public interface Api {
     @GET("movieApi/user/v2/verify/findExchangeCode")
     Observable<ExchangeCodeBean> onExchangeCode(@HeaderMap Map<String,Object> map, @Query("recordId")int recordId);
 
-
+    //系统消息读取状态修改
+    @GET("movieApi/tool/v1/verify/changeSysMsgStatus")
+    Observable<CodeBean> onMsgStatus(@HeaderMap Map<String,Object> map, @Query("id")int id);
+//  根据关键字查询电影信息
+    @GET("movieApi/movie/v2/findMovieByKeyword")
+    Observable<MovieByKeyBean> onMovieByKey(@QueryMap Map<String,Object> map);
 }

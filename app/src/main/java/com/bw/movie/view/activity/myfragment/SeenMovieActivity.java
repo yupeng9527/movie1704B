@@ -1,8 +1,10 @@
 package com.bw.movie.view.activity.myfragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,11 +14,13 @@ import android.widget.Toast;
 import com.bw.movie.R;
 import com.bw.movie.modle.bean.SeenMovieBean;
 import com.bw.movie.persenter.Persenter;
+import com.bw.movie.view.adapter.SeenAdapter;
 import com.bw.movie.view.base.BaseActivity;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -67,7 +71,26 @@ public class SeenMovieActivity extends BaseActivity implements IViewContract.doV
     @Override
     public void onLogCurress(Object obj) {
         SeenMovieBean seenMovieBean= (SeenMovieBean) obj;
-        linearView.setVisibility(View.VISIBLE);
+        List<SeenMovieBean.ResultBean> result = seenMovieBean.result;
+        if (result.size()!=0) {
+            rectListView.setVisibility(View.VISIBLE);
+            linearView.setVisibility(View.GONE);
+            SeenAdapter seenAdapter=new SeenAdapter(result);
+            rectListView.setLayoutManager(new LinearLayoutManager(this));
+            rectListView.setAdapter(seenAdapter);
+            seenAdapter.setDoView(new SeenAdapter.DoView() {
+                @Override
+                public void onCurress(int id) {
+                    Intent intent=new Intent("com.bawei.RevieMovie");
+                    intent.putExtra("id",id);
+                    startActivity(intent);
+                }
+            });
+        }else{
+            rectListView.setVisibility(View.GONE);
+            linearView.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -82,6 +105,11 @@ public class SeenMovieActivity extends BaseActivity implements IViewContract.doV
 
     @Override
     public void onBannerCurress(Object obj) {
+
+    }
+
+    @Override
+    public void onMovieCinema(Object obj) {
 
     }
 

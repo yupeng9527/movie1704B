@@ -130,6 +130,11 @@ public class RecordByActivity extends BaseActivity implements IViewContract.doVi
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="horizontal"
-    android:gravity="center_horizontal"
+
+    android:gravity="center_vertical"
     android:background="#141931"
     android:layout_height="@dimen/dp_27">
 
@@ -15,7 +16,6 @@
         android:layout_height="@dimen/m24" />
     <TextView
         android:layout_gravity="center_vertical"
-
         android:id="@+id/text_mapa_name"
         android:text=""
         android:layout_marginLeft="@dimen/m20"
@@ -27,6 +27,13 @@
         android:layout_weight="1"
         android:layout_width="@dimen/m14"
         android:layout_height="0dp" />
+    <EditText
+        android:visibility="gone"
+        android:hint="请输入搜索内容"
+        android:background="@drawable/screen_checkxy"
+        android:id="@+id/edit_text"
+        android:layout_width="@dimen/dp_150"
+        android:layout_height="wrap_content" />
     <ImageView
         android:layout_gravity="center_vertical"
         android:id="@+id/imag_search"

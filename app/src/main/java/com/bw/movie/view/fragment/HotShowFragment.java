@@ -120,6 +120,11 @@ public class HotShowFragment extends BaseFragment implements IViewContract.doVie
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }

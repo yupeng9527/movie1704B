@@ -32,6 +32,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rect_list_view"
         android:layout_marginTop="@dimen/dp_75"
+
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

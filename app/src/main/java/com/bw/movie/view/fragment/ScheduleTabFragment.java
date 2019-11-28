@@ -153,6 +153,11 @@ public class ScheduleTabFragment extends BaseFragment implements IViewContract.d
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
         Log.i("qq", "onLogExurr: "+str);
     }

@@ -2,20 +2,14 @@ package com.bw.movie.view.zview;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
 import com.bw.movie.R;
-import com.bw.movie.gaode.MapUtils;
-import com.bw.movie.modle.ap.App;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +28,9 @@ public class SearchView extends RelativeLayout {
     TextView textMapaName;
     @BindView(R.id.imag_search)
     ImageView imagSearch;
+    @BindView(R.id.edit_text)
+    EditText editText;
+
     public SearchView(Context context) {
         super(context, null);
     }
@@ -43,9 +40,18 @@ public class SearchView extends RelativeLayout {
         View inflate = LayoutInflater.from(context)
                 .inflate(R.layout.item_view, this, true);
         ButterKnife.bind(inflate);
+        imagSearch.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imagSearch.setVisibility(GONE);
+                editText.setVisibility(VISIBLE);
+            }
+        });
+        String s = editText.getText().toString();
+        onIntersen.onFinis(s);
     }
 
-  public void setOnIntersen(OnIntersen onIntersen) {
+    public void setOnIntersen(OnIntersen onIntersen) {
         this.onIntersen = onIntersen;
     }
 

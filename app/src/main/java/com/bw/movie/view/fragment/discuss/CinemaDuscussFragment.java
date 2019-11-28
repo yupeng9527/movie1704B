@@ -107,6 +107,11 @@ public class CinemaDuscussFragment extends BaseFragment implements IViewContract
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }

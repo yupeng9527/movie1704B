@@ -19,9 +19,9 @@ import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.BannerBean;
 import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.modle.bean.MoVieListBean;
+import com.bw.movie.modle.bean.MovieByKeyBean;
 import com.bw.movie.modle.bean.SoonMovieBean;
 import com.bw.movie.persenter.Persenter;
-import com.bw.movie.view.adapter.CinemaXRecycleAdapter;
 import com.bw.movie.view.adapter.HotAdapter;
 import com.bw.movie.view.adapter.SoonMovieAdapter;
 import com.bw.movie.view.adapter.YMovieAdapter;
@@ -87,6 +87,12 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     @BindView(R.id.xlist_movie)
     RecyclerView xlistMovie;
 
+    @BindView(R.id.recy_layout_ss)
+    RecyclerView recyLayoutSs;
+    @BindView(R.id.linear_layout_ss)
+    LinearLayout linearLayoutSs;
+
+
 
     @Override
     protected int initLayout() {
@@ -137,6 +143,19 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
 //        cinemaXRecycleAdapter = new CinemaXRecycleAdapter(getActivity());
 //        xlistViewD.setPullRefreshEnabled(false);
 //        xlistViewD.setLoadingMoreEnabled(false);
+        searCh.setOnIntersen(new SearchView.OnIntersen() {
+            @Override
+            public void onFinis(String str) {
+                linearLayoutSs.setVisibility(View.GONE);
+                recyLayoutSs.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onSs(String str) {
+
+            }
+        });
     }
 
 
@@ -144,7 +163,7 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     public void onLogCurress(Object obj) {
         List<MoVieListBean.ResultBean> resultBeanList = (List<MoVieListBean.ResultBean>) obj;
 //        cinemaXRecycleAdapter.getResultA(resultBeanList);
-        YMovieAdapter yMovieAdapter = new YMovieAdapter(resultBeanList,getContext());
+        YMovieAdapter yMovieAdapter = new YMovieAdapter(resultBeanList, getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         xlistNot.setLayoutManager(linearLayoutManager);
@@ -160,7 +179,7 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
             @Override
             public void onCurress(int id) {
                 Intent intent1 = new Intent("com.bawei.SelectMovie");
-                intent1.putExtra("movieId",id);
+                intent1.putExtra("movieId", id);
                 startActivity(intent1);
             }
         });
@@ -170,9 +189,9 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     public void onShapeCurress(Object obj) {
         List<SoonMovieBean.ResultBean> resultBeans = (List<SoonMovieBean.ResultBean>) obj;
 //        cinemaXRecycleAdapter.getResultB(resultBeans);
-        final SoonMovieAdapter soonMovieAdapter = new SoonMovieAdapter(resultBeans,getContext());
-       xlistShow.setLayoutManager(new LinearLayoutManager(getContext()));
-       xlistShow.setAdapter(soonMovieAdapter);
+        final SoonMovieAdapter soonMovieAdapter = new SoonMovieAdapter(resultBeans, getContext());
+        xlistShow.setLayoutManager(new LinearLayoutManager(getContext()));
+        xlistShow.setAdapter(soonMovieAdapter);
         soonMovieAdapter.notifyDataSetChanged();
         soonMovieAdapter.setIview(new SoonMovieAdapter.Iview() {
             @Override
@@ -205,7 +224,7 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
 //        cinemaXRecycleAdapter.getResultC(result);
 //        xlistViewD.setAdapter(cinemaXRecycleAdapter);
 
-        HotAdapter hotAdapter = new HotAdapter(result,getContext());
+        HotAdapter hotAdapter = new HotAdapter(result, getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         xlistMovie.setLayoutManager(linearLayoutManager);
@@ -221,7 +240,7 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
             @Override
             public void onCurress(int id) {
                 Intent intent1 = new Intent("com.bawei.SelectMovie");
-                intent1.putExtra("movieId",id);
+                intent1.putExtra("movieId", id);
                 startActivity(intent1);
             }
         });
@@ -259,6 +278,12 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
 
             }
         });
+
+    }
+
+    @Override
+    public void onMovieCinema(Object obj) {
+        MovieByKeyBean movieByKeyBean= (MovieByKeyBean) obj;
 
     }
 

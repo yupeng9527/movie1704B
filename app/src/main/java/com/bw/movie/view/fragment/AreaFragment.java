@@ -110,6 +110,11 @@ public class AreaFragment extends BaseFragment implements IViewContract.doView {
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }

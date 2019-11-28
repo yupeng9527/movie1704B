@@ -6,13 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.bw.movie.R;
-import com.bw.movie.modle.bean.CinemaBean;
 import com.bw.movie.modle.bean.SysMsgListBean;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -29,6 +26,8 @@ import butterknife.ButterKnife;
  */
 public class SysMsgListAdapter extends XRecyclerView.Adapter<SysMsgListAdapter.MovieViewHolder> {
     List<SysMsgListBean.ResultBean> resultBeanList;
+
+
     public SysMsgListAdapter(List<SysMsgListBean.ResultBean> resultBeanList) {
         this.resultBeanList = resultBeanList;
     }
@@ -42,11 +41,11 @@ public class SysMsgListAdapter extends XRecyclerView.Adapter<SysMsgListAdapter.M
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
+    public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, final int i) {
         int status = resultBeanList.get(i).status;
-        if (status==0){
+        if (status == 0) {
             movieViewHolder.checkBox.setVisibility(View.VISIBLE);
-        }else if (status==1){
+        } else if (status == 1) {
             movieViewHolder.checkBox.setVisibility(View.GONE);
         }
         movieViewHolder.textName.setText(resultBeanList.get(i).title);
@@ -54,6 +53,18 @@ public class SysMsgListAdapter extends XRecyclerView.Adapter<SysMsgListAdapter.M
         String format = formatter.format(resultBeanList.get(i).pushTime);
         movieViewHolder.textTime.setText(format);
         movieViewHolder.textXianq.setText(resultBeanList.get(i).content);
+        if (resultBeanList.get(i).status==0) {
+
+        }
+        if (resultBeanList.get(i).status==1){
+           movieViewHolder.checkBox.setBackgroundDrawable(null);
+        }
+        movieViewHolder.textXianq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doData.doLogID(resultBeanList.get(i).id);
+            }
+        });
     }
 
     @Override
@@ -71,11 +82,21 @@ public class SysMsgListAdapter extends XRecyclerView.Adapter<SysMsgListAdapter.M
         TextView textTime;
         @BindView(R.id.text_xianq)
         TextView textXianq;
-
+        @BindView(R.id.xiao_xi)
+        LinearLayout xiaoXi;
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
         }
+    }
+
+    public void setDoData(DoData doData) {
+        this.doData = doData;
+    }
+
+    DoData doData;
+    public interface DoData{
+        void doLogID(int id);
     }
 }

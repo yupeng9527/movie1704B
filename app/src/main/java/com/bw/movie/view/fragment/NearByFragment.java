@@ -121,6 +121,11 @@ public class NearByFragment extends LazyLoadFragment implements IViewContract.do
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }

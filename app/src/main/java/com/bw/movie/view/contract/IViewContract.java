@@ -142,6 +142,10 @@ public abstract void doTickets(Map<String,Object> map,Map<String,Object> omap);
     public abstract void doGreat(Map<String,Object> map,Map<String,Object> omap);
 //查询取票码
     public abstract void doExchangeCode(Map<String,Object> map,int recordId);
+//查询取票码
+    public abstract void doMsgStatus(Map<String,Object> map,int id);
+    //查询取票码
+    public abstract void doMovieByKey(Map<String,Object> map);
 
 }
 

@@ -214,6 +214,11 @@ public class CinemaXRecycleAdapter extends XRecyclerView.Adapter implements IVie
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }

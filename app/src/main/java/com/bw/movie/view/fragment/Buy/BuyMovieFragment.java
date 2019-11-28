@@ -193,6 +193,11 @@ public class BuyMovieFragment extends BaseFragment implements IViewContract.doVi
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }

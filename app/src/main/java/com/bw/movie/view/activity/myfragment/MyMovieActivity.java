@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,9 +19,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.bw.movie.R;
+import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.ExchangeCodeBean;
 import com.bw.movie.modle.bean.MyMovieBean;
+import com.bw.movie.modle.utils.ImageUtils;
 import com.bw.movie.persenter.Persenter;
 import com.bw.movie.view.activity.MainActivity;
 import com.bw.movie.view.adapter.myfragment.MyMovieAdapter;
@@ -36,7 +40,11 @@ import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +62,7 @@ public class MyMovieActivity extends BaseActivity implements IViewContract.doVie
     @BindView(R.id.rel_list)
     RelativeLayout relList;
     @BindView(R.id.simp_view)
-    SimpleDraweeView simpView;
+    ImageView simpView;
     @BindView(R.id.but_ton)
     Button butTon;
     @BindView(R.id.lin_layout)
@@ -117,7 +125,10 @@ public class MyMovieActivity extends BaseActivity implements IViewContract.doVie
         ExchangeCodeBean.ResultBean result = exchangeCodeBean.result;
         String exchangeCode = result.exchangeCode;
 
-        simpView.setImageURI(exchangeCode);
+//        simpView.setImageURI(exchangeCode);
+        Glide.with(this)
+                .load(exchangeCode)
+                .into(simpView);
         linLayout.setVisibility(View.VISIBLE);
         butTon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,77 +139,66 @@ public class MyMovieActivity extends BaseActivity implements IViewContract.doVie
         simpView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-//                Bitmap obmp = ((BitmapDrawable) (simpView).getDrawable()).getBitmap();
-//                int width = obmp.getWidth();
-//                int height = obmp.getHeight();
-//                int[] data = new int[width * height];
-//                obmp.getPixels(data, 0, width, 0, 0, width, height);
-//                RGBLuminanceSource source = new RGBLuminanceSource(width, height, data);
-//                BinaryBitmap bitmap1 = new BinaryBitmap(new HybridBinarizer(source));
-//                QRCodeReader reader = new QRCodeReader();
-//                Result re = null;
-//                try {
-//                    re = reader.decode(bitmap1);
-//                } catch (NotFoundException e) {
-//                    e.printStackTrace();
-//                } catch (ChecksumException e) {
-//                    e.printStackTrace();
-//                } catch (FormatException e) {
-//                    e.printStackTrace();
-//                }
-//                if (re == null) {
-//                    showAlert(obmp);
-//                } else {
-//                    showSelectAlert(obmp, re.getText());
-//                }
-                return false;
+                ImageView imageView = (ImageView) v;
+                BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable ();
+                Bitmap bitmap = drawable.getBitmap ();
+                File file = new File ( getCacheDir (), "acd.jpg" );
+                try {
+                    bitmap.compress ( Bitmap.CompressFormat.JPEG,100,new FileOutputStream( file ) );
+                    CodeUtils.analyzeBitmap ( file.getAbsolutePath (), new CodeUtils.AnalyzeCallback () {
+                        @Override
+                        public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+
+                        }
+
+                        @Override
+                        public void onAnalyzeFailed() {
+                            Toast.makeText ( App.context, "解析失败", Toast.LENGTH_SHORT ).show ();
+                        }
+                    } );
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace ();
+                }
+                return true;
             }
         });
     }
-    private void showAlert(final Bitmap bitmap) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("保存图片")
-                .setCancelable(false)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterfacem, int i) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult ( requestCode, resultCode, data );
+        if (requestCode==210){
+            if (data==null){
+                return;
+            }
+            Bundle bundle = data.getExtras ();
+            if (bundle.getInt ( CodeUtils.RESULT_TYPE )==CodeUtils.RESULT_SUCCESS){
+                String string = bundle.getString ( CodeUtils.RESULT_STRING );
+                Toast.makeText ( this,string, Toast.LENGTH_SHORT ).show ();
+            }else {
+                Toast.makeText ( this, "解析失败！", Toast.LENGTH_SHORT ).show ();
+            }
+        }
 
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterfacem, int i) {
-                    }
-                });
-        builder.show();
-    }
+        if (requestCode==220){
+            if (data!=null){
+                Uri uri = data.getData ();
+                try {
+                    CodeUtils.analyzeBitmap ( ImageUtils.getImageAbsolutePath ( this,uri ), new CodeUtils.AnalyzeCallback () {
+                        @Override
+                        public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+                            Toast.makeText ( App.context, result , Toast.LENGTH_SHORT ).show ();
+                        }
 
-    private void showSelectAlert(final Bitmap bitmap, final String url) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("请选择");
-        String str[] = {"保存图片", "扫二维码"};
-        builder.setItems(str, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterfacem, int i) {
-                switch (i) {
-                    case 0: {
-
-                    }
-                    break;
-                    case 1: {
-                        Toast.makeText(MyMovieActivity.this, url, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
+                        @Override
+                        public void onAnalyzeFailed() {
+                            Toast.makeText ( App.context, "解析失败", Toast.LENGTH_SHORT ).show ();
+                        }
+                    } );
+                } catch (Exception e) {
+                    e.printStackTrace ();
                 }
             }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterfacem, int i) {
-
-            }
-        });
-        builder.show();
+        }
     }
     @Override
     public void onMyCurress(Object obj) {
@@ -207,6 +207,11 @@ public class MyMovieActivity extends BaseActivity implements IViewContract.doVie
 
     @Override
     public void onBannerCurress(Object obj) {
+
+    }
+
+    @Override
+    public void onMovieCinema(Object obj) {
 
     }
 

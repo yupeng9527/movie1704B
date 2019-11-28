@@ -31,6 +31,9 @@ public class SysMsgListActivity extends BaseActivity implements IViewContract.do
     ImageView detailsBack;
     @BindView(R.id.rexy_list_view)
     RecyclerView rexyListView;
+    private Persenter persenter;
+    private Map<String, Object> map;
+    private SysMsgListAdapter sysMsgListAdapter;
 
     @Override
     protected int initLayout() {
@@ -58,29 +61,35 @@ public class SysMsgListActivity extends BaseActivity implements IViewContract.do
         SharedPreferences sp = getSharedPreferences("feil", Context.MODE_PRIVATE);
         String sessionId = sp.getString("sessionId", "");
         int userId = sp.getInt("userId", 0);
-        Map<String,Object> map=new HashMap<>();
+        map = new HashMap<>();
         map.put("userId",userId);
         map.put("sessionId",sessionId);
         Map<String,Object> omap=new HashMap<>();
         omap.put("page",1);
         omap.put("count",10);
-        Persenter persenter=new Persenter(this);
+        persenter = new Persenter(this);
         persenter.doSysMsgList(map,omap);
     }
     @Override
     public void onLogCurress(Object obj) {
         SysMsgListBean sysMsgListBean= (SysMsgListBean) obj;
         List<SysMsgListBean.ResultBean> result = sysMsgListBean.result;
-        SysMsgListAdapter sysMsgListAdapter=new SysMsgListAdapter(result);
+        sysMsgListAdapter = new SysMsgListAdapter(result);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         rexyListView.setLayoutManager(linearLayoutManager);
         rexyListView.setAdapter(sysMsgListAdapter);
+        sysMsgListAdapter.setDoData(new SysMsgListAdapter.DoData() {
+            @Override
+            public void doLogID(int id) {
+                persenter.doMsgStatus(map,id);
+            }
+        });
     }
 
     @Override
     public void onShapeCurress(Object obj) {
-
+        sysMsgListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -90,6 +99,11 @@ public class SysMsgListActivity extends BaseActivity implements IViewContract.do
 
     @Override
     public void onBannerCurress(Object obj) {
+
+    }
+
+    @Override
+    public void onMovieCinema(Object obj) {
 
     }
 

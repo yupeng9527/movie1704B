@@ -51,6 +51,7 @@ public class RommSeatAdapter extends XRecyclerView.Adapter<RommSeatAdapter.Movie
                 int blue = 0;
                 movieVIewHolder.reLay.setBackgroundColor(blue);
                 callBack.getBack("0");
+                callBack.getPrice(result.get(i).fare);
                 callBack.getId(result.get(i).id);
             }
         });
@@ -78,7 +79,9 @@ public class RommSeatAdapter extends XRecyclerView.Adapter<RommSeatAdapter.Movie
         }
     }
     public interface iCallBack {
+
         void getBack(String s);
+        void getPrice(Double price);
         void getId(int idd);
     }
 

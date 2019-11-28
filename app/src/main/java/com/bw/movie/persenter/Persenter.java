@@ -20,6 +20,7 @@ import com.bw.movie.modle.bean.GuideBean;
 import com.bw.movie.modle.bean.HeadPicBean;
 import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.modle.bean.MoVieListBean;
+import com.bw.movie.modle.bean.MovieByKeyBean;
 import com.bw.movie.modle.bean.MovieDiscussBean;
 import com.bw.movie.modle.bean.MyMovieBean;
 import com.bw.movie.modle.bean.OnCimenBean;
@@ -1304,6 +1305,58 @@ public class Persenter extends IViewContract.doData {
                             }
                         } else {
                             Toast.makeText(App.context, exchangeCodeBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doMsgStatus(Map<String, Object> map, int id) {
+        HttpUtil.getHttpUtil().getApi()
+                .onMsgStatus(map,id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CodeBean>() {
+                    @Override
+                    public void accept(CodeBean codeBean) throws Exception {
+                        if ("0000".equals(codeBean.status)) {
+                            Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
+                            if (iBaseVIew!=null) {
+                                iBaseVIew.onShapeCurress("0");
+                            }
+                        } else {
+                            Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doMovieByKey(Map<String, Object> map) {
+        HttpUtil.getHttpUtil().getApi()
+                .onMovieByKey(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MovieByKeyBean>() {
+                    @Override
+                    public void accept(MovieByKeyBean movieByKeyBean) throws Exception {
+                        if ("0000".equals(movieByKeyBean.status)) {
+                            Toast.makeText(App.context, movieByKeyBean.message, Toast.LENGTH_SHORT).show();
+                            if (iBaseVIew!=null) {
+                                iBaseVIew.onMovieCinema(movieByKeyBean);
+                            }
+                        } else {
+                            Toast.makeText(App.context, movieByKeyBean.message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Consumer<Throwable>() {

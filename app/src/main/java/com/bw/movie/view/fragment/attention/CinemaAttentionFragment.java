@@ -104,6 +104,11 @@ public class CinemaAttentionFragment extends BaseFragment implements IViewContra
     }
 
     @Override
+    public void onMovieCinema(Object obj) {
+
+    }
+
+    @Override
     public void onLogExurr(String str) {
 
     }
