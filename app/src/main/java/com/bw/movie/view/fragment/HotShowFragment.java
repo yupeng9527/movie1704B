@@ -1,5 +1,6 @@
 package com.bw.movie.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -102,6 +103,14 @@ public class HotShowFragment extends BaseFragment implements IViewContract.doVie
         movieAdapter.notifyDataSetChanged();
         xrecList.setLayoutManager(new LinearLayoutManager(getContext()));
         xrecList.setAdapter(movieAdapter);
+        movieAdapter.setAreaView(new MovieAdapter.AreaView() {
+            @Override
+            public void onCurress(int id) {
+                Intent intent1 = new Intent("com.bawei.SelectMovie");
+                intent1.putExtra("movieId", id);
+                startActivity(intent1);
+            }
+        });
     }
 
     @Override

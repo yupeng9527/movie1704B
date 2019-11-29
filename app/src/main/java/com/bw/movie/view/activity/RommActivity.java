@@ -234,7 +234,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
                 final String sessionId = fp.getString("sessionId", null);
                 final int userId = fp.getInt("userId", 0);
                 String s = userId + "" + idd + "movie";
-                Log.i("qqq", "onClick: " + idd);
+                Log.i("qqq", "onClick: " + s);
                 final String sign = MD5(s);
                 Log.i("qqq", "onClick: " + sign);
                 radioWx.setOnClickListener(new View.OnClickListener() {
@@ -300,7 +300,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
         payReq.timeStamp = verifyBean.timeStamp;
         payReq.packageValue = verifyBean.packageValue;
         payReq.sign = verifyBean.sign;
-        payReq.extData = "app data"; // optional
+        payReq.extData = "app data";
         App.api.sendReq(payReq);
 
 

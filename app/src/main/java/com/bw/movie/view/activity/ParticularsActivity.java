@@ -20,8 +20,6 @@ import com.bw.movie.view.adapter.FragAdapter;
 import com.bw.movie.view.base.BaseActivity;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
-import com.bw.movie.view.fragment.ShapeFragment;
-import com.bw.movie.view.fragment.YMovieFragment;
 import com.bw.movie.view.fragment.particular.CinemaDetailsFragment;
 import com.bw.movie.view.fragment.particular.CinemaEvaluateFragment;
 
@@ -56,6 +54,8 @@ public class ParticularsActivity extends BaseActivity implements IViewContract.d
     ImageView detailsBtnImg;
     @BindView(R.id.details_btn_false)
     ImageView detailsBtnImgFalse;
+    @BindView(R.id.but_pj)
+    Button butPj;
     private Map<String, Object> map;
     private int id;
 
@@ -81,7 +81,7 @@ public class ParticularsActivity extends BaseActivity implements IViewContract.d
                 finish();
             }
         });
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         id = intent.getIntExtra("id", 0);
         SharedPreferences sp = getSharedPreferences("feil", Context.MODE_PRIVATE);
         String sessionId = sp.getString("sessionId", "");
@@ -110,7 +110,14 @@ public class ParticularsActivity extends BaseActivity implements IViewContract.d
         FragAdapter fragAdapter = new FragAdapter(getSupportFragmentManager(), list, llist);
         fragAdapter.notifyDataSetChanged();
         viewPager.setAdapter(fragAdapter);
-
+        butPj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1=new Intent("com.bawei.CinemaPj");
+                intent1.putExtra("id",id);
+                startActivity(intent1);
+            }
+        });
     }
 
     @Override
@@ -121,9 +128,9 @@ public class ParticularsActivity extends BaseActivity implements IViewContract.d
             @Override
             public void onClick(View v) {
                 int did = result.id;
-                Intent intent=new Intent("com.bawei.Schedule");
-                intent.putExtra("did",did);
-                intent.putExtra("id",id);
+                Intent intent = new Intent("com.bawei.Schedule");
+                intent.putExtra("did", did);
+                intent.putExtra("id", id);
                 startActivity(intent);
             }
         });
@@ -139,8 +146,8 @@ public class ParticularsActivity extends BaseActivity implements IViewContract.d
         detailsBtnImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Persenter persenter=new Persenter(ParticularsActivity.this);
-                persenter.onFollow(map,id);
+                Persenter persenter = new Persenter(ParticularsActivity.this);
+                persenter.onFollow(map, id);
 
                 detailsBtnImg.setVisibility(View.GONE);
                 detailsBtnImgFalse.setVisibility(View.VISIBLE);
@@ -149,8 +156,8 @@ public class ParticularsActivity extends BaseActivity implements IViewContract.d
         detailsBtnImgFalse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Persenter persenter=new Persenter(ParticularsActivity.this);
-                persenter.onCancel(map,id);
+                Persenter persenter = new Persenter(ParticularsActivity.this);
+                persenter.onCancel(map, id);
                 detailsBtnImg.setVisibility(View.VISIBLE);
                 detailsBtnImgFalse.setVisibility(View.GONE);
 

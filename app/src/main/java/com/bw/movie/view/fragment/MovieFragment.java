@@ -1,5 +1,6 @@
 package com.bw.movie.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import com.bw.movie.modle.bean.HotBean;
 import com.bw.movie.persenter.Persenter;
 import com.bw.movie.view.adapter.HotAdapter;
 import com.bw.movie.view.adapter.HtoAdapter;
+import com.bw.movie.view.adapter.MovieAdapter;
 import com.bw.movie.view.base.BaseFragment;
 import com.bw.movie.view.base.BasePersenter;
 import com.bw.movie.view.contract.IViewContract;
@@ -70,6 +72,14 @@ public class MovieFragment extends BaseFragment implements IViewContract.doView 
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recList.setLayoutManager(linearLayoutManager);
         recList.setAdapter(hotAdapter);
+        hotAdapter.setAreaView(new HtoAdapter.AreaView() {
+            @Override
+            public void onCurress(int id) {
+                Intent intent1 = new Intent("com.bawei.SelectMovie");
+                intent1.putExtra("movieId", id);
+                startActivity(intent1);
+            }
+        });
     }
 
     @Override

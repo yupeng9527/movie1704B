@@ -61,9 +61,10 @@ public class HtoAdapter extends XRecyclerView.Adapter<HtoAdapter.MovieViewHolder
         movieViewHolder.bitGaopiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(App.context, "正在购票中", Toast.LENGTH_SHORT).show();
+                areaView.onCurress(resultBeanList.get(i).movieId);
             }
         });
+
         movieViewHolder.imagView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,5 +101,14 @@ public class HtoAdapter extends XRecyclerView.Adapter<HtoAdapter.MovieViewHolder
             ButterKnife.bind(this, itemView);
 
         }
+    }
+    public void setAreaView(AreaView areaView) {
+        this.areaView = areaView;
+    }
+
+    AreaView areaView;
+
+    public interface AreaView {
+        void onCurress(int id);
     }
 }

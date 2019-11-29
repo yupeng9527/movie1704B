@@ -1,6 +1,7 @@
 package com.bw.movie.view.fragment.attention;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -85,6 +86,14 @@ public class CinemaAttentionFragment extends BaseFragment implements IViewContra
             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
             rlinkView.setLayoutManager(linearLayoutManager);
             rlinkView.setAdapter(cinemaAdapter);
+            cinemaAdapter.setAreaView(new CinemaAttentionAdapter.AreaView() {
+                @Override
+                public void onCurress(int id) {
+                    Intent intent=new Intent("com.bawei.Particulars");
+                    intent.putExtra("id",id);
+                    startActivity(intent);
+                }
+            });
         }
     }
 

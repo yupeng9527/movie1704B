@@ -60,7 +60,7 @@ public class AreaAdapter extends XRecyclerView.Adapter<AreaAdapter.MovieViewHold
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.text_name_data)
-        TextView textNameData;;
+        TextView textNameData;
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);

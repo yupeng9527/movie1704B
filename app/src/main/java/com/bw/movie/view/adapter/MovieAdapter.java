@@ -1,5 +1,6 @@
 package com.bw.movie.view.adapter;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,7 +46,7 @@ public class MovieAdapter extends XRecyclerView.Adapter<MovieAdapter.MovieViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final MovieViewHolder movieViewHolder, final int i) {
         movieViewHolder.imagView.setImageURI(resultBeans.get(i).imageUrl);
  //        Glide.with(movieViewHolder.itemView.getContext())
 //                .load(resultBeans.get(i).imageUrl)
@@ -58,7 +59,15 @@ public class MovieAdapter extends XRecyclerView.Adapter<MovieAdapter.MovieViewHo
         movieViewHolder.bitGaopiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(App.context, "正在购票中", Toast.LENGTH_SHORT).show();
+                areaView.onCurress(resultBeans.get(i).movieId);
+            }
+        });
+        movieViewHolder.imagView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent("com.bawei.Deil");
+                intent.putExtra("movieId",resultBeans.get(i).movieId);
+                movieViewHolder.itemView.getContext().startActivity(intent);
             }
         });
     }
@@ -85,5 +94,14 @@ public class MovieAdapter extends XRecyclerView.Adapter<MovieAdapter.MovieViewHo
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
+    }
+    public void setAreaView(AreaView areaView) {
+        this.areaView = areaView;
+    }
+
+    AreaView areaView;
+
+    public interface AreaView {
+        void onCurress(int id);
     }
 }

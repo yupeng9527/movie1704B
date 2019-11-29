@@ -1,5 +1,6 @@
 package com.bw.movie.view.adapter.attention;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -46,12 +47,20 @@ public class MovieAttentionAdapter extends XRecyclerView.Adapter<MovieAttentionA
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final MovieViewHolder movieViewHolder, final int i) {
         movieViewHolder.imagView.setImageURI(result.get(i).imageUrl);
         movieViewHolder.textName.setText(result.get(i).name);
         movieViewHolder.textDirector.setText("导演: "+result.get(i).director);
         movieViewHolder.textStarring.setText("主演: "+result.get(i).starring);
         movieViewHolder.textScore.setText("评分: "+result.get(i).score+"分");
+        movieViewHolder.imagView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent("com.bawei.Deil");
+                intent.putExtra("movieId",result.get(i).movieId);
+                movieViewHolder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

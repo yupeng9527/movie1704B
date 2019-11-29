@@ -30,6 +30,8 @@ public class SearchView extends RelativeLayout {
     ImageView imagSearch;
     @BindView(R.id.edit_text)
     EditText editText;
+    @BindView(R.id.text_visih)
+    TextView textVisih;
 
     public SearchView(Context context) {
         super(context, null);
@@ -43,12 +45,19 @@ public class SearchView extends RelativeLayout {
         imagSearch.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                imagSearch.setVisibility(GONE);
+//                imagSearch.setVisibility(GONE);
                 editText.setVisibility(VISIBLE);
+                String s = editText.getText().toString();
+                onIntersen.onFinis(s);
             }
         });
-        String s = editText.getText().toString();
-        onIntersen.onFinis(s);
+        textVisih.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setVisibility(GONE);
+                onIntersen.onSs("a");
+            }
+        });
     }
 
     public void setOnIntersen(OnIntersen onIntersen) {

@@ -1,5 +1,6 @@
 package com.bw.movie.persenter;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.bw.movie.modle.ap.App;
@@ -10,6 +11,7 @@ import com.bw.movie.modle.bean.CinemaByBean;
 import com.bw.movie.modle.bean.CinemaCommentBean;
 import com.bw.movie.modle.bean.CinemaDiscussBean;
 import com.bw.movie.modle.bean.CinemaInfoBean;
+import com.bw.movie.modle.bean.CinmeaKeyBean;
 import com.bw.movie.modle.bean.CodeBean;
 import com.bw.movie.modle.bean.CommentBean;
 import com.bw.movie.modle.bean.DateListBean;
@@ -1357,6 +1359,60 @@ public class Persenter extends IViewContract.doData {
                             }
                         } else {
                             Toast.makeText(App.context, movieByKeyBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doCinemaByKey(Map<String, Object> map) {
+        HttpUtil.getHttpUtil().getApi()
+                .onCinemaByKey(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CinmeaKeyBean>() {
+                    @Override
+                    public void accept(CinmeaKeyBean cinmeaKeyBean) throws Exception {
+                        if ("0000".equals(cinmeaKeyBean.status)) {
+                            Toast.makeText(App.context, cinmeaKeyBean.message, Toast.LENGTH_SHORT).show();
+                            if (iBaseVIew!=null) {
+                                Log.i("qqq", "accept: "+cinmeaKeyBean.toString());
+                                iBaseVIew.onMovieCinema(cinmeaKeyBean);
+                            }
+                        } else {
+                            Toast.makeText(App.context, cinmeaKeyBean.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void doCinemaCom(Map<String, Object> map, Map<String, Object> omap) {
+        HttpUtil.getHttpUtil().getApi()
+                .onCinemaCom(map,omap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CodeBean>() {
+                    @Override
+                    public void accept(CodeBean codeBean) throws Exception {
+                        if ("0000".equals(codeBean.status)) {
+                            Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
+                            if (iBaseVIew!=null) {
+                                Log.i("qqq", "accept: "+codeBean.toString());
+                                iBaseVIew.onShapeCurress(codeBean);
+                            }
+                        } else {
+                            Toast.makeText(App.context, codeBean.message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Consumer<Throwable>() {

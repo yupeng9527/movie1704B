@@ -146,6 +146,10 @@ public abstract void doTickets(Map<String,Object> map,Map<String,Object> omap);
     public abstract void doMsgStatus(Map<String,Object> map,int id);
     //查询取票码
     public abstract void doMovieByKey(Map<String,Object> map);
+    //根据电影院名称模糊查询电影院
+    public abstract void doCinemaByKey(Map<String,Object> map);
+    //影院评论
+    public abstract void doCinemaCom(Map<String,Object> map,Map<String,Object> omap);
 
 }
 

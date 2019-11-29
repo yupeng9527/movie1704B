@@ -23,6 +23,7 @@ import com.bw.movie.modle.bean.MovieByKeyBean;
 import com.bw.movie.modle.bean.SoonMovieBean;
 import com.bw.movie.persenter.Persenter;
 import com.bw.movie.view.adapter.HotAdapter;
+import com.bw.movie.view.adapter.MovieKeyAdapter;
 import com.bw.movie.view.adapter.SoonMovieAdapter;
 import com.bw.movie.view.adapter.YMovieAdapter;
 import com.bw.movie.view.base.BaseFragment;
@@ -122,18 +123,8 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
         map.put("sessionId", sessionId);
 
 
-        searCh.setOnIntersen(new SearchView.OnIntersen() {
-            @Override
-            public void onFinis(String str) {
-                Toast.makeText(App.context, str, Toast.LENGTH_SHORT).show();
-            }
 
-            @Override
-            public void onSs(String str) {
-
-            }
-        });
-        Persenter persenter = new Persenter(YMovieFragment.this);
+        final Persenter persenter = new Persenter(YMovieFragment.this);
         persenter.doMovieList(page);
         persenter.SoonMovieList(map, page);
         persenter.HotMovieList(page);
@@ -148,12 +139,17 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
             public void onFinis(String str) {
                 linearLayoutSs.setVisibility(View.GONE);
                 recyLayoutSs.setVisibility(View.VISIBLE);
-
+                Map<String,Object> map=new HashMap<>();
+                map.put("keyword",str);
+                map.put("page",1);
+                map.put("count",10);
+                persenter.doMovieByKey(map);
             }
 
             @Override
             public void onSs(String str) {
-
+                linearLayoutSs.setVisibility(View.VISIBLE);
+                recyLayoutSs.setVisibility(View.GONE);
             }
         });
     }
@@ -267,7 +263,7 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
         });
         banNer.loadImage(new XBanner.XBannerAdapter() {
             @Override
-            public void loadBanner(XBanner banner, Object model, View view, int position) {
+            public void loadBanner(XBanner banner, Object model, View view, final int position) {
                 String imageUrl = resultBeans.get(position).imageUrl;
                 SimpleDraweeView simpleDraweeView = view.findViewById(R.id.my_image_view);
                 AbstractDraweeController build = Fresco.newDraweeControllerBuilder()
@@ -275,6 +271,13 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
                         .setAutoPlayAnimations(true)
                         .build();
                 simpleDraweeView.setController(build);
+                banNer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
 
             }
         });
@@ -284,7 +287,18 @@ public class YMovieFragment extends BaseFragment implements IViewContract.doView
     @Override
     public void onMovieCinema(Object obj) {
         MovieByKeyBean movieByKeyBean= (MovieByKeyBean) obj;
-
+        List<MovieByKeyBean.ResultBean> result = movieByKeyBean.result;
+        recyLayoutSs.setLayoutManager(new LinearLayoutManager(getContext()));
+        MovieKeyAdapter movieKeyAdapter=new MovieKeyAdapter(result);
+        recyLayoutSs.setAdapter(movieKeyAdapter);
+        movieKeyAdapter.setAreaView(new MovieKeyAdapter.AreaView() {
+            @Override
+            public void onCurress(int id) {
+                Intent intent1 = new Intent("com.bawei.SelectMovie");
+                intent1.putExtra("movieId", id);
+                startActivity(intent1);
+            }
+        });
     }
 
     @Override

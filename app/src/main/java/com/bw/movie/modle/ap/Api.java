@@ -7,6 +7,7 @@ import com.bw.movie.modle.bean.CinemaByBean;
 import com.bw.movie.modle.bean.CinemaCommentBean;
 import com.bw.movie.modle.bean.CinemaDiscussBean;
 import com.bw.movie.modle.bean.CinemaInfoBean;
+import com.bw.movie.modle.bean.CinmeaKeyBean;
 import com.bw.movie.modle.bean.CodeBean;
 import com.bw.movie.modle.bean.CommentBean;
 import com.bw.movie.modle.bean.DateListBean;
@@ -258,4 +259,12 @@ public interface Api {
 //  根据关键字查询电影信息
     @GET("movieApi/movie/v2/findMovieByKeyword")
     Observable<MovieByKeyBean> onMovieByKey(@QueryMap Map<String,Object> map);
+//  根据电影院名称模糊查询电影院
+    @GET("movieApi/cinema/v1/findAllCinemas")
+    Observable<CinmeaKeyBean> onCinemaByKey(@QueryMap Map<String,Object> map);
+//影院评论
+    @FormUrlEncoded
+    @POST("movieApi/cinema/v1/verify/cinemaComment")
+    Observable<CodeBean> onCinemaCom(@HeaderMap Map<String,Object> map,@FieldMap Map<String,Object> omap);
+
 }

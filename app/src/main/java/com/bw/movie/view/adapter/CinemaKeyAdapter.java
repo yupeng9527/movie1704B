@@ -1,4 +1,4 @@
-package com.bw.movie.view.adapter.attention;
+package com.bw.movie.view.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bw.movie.R;
-import com.bw.movie.modle.bean.OnCimenBean;
+import com.bw.movie.modle.bean.CinmeaKeyBean;
+import com.bw.movie.modle.bean.RecommendBean;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -23,10 +24,12 @@ import butterknife.ButterKnife;
  * author:贺少伟(盗)
  * function:
  */
-public class CinemaAttentionAdapter extends XRecyclerView.Adapter<CinemaAttentionAdapter.MovieViewHolder> {
-    List<OnCimenBean.ResultBean> resultBeanList;
+public class CinemaKeyAdapter extends XRecyclerView.Adapter<CinemaKeyAdapter.MovieViewHolder> {
+    List<CinmeaKeyBean.ResultBean> resultBeanList;
 
-    public CinemaAttentionAdapter(List<OnCimenBean.ResultBean> resultBeanList) {
+
+
+    public CinemaKeyAdapter(List<CinmeaKeyBean.ResultBean> resultBeanList) {
         this.resultBeanList = resultBeanList;
     }
 
@@ -46,7 +49,7 @@ public class CinemaAttentionAdapter extends XRecyclerView.Adapter<CinemaAttentio
         movieViewHolder.linLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                areaView.onCurress(resultBeanList.get(i).cinemaId);
+                areaView.onCurress(resultBeanList.get(i).id);
             }
         });
     }
@@ -64,10 +67,9 @@ public class CinemaAttentionAdapter extends XRecyclerView.Adapter<CinemaAttentio
         TextView textScore;
         @BindView(R.id.text_name)
         TextView textName;
-        @BindView(R.id.text_price)
-        TextView textPrice;
         @BindView(R.id.lin_layout)
         LinearLayout linLayout;
+
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

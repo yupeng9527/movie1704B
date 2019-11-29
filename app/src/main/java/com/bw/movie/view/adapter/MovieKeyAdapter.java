@@ -1,5 +1,6 @@
 package com.bw.movie.view.adapter;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,10 +13,12 @@ import android.widget.Toast;
 import com.bw.movie.R;
 import com.bw.movie.modle.ap.App;
 import com.bw.movie.modle.bean.MoVieListBean;
+import com.bw.movie.modle.bean.MovieByKeyBean;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,9 +29,10 @@ import butterknife.ButterKnife;
  * function:
  */
 public class MovieKeyAdapter extends XRecyclerView.Adapter<MovieKeyAdapter.MovieViewHolder> {
-    ArrayList<MoVieListBean.ResultBean> resultBeans;
-    public MovieKeyAdapter(ArrayList<MoVieListBean.ResultBean> resultBeans) {
-        this.resultBeans = resultBeans;
+    List<MovieByKeyBean.ResultBean> result;
+
+    public MovieKeyAdapter(List<MovieByKeyBean.ResultBean> result) {
+        this.result = result;
     }
 
     @NonNull
@@ -41,27 +45,32 @@ public class MovieKeyAdapter extends XRecyclerView.Adapter<MovieKeyAdapter.Movie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
-        movieViewHolder.imagView.setImageURI(resultBeans.get(i).imageUrl);
- //        Glide.with(movieViewHolder.itemView.getContext())
-//                .load(resultBeans.get(i).imageUrl)
-//                .error(R.mipmap.ic_launcher)
-//                .into(movieViewHolder.imagView);
-        movieViewHolder.textName.setText(resultBeans.get(i).name);
-        movieViewHolder.textDirector.setText("导演: "+resultBeans.get(i).director);
-        movieViewHolder.textStarring.setText("主演: "+resultBeans.get(i).starring);
-        movieViewHolder.textScore.setText("评分: "+resultBeans.get(i).score+"分");
+    public void onBindViewHolder(@NonNull final MovieViewHolder movieViewHolder, final int i) {
+        movieViewHolder.imagView.setImageURI(result.get(i).imageUrl);
+
+        movieViewHolder.textName.setText(result.get(i).name);
+        movieViewHolder.textDirector.setText("导演: "+result.get(i).director);
+        movieViewHolder.textStarring.setText("主演: "+result.get(i).starring);
+        movieViewHolder.textScore.setText("评分: "+result.get(i).score+"分");
         movieViewHolder.bitGaopiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(App.context, "正在购票中", Toast.LENGTH_SHORT).show();
+                areaView.onCurress(result.get(i).movieId);
+            }
+        });
+        movieViewHolder.imagView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent("com.bawei.Deil");
+                intent.putExtra("movieId",result.get(i).movieId);
+                movieViewHolder.itemView.getContext().startActivity(intent);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return resultBeans==null?0:resultBeans.size();
+        return result==null?0:result.size();
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
@@ -81,5 +90,14 @@ public class MovieKeyAdapter extends XRecyclerView.Adapter<MovieKeyAdapter.Movie
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
+    }
+    public void setAreaView(AreaView areaView) {
+        this.areaView = areaView;
+    }
+
+    AreaView areaView;
+
+    public interface AreaView {
+        void onCurress(int id);
     }
 }
