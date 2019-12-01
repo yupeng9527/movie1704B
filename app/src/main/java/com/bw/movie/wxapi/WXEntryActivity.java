@@ -31,6 +31,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onReq(BaseReq baseReq) {
+
     }
 
     @Override
@@ -56,6 +57,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
             //用户取消
             case BaseResp.ErrCode.ERR_USER_CANCEL:
                 Toast.makeText(this, "用户取消", Toast.LENGTH_SHORT).show();
+
                 finish();
                 break;
             default:

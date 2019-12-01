@@ -193,7 +193,7 @@ public interface Api {
     //上传用户头像
     @Multipart
     @POST("movieApi/user/v1/verify/uploadHeadPic")
-    Observable<HeadPicBean> onloadHeadPic(@HeaderMap Map<String,Object> map,@Part MultipartBody.Part file);
+    Observable<HeadPicBean> onloadHeadPic(@HeaderMap Map<String,Object> map,@Part MultipartBody.Part image);
 
     //修改用户手机号
     @FormUrlEncoded

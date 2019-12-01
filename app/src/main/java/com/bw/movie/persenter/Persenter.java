@@ -969,7 +969,7 @@ public class Persenter extends IViewContract.doData {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(App.context, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        iBaseVIew.onLogExurr(throwable.toString());
                     }
                 });
     }

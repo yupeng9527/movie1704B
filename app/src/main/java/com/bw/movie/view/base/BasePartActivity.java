@@ -13,14 +13,12 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bw.movie.R;
-
 /**
  * date:2019/9/27
  * author:贺少伟(盗)
  * function: 抽取Activity基类
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BasePartActivity extends AppCompatActivity {
     protected BasePersenter basePersenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param permission 要检查的权限
      * @return  结果标识
      */
-    public int verifyPermissions(Activity activity,java.lang.String permission) {
+    public int verifyPermissions(Activity activity, String permission) {
         int Permission = ActivityCompat.checkSelfPermission(activity,permission);
         if (Permission == PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(activity, "已经同意权限", Toast.LENGTH_SHORT).show();

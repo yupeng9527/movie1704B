@@ -93,7 +93,7 @@
                     android:layout_marginLeft="@dimen/dp_45"
                     android:layout_marginTop="@dimen/dp_15"
                     android:layout_toRightOf="@id/details_type"
-                    android:text="播放时间"
+                    android:text="播放时   间"
                     android:textColor="#fff" />
 
                 <LinearLayout

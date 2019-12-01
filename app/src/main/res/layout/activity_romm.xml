@@ -113,9 +113,9 @@
             <ImageView
                 android:id="@+id/imag_gb"
                 android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/crop__ic_cancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                android:background="@drawable/crop__ic_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <TextView
                 android:text="选择方式"
                 android:layout_marginLeft="@dimen/dp_20"

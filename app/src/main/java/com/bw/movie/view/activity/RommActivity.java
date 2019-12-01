@@ -87,6 +87,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
     private String orderId;
     private int cinemaId;
     private String str;
+    private MovieSeatAdapter seatAdapter;
 
     @Override
     protected int initLayout() {
@@ -156,7 +157,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
         final List<SeatleBean.ResultBean> result = seatleBean.result;
         LinearLayoutManager manager = new GridLayoutManager(this, 8);
         roomMovieSeat.setLayoutManager(manager);
-        MovieSeatAdapter seatAdapter = new MovieSeatAdapter(result);
+        seatAdapter = new MovieSeatAdapter(result);
         roomMovieSeat.setAdapter(seatAdapter);
         seatAdapter.setCallBack(new MovieSeatAdapter.CallBack() {
             @Override
@@ -302,7 +303,7 @@ public class RommActivity extends BaseActivity implements IViewContract.doView {
         payReq.sign = verifyBean.sign;
         payReq.extData = "app data";
         App.api.sendReq(payReq);
-
+        seatAdapter.notifyDataSetChanged();
 
     }
 

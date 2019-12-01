@@ -53,12 +53,7 @@ public class SysMsgListAdapter extends XRecyclerView.Adapter<SysMsgListAdapter.M
         String format = formatter.format(resultBeanList.get(i).pushTime);
         movieViewHolder.textTime.setText(format);
         movieViewHolder.textXianq.setText(resultBeanList.get(i).content);
-        if (resultBeanList.get(i).status==0) {
 
-        }
-        if (resultBeanList.get(i).status==1){
-           movieViewHolder.checkBox.setBackgroundDrawable(null);
-        }
         movieViewHolder.textXianq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
