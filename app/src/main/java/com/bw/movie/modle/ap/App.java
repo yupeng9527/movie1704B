@@ -14,8 +14,6 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 /**
- * date:2019/9/27
- * author:贺少伟(盗)
  * function: 上下文
  */
 public class App extends Application {

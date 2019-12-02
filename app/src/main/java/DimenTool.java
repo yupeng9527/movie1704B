@@ -6,11 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * date:2019/10/11
- * author:贺少伟(盗)
- * function:
- */
+
 public class DimenTool {
     public static void gen() {
         //以此文件夹下的dimens.xml文件内容为初始值参照

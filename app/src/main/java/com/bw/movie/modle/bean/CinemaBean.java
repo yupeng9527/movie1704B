@@ -2,11 +2,6 @@ package com.bw.movie.modle.bean;
 
 import java.util.List;
 
-/**
- * date:2019/10/15
- * author:贺少伟(盗)
- * function:
- */
 public class CinemaBean {
 
     /**

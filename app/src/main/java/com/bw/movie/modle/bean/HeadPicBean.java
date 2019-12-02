@@ -1,10 +1,6 @@
 package com.bw.movie.modle.bean;
 
-/**
- * date:2019/11/12
- * author:贺少伟(盗)
- * function:
- */
+
 public class HeadPicBean {
 
     /**

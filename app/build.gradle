@@ -6,13 +6,13 @@ android {
         release {
             keyAlias 'bw_movie'
             keyPassword '123456'
-            storeFile file('H:/movie.keystore')
+            storeFile file('C:\\Users\\admin\\Desktop\\movie.keystore')
             storePassword '123456'
         }
         debug {
             keyAlias 'bw_movie'
             keyPassword '123456'
-            storeFile file('H:/movie/movie1703A/app/movie.keystore')
+            storeFile file('C:\\Users\\admin\\Desktop\\movie.keystore')
             storePassword '123456'
         }
     }

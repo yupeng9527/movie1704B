@@ -59,11 +59,6 @@ import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
-/**
- * date:2019/9/27
- * author:贺少伟(盗)
- * function:
- */
 public interface Api {
     String DA_TA="http://172.17.8.100/";
     @FormUrlEncoded
